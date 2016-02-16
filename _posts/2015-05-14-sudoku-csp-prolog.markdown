@@ -39,3 +39,26 @@ The full code is available at [github][ghub].
 [sudoku]: http://en.wikipedia.org/wiki/Sudoku
 [csp]: http://en.wikipedia.org/wiki/Constraint_satisfaction_problem
 [ghub]: http://github.com/blackecho/prolog-programs
+
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+
+var disqus_config = function () {
+this.page.url = "http://www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog"; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = "Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//gabrieleangeletti.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

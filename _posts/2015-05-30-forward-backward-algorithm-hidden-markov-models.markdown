@@ -84,3 +84,26 @@ We again compute this value $\forall k = 1 ... n-1$ and we are done. For k=n, th
 
 [hidden-markov-model]: https://en.wikipedia.org/wiki/Hidden_Markov_Model
 [forward-backward]: https://en.wikipedia.org/wiki/Forward%E2%80%93backward_algorithm
+
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+
+var disqus_config = function () {
+this.page.url = "http://www.gabrieleangeletti.com/2015/05/forward-backward-algorithm-hidden-markov-models"; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = "The Forward-Backward Algorithm for Hidden Markov Models"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//gabrieleangeletti.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

@@ -9,7 +9,7 @@ permalink: /posts/machine-learning/
 
     {% if post.categories contains "machine-learning" %}
           <li class="c-archives__item">
-              <h3><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
+              <h3><a href="{{ post.url | prepend: site.baseurl }}#disqus_thread">{{ post.title }}</a></h3>
               <p>{{ post.date | date: "%b %-d, %Y" }}</p>
               <br>
           </li>
@@ -24,3 +24,5 @@ permalink: /posts/machine-learning/
       {% endif %}
     {% endif %}
 {% endfor %}
+
+<script id="dsq-count-scr" src="//gabrieleangeletti.disqus.com/count.js" async></script>
