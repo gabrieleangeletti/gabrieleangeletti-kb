@@ -2,50 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gabriele Angeletti</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+    <description>My blog about Artificial Intelligence, Machine Learning and related topics.
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Feb 2016 12:08:56 +0100</pubDate>
-    <lastBuildDate>Tue, 16 Feb 2016 12:08:56 +0100</lastBuildDate>
+    <pubDate>Tue, 16 Feb 2016 16:09:39 +0100</pubDate>
+    <lastBuildDate>Tue, 16 Feb 2016 16:09:39 +0100</lastBuildDate>
     <generator>Jekyll v3.0.3</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <title>Sparse Distributed Representations in Machine Learning</title>
+        <description>&lt;p&gt;Today we will take a look at &lt;a href=&quot;https://github.com/numenta/nupic/wiki/Sparse-Distributed-Representations&quot;&gt;Sparse Distributed Representations&lt;/a&gt;: what they are, why they differ from the standard types of representations used by computers, and why many people think they are fundamental in building true machine intelligence.&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;Computers use &lt;strong&gt;dense&lt;/strong&gt; representations of information: they use a small number of bits and every combination of them represent something. For example, think about &lt;a href=&quot;https://en.wikipedia.org/wiki/ASCII&quot;&gt;ASCII&lt;/a&gt;, that uses a fixed number of bits, and any combination of those bits is something, for instance ‘110 0111’ is ‘g’.&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;The first thing to note here is that the individual bits has no meaning at all, they become meaningful only when they are together. In the ‘g’ code, the fact that the third bit is 0 does not say anything about the concept of ‘g’, its simply that someone has chosen that string of bits to represent a ‘g’. Another thing is that this representation is not fault tolerant: if you change only one bit, you obtain a completely different meaning.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Neuroscientists have discovered that this is not how our brain works. Instead, the brain uses a Sparse Distributed Representation of information.&lt;/p&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can think of a binary string as a set of neurons, where each neuron can be active (1) or not active (0). These representations are &lt;strong&gt;sparse&lt;/strong&gt; in the sense that at any given time, only a tiny fraction of the neurons are active, so you always have a very small percentage of 1s. They are also &lt;strong&gt;distributed&lt;/strong&gt; in the sense that they are a many-to-many mapping between concepts and neurons: each concept is represented by many neurons, and each neuron participates in the representation of many concepts. Here individual neurons have semantic meaning.&lt;/p&gt;
+
+&lt;p&gt;For example, if you want to represent the concept of a car with a distributed representation, you can use a binary vector of length 1000, where each element represent the presence or absence of the feature it represent. In this sense neurons have semantic meaning: if the neuron in position 49 is active, you know that that car is red, regardless of all the other neurons.&lt;/p&gt;
+
+&lt;p&gt;In ASCII code, the fact that you have a value of 1 in index 2 is almost irrelevant. Instead, in a distributed representation, this is meaningful, in fact you can say that two sequences are semantically similar if they share some indexes of active bits, the more they share the more they are similar. So you can even sample a subset of the bits and compare only these samples to infer similarity (this is one of the advantages of a distributed representation). They have another advantage: because the representation is sparse, you can store only the indices of the active bits, and because there a few active bits at a given time, you can save a lot of space!&lt;/p&gt;
+
+&lt;p&gt;If you want to know more on this subject, and also on related topics, I suggest you to follow &lt;a href=&quot;https://en.wikipedia.org/wiki/Jeff_Hawkins&quot;&gt;Jeff Hawkins&lt;/a&gt;, an impressive Neuroscientist in the field of Machine Intelligence. Among other things, he founded a company called &lt;a href=&quot;http://numenta.org&quot;&gt;Numenta&lt;/a&gt; that is doing many interest things. They developed &lt;a href=&quot;https://github.com/numenta/nupic/wiki/Using-NuPIC&quot;&gt;open source framework&lt;/a&gt; written in Python that implements the algorithms they are working on. I think i will play around a bit with this framework, maybe I’ll write a new post on Nupic, to show you how it works!&lt;/p&gt;
 
 </description>
-        <pubDate>Wed, 02 Dec 2015 00:52:21 +0100</pubDate>
-        <link>http://www.gabrieleangeletti.com/2015/12/welcome-to-jekyll</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/12/welcome-to-jekyll</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Sparse Distributed Representations</title>
-        <description>
-</description>
-        <pubDate>Mon, 15 Jun 2015 00:00:00 +0200</pubDate>
+        <pubDate>Mon, 15 Jun 2015 16:30:20 +0200</pubDate>
         <link>http://www.gabrieleangeletti.com/2015/06/sparse-distributed-representations</link>
         <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/06/sparse-distributed-representations</guid>
         
+        
+        <category>machine-learning</category>
         
       </item>
     
@@ -142,31 +131,117 @@ We again compute this value $\forall k = 1 … n-1$ and we are done. For k=n, th
         <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/forward-backward-algorithm-hidden-markov-models</guid>
         
         
-        <category>machine</category>
-        
-        <category>learning</category>
+        <category>machine-learning</category>
         
       </item>
     
       <item>
-        <title>Prolog Bfs Meta Interpreter</title>
-        <description>
+        <title>A Breadth-First Search (BFS) Prolog meta-interpreter</title>
+        <description>&lt;p&gt;Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the tree of computations. This is due to performance reasons, because other searching policies wouldn’t be feasible, except for fairly easy problems. But a cool fact about Prolog is that code and data are basically the same thing, and because of that its easy to implement a Prolog program that runs other Prolog programs (i.e. a meta-interpreter).
+We can build meta-interpreters to change the behavior of our interpreter: we can for example change the search policy, do the occur check, return the depth of the computations tree, and many other things.&lt;/p&gt;
+
+&lt;p&gt;In this post we will change Prolog’s search strategy from DFS to BFS, as an example of how we can easily change its behavior.
+The main difference between DFS and BFS is that DFS uses a Stack to mantain the list of nodes to visit, and it means that DFS always tries to expand the last node it has visited. This policy can turn into trouble if there is a
+left recursion, which is when a variable that appears in the head of a rule also appears in the first goal of the tail. Since Prolog doesn’t do the occur check, which is needed exactly to avoid such situations, it loops forever, until it goes out of local stack.&lt;/p&gt;
+
+&lt;p&gt;With Breadth-First Search such situations can be avoided, because BFS will expand all the goals in a clause, instead of keep trying to expand the first node it encounter.
+This is due do the fact that BFS uses a Queue to mantain the list of nodes to visit, so it when it expands a node, it won’t visit what it has just expanded, but it will continue to visit the other nodes it hasn’t expanded yet.&lt;/p&gt;
+
+&lt;p&gt;So at each depth level, BFS will first visit all the nodes at that level, and then move to the next level. While this is bad for performance, because we don’t want any useless path to be visited, it can always find a solution if it exists, thus BFS is sound and complete. Let’s now implement the meta-interpreter.&lt;/p&gt;
+
+&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
+&lt;p&gt;We will use Prolog’s built-in predicate clause/2.
+clause(Goal, Body) unifies Body with the bodies that matches with Goal, and return them in the form (FirstGoal, OtherGoals), where OtherGoals can be another list of the form (FirstGoal, OtherGoals). So clause/2 will find for us all the matches with Goal. Now we need a predicate that converts goal lists of this form into a standard prolog list with square brackets. To do this we will implement the predicate conj_goals_2_list.
+Now we are ready to implement the meta-interpreter. Basically BFS is the same as DFS except that it uses a Queue instead of a Stack. The Queue works with a FIFO (first-in first-out) policy, so we always insert element at the last position of the list, and we always retrieve elements at the first position.
+In Prolog we can do this pretty easily by using the way it handles lists and append/3.
+Using the predicate append(OldList, Element, NewList), NewList will be the result of adding Element at the end of OldList.
+So the code looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;solveBFS([Goal|Rest]) :- % list of goals to prove
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;we use clause/2 on the first element of the goals list, that is the first-out part of FIFO&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;clause(Goal, Body)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;we convert the list format returned by clause into a standart Prolog list&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;conj_goals_2_list(Body, List)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;we append List to the end of Rest, that is the part first-in part of FIFO&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;append(Rest, List, New)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;we call recursively the solver passing it the new list. The program will keep trying to prove the goals, until all the goals are proved, or they can’t be proved&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;solveBFS(New)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The full code is available at &lt;a href=&quot;http://github.com/blackecho/prolog-programs&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
+
 </description>
-        <pubDate>Thu, 21 May 2015 00:00:00 +0200</pubDate>
+        <pubDate>Thu, 21 May 2015 16:30:20 +0200</pubDate>
         <link>http://www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter</link>
         <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter</guid>
         
         
+        <category>prolog</category>
+        
       </item>
     
       <item>
-        <title>Sudoku Csp Prolog</title>
-        <description>
+        <title>Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog</title>
+        <description>&lt;p&gt;Today we will model the game of &lt;a href=&quot;http://en.wikipedia.org/wiki/Sudoku&quot;&gt;Sudoku&lt;/a&gt; as a &lt;a href=&quot;http://en.wikipedia.org/wiki/Constraint_satisfaction_problem&quot;&gt;Constraint Satisfaction Problem (CSP)&lt;/a&gt; and then write a Prolog program that solves it.
+CSP is particularly useful when we want to model a combinatorial problem subject to &lt;strong&gt;constraints&lt;/strong&gt;. In standard Sudoku we have a 9x9 grid, where each cell can be filled with an integer between 1 and 9, so the possible configurations are all the ordered combinations of 81 numbers between 1 and 9.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../img/sudoku.png&quot; width=&quot;50%&quot; style=&quot;display: block;margin: 0 auto;clear right;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the first cell, we have 9 different values that we can put in.
+If we consider both the first and the second cells, we have $ 9^{2} $ different values that we can put in, because we have to take into account all the possible combination of
+the form $ (1,1), (1,2) … (1,9), (2,1) … (9,9) $. So if we consider all the cells in the end we have $ 9^{81} $ possible combination of values, a very huge number!!&lt;/p&gt;
+
+&lt;p&gt;But, two things help us here:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Sudoku is not about trying some random combination, it has some rules, and those rules greatly reduce the above number, because they tell us which combinations are right, and which are wrong.&lt;/li&gt;
+  &lt;li&gt;Sudoku has some cells that are already filled, and these &lt;strong&gt;initial conditions&lt;/strong&gt; also help in reducing the huge number of tries.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So let’s see how we can model this game in csp.&lt;/p&gt;
+
+&lt;p&gt;CSP has variables (what we are interested in), domains (which values the variables can assume) and constraints (rules about what values are right and what are wrong).
+The variables in this case are the 81 cells of the grid, each of which can assume a value between 1 and 9, so the domain here is the integer interval [1, 9].
+The constraints simply are the rules of the game, that are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;All the values in each row must be different each other&lt;/li&gt;
+  &lt;li&gt;All the values in each column must be different each other&lt;/li&gt;
+  &lt;li&gt;All the values in each 3x3 block must be different each other&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Done! We don’t need some fancy algorithm or complex trick to get the job done: we are simply describing the problem here, and we let Prolog’s backtracking solve it for us. This is the true power of Prolog and logic
+Programming: you don’t actually have to solve the problem, you only have to model it!&lt;/p&gt;
+
+&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
+&lt;p&gt;Prolog has a csp library, named &lt;strong&gt;clpfd&lt;/strong&gt;. It has all the things that we need: we can define variables, domains for the variables, and costraints. More over, the constraints that the values must be different, is a type of constraint that is already implemented in clpfd. All we have to do is to use all_different(List).&lt;/p&gt;
+
+&lt;p&gt;The full code is available at &lt;a href=&quot;http://github.com/blackecho/prolog-programs&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
+
 </description>
-        <pubDate>Thu, 14 May 2015 00:00:00 +0200</pubDate>
+        <pubDate>Thu, 14 May 2015 21:30:20 +0200</pubDate>
         <link>http://www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog</link>
         <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog</guid>
         
+        
+        <category>prolog</category>
         
       </item>
     

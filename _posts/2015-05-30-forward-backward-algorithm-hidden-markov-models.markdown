@@ -2,7 +2,7 @@
 layout: post
 title:  "The Forward-Backward Algorithm for Hidden Markov Models"
 date:   2015-05-30 10:30:20 -0500
-categories: machine learning
+categories: "machine-learning"
 ---
 Today we will see how we can do inference in a [Hidden Markov Model (HMM)][hidden-markov-model], using the [Forward-Backward (FB) algorithm][forward-backward]. First of all I will briefly recap what a HMM is, then I'll show you the algorithm in detail.
 
