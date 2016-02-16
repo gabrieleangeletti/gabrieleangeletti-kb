@@ -28,11 +28,11 @@ that one has written given the actual messy character that she/he wrote.
 
 The FB algorithm allows you to compute these posterior probabilities $P(Z_k | X_{1:t})$ for internal hidden states.
 
-The basic idea is that this probability is proportional to the joint distribution $ P(Z_k,X_{1:t}) $ and, using <a target="_blank" href="http://en.wikipedia.org/wiki/Bayes'_theorem">Bayes theorem</a> and the independence of $ X_{1:k} $ and $ X_{k+1:t} $ given $ Z_k $, we obtain:
+The basic idea is that this probability is proportional to the joint distribution $ P(Z_k,X_{1:t}) $ and, using [Bayes theorem][bayes] and the independence of $ X_{1:k} $ and $ X_{k+1:t} $ given $ Z_k $, we obtain:
 
 $$ P(Z_k | X_{1:t}) \propto P(Z_k , X_{1:t}) = P(Z_k | X_{1:k}) P(X_{k+1:t} | Z_k) $$
 
-This algorithm rely on the idea of <a target="_blank" href="http://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a>, that is a fancy name for saying that we reuse things we have already computed to make things faster.
+This algorithm rely on the idea of [Dynamic Programming][dp], that is a fancy name for saying that we reuse things we have already computed to make things faster.
 
 The forward part computes the posterior probability of state $Z_k$ given the first k observations $ X_{1:k}$, and does
 this $\forall k = 1 ... n$.
@@ -41,20 +41,20 @@ The backward part computes the probability of the remaining observations $X_{k+1
 
 The last part of the algorithm is to merge the forward and the backward part to give the full posterior probabilities.
 
-This algorithm gives you probabilities for all hidden states, but it doesn't give probabilities for sequences of states (see <a target="_blank" href="http://en.wikipedia.org/wiki/Viterbi_algorithm">Viterbi Algorithm</a>)
+This algorithm gives you probabilities for all hidden states, but it doesn't give probabilities for sequences of states (see the [Viterbi Algorithm][viterbi])
 
 ## Forward Part
 
-We want to use dynamic programming, so we want to express $P(Z_k | X_{1:k})$ as a function of k-1, so that we can setup a recursion. We achieve that by using <a target="_blank" href="http://en.wikipedia.org/wiki/Marginal_distribution">marginalization</a>.
+We want to use dynamic programming, so we want to express $P(Z_k | X_{1:k})$ as a function of k-1, so that we can setup a recursion. We achieve that by using [marginalization][marg].
 So using marginalization we can bring $ Z_{k-1} $ to the equation:
 
 $$ P(Z_k,X_{1:k}) = \sum_{Z_{k-1}} P(Z_k, Z_{k-1}, X_{1:k-1}, X_k) $$
 
-Where the sum is over all the values which $ Z_{k-1} $ can assume. Now we can use the <a target="_blank" href="http://en.wikipedia.org/wiki/Chain_rule_(probability)">chain rule for probability</a> and see what happens:
+Where the sum is over all the values which $ Z_{k-1} $ can assume. Now we can use the [chain rule for probability][chainrule]</a> and see what happens:
 
 $$ \sum_{Z_{k-1}} P(Z_k, Z_{k-1}, X_{1:k-1}, X_k) = \sum_{Z_{k-1}} P(X_k | Z_k, Z_{k-1}, X_{1:k-1}) P(Z_k|Z_{k-1}, X_{1:k-1}) P(Z_{k-1} | X_{1:k-1}) P(X_{1:k-1}) $$
 
-the last two terms can be unified in: $P(Z_{k-1}, X_{1:k-1})$. So now we use <a target="_blank" href="http://www.andrew.cmu.edu/user/scheines/tutor/d-sep.html">D-separation</a> to simplify the above equation. In the first term we can remove $ Z_{k-1}$ and $ X_{1:k-1} $, because $ X_k $ is independent of them, given $ Z_k $. We can see it graphically using D-separation: the idea is that any path in the graph from $ X_k $ to $ Z_{k-1}$ or $ X_{1:k-1} $, must pass through $ Z_k $, so we say that they are independent given $ Z_k $ and we remove them.
+the last two terms can be unified in: $P(Z_{k-1}, X_{1:k-1})$. So now we use [D-separation][dsep] to simplify the above equation. In the first term we can remove $ Z_{k-1}$ and $ X_{1:k-1} $, because $ X_k $ is independent of them, given $ Z_k $. We can see it graphically using D-separation: the idea is that any path in the graph from $ X_k $ to $ Z_{k-1}$ or $ X_{1:k-1} $, must pass through $ Z_k $, so we say that they are independent given $ Z_k $ and we remove them.
 The same goes for the second term, in which we remove $ X_{1:k-1} $. Let's now write the simplified equation:
 
 $$ P(Z_k,X_{1:k}) = \sum_{Z_{k-1}} P(X_k | Z_k) P(Z_k|Z_{k-1}) P(Z_{k-1}, X_{1:k-1}) $$
@@ -84,6 +84,12 @@ We again compute this value $\forall k = 1 ... n-1$ and we are done. For k=n, th
 
 [hidden-markov-model]: https://en.wikipedia.org/wiki/Hidden_Markov_Model
 [forward-backward]: https://en.wikipedia.org/wiki/Forward%E2%80%93backward_algorithm
+[bayes]: http://en.wikipedia.org/wiki/Bayes'_theorem
+[dp]: http://en.wikipedia.org/wiki/Dynamic_programming
+[viterbi]: http://en.wikipedia.org/wiki/Viterbi_algorithm
+[marg]: http://en.wikipedia.org/wiki/Marginal_distribution
+[chainrule]: http://en.wikipedia.org/wiki/Chain_rule_(probability)
+[dsep]: http://www.andrew.cmu.edu/user/scheines/tutor/d-sep.html
 
 <div id="disqus_thread"></div>
 <script>
