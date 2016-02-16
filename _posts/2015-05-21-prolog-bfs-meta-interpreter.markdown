@@ -1,9 +1,9 @@
-{% extends "base-post.html" %}
-{% set post_title= post.head %}
-{% set post_head= post.head %}
-{% set post_path= post.link %}
-
-{% block post_content %}
+---
+layout: post
+title:  "Implementing a Breadth-First Search (BFS) strategy for the Prolog interpreter"
+date:   2015-05-21 09:30:20 -0500
+categories: prolog
+---
 	<p class="post-content">
 		Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the tree of computations. This is due to performance reasons, because other searching policies wouldn't be feasible, except for fairly easy problems. But a cool fact about Prolog is that code and data are basically the same thing, and because of that its easy to implement a Prolog program that runs other Prolog programs (i.e. a meta-interpreter).
 		We can build meta-interpreters to change the behavior of our interpreter: we can for example change the search policy, do the occur check, return the depth of the computations tree, and many other things.
@@ -40,4 +40,3 @@
 	<p class="post-content">
 		The full code is available at <a target="_blank" href="http://github.com/blackecho/prolog-programs">github</a>.
 	</p>
-{% endblock %}

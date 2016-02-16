@@ -1,9 +1,9 @@
-{% extends "base-post.html" %}
-{% set post_title= post.head %}
-{% set post_head= post.head %}
-{% set post_path= post.link %}
-
-{% block post_content %}
+---
+layout: post
+title:  "Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog"
+date:   2015-05-14 14:30:20 -0500
+categories: prolog
+---
 	<p class="post-content">
 		Today we will model the game of <a target="_blank" href="http://en.wikipedia.org/wiki/Sudoku">Sudoku</a> as a <a target="_blank" href="http://en.wikipedia.org/wiki/Constraint_satisfaction_problem">Constraint Satisfaction Problem (CSP)</a> and then write a Prolog program that solves it.
 		CSP is particularly useful when we want to model a combinatorial problem subject to <strong>constraints</strong>. In standard Sudoku we have a 9x9 grid, where each cell can be filled with an integer between 1 and 9, so the possible configurations are all the ordered combinations of 81 numbers between 1 and 9.
@@ -44,4 +44,3 @@
 	<p class="post-content">
 		The full code is available at <a target="_blank" href="http://github.com/blackecho/prolog-programs">github</a>.
 	</p>
-{% endblock %}

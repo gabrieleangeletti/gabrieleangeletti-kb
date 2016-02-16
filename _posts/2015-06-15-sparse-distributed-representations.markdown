@@ -1,9 +1,9 @@
-{% extends "base-post.html" %}
-{% set post_title= post.head %}
-{% set post_head= post.head %}
-{% set post_path= post.link %}
-
-{% block post_content %}
+---
+layout: post
+title:  "Sparse Distributed Representations in Machine Learning"
+date:   2015-06-15 09:30:20 -0500
+categories: machine learning
+---
 
 <p class="post-content">
     Today we will take a look at <a target="_blank" href="https://github.com/numenta/nupic/wiki/Sparse-Distributed-Representations">Sparse Distributed Representations</a>: what they are, why they differ from the standard types of representations used by computers, and why many people think they are fundamental in building true machine intelligence.
@@ -28,5 +28,3 @@
     If you want to know more on this subject, and also on related topics, I suggest you to follow <a target="_blank" href="https://en.wikipedia.org/wiki/Jeff_Hawkins">Jeff Hawkins</a>, an impressive Neuroscientist in the field of Machine Intelligence. Among other things, he founded a company called <a target="_blank" href="http://numenta.org">Numenta</a> that is doing many interest things. They developed an <a target="_blank" href="https://github.com/numenta/nupic/wiki/Using-NuPIC">open source framework</a> written in Python that implements the algorithms they are working on. I think i will play around a bit with this framework, maybe I'll write a new post on Nupic, to show you how it works!
 
 </p>
-
-{% endblock %}
