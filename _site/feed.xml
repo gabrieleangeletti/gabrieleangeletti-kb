@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gabriele Angeletti</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://www.gabrieleangeletti.com/</link>
+    <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 16 Feb 2016 12:08:56 +0100</pubDate>
+    <lastBuildDate>Tue, 16 Feb 2016 12:08:56 +0100</lastBuildDate>
+    <generator>Jekyll v3.0.3</generator>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 02 Dec 2015 00:52:21 +0100</pubDate>
+        <link>http://www.gabrieleangeletti.com/2015/12/welcome-to-jekyll</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/12/welcome-to-jekyll</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Sparse Distributed Representations</title>
+        <description>
+</description>
+        <pubDate>Mon, 15 Jun 2015 00:00:00 +0200</pubDate>
+        <link>http://www.gabrieleangeletti.com/2015/06/sparse-distributed-representations</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/06/sparse-distributed-representations</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>The Forward-Backward Algorithm for Hidden Markov Models</title>
+        <description>&lt;p&gt;Today we will see how we can do inference in a &lt;a href=&quot;https://en.wikipedia.org/wiki/Hidden_Markov_Model&quot;&gt;Hidden Markov Model (HMM)&lt;/a&gt;, using the &lt;a href=&quot;https://en.wikipedia.org/wiki/Forward%E2%80%93backward_algorithm&quot;&gt;Forward-Backward (FB) algorithm&lt;/a&gt;. First of all I will briefly recap what a HMM is, then I’ll show you the algorithm in detail.&lt;/p&gt;
+
+&lt;p&gt;A HMM is a statistical model that can be used to do a lot of interesting things, it has many applications in speech-recognition, handwriting recognition, and many others.
+The basic idea is that if we have some observations about something, they can be explained in terms of some states (which are hidden) to which these observations depend. If we take for example handwriting recognition, the hidden states would be the letters of the alphabet, and the observed variables would be the letters that one actually writes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;responsive-img&quot; src=&quot;../../img/hmm.png&quot; alt=&quot;hidden markov model graphic representation&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The arrows in the image indicate a conditional probability, so there are conditional probabilities between states and between
+states and observations.
+These two quantities themselves, together with the initial distributions for the states, entirely define an HMM.
+So you have two matrices, the transition probability matrix $T$ (or transition model) and the observation probability matrix $O$
+(or observation model).&lt;/p&gt;
+
+&lt;p&gt;$T$ contains the probabilities of changing state: if the model has N states, then the matrix will have dimensions NxN, in which the $T_{(i,j)}$ cell contains the probability that the next state will be j, given that the current state is i.&lt;/p&gt;
+
+&lt;p&gt;$O$ contains the probabilities of observing a particular value, given the current state: for example the $O_{(i,j)}$ cell
+contains the probability of observing value i given that the current state is j.&lt;/p&gt;
+
+&lt;p&gt;When you have defined a HMM, you can compute the posterior probability distribution of the states given the observations, thus estimating the
+correlations between the observed variables and the hidden states. In the handwriting example this means that we would be able to recognize the character
+that one has written given the actual messy character that she/he wrote.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;The FB algorithm allows you to compute these posterior probabilities $P(Z_k&lt;/td&gt;
+      &lt;td&gt;X_{1:t})$ for internal hidden states.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The basic idea is that this probability is proportional to the joint distribution $ P(Z_k,X_{1:t}) $ and, using &lt;a target=&quot;_blank&quot; href=&quot;http://en.wikipedia.org/wiki/Bayes&#39;_theorem&quot;&gt;Bayes theorem&lt;/a&gt; and the independence of $ X_{1:k} $ and $ X_{k+1:t} $ given $ Z_k $, we obtain:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(Z_k | X_{1:t}) \propto P(Z_k , X_{1:t}) = P(Z_k | X_{1:k}) P(X_{k+1:t} | Z_k)&lt;/script&gt;
+
+&lt;p&gt;This algorithm rely on the idea of &lt;a target=&quot;_blank&quot; href=&quot;http://en.wikipedia.org/wiki/Dynamic_programming&quot;&gt;dynamic programming&lt;/a&gt;, that is a fancy name for saying that we reuse things we have already computed to make things faster.&lt;/p&gt;
+
+&lt;p&gt;The forward part computes the posterior probability of state $Z_k$ given the first k observations $ X_{1:k}$, and does
+this $\forall k = 1 … n$.&lt;/p&gt;
+
+&lt;p&gt;The backward part computes the probability of the remaining observations $X_{k+1:n}$ given state $Z_k$, again for each k.&lt;/p&gt;
+
+&lt;p&gt;The last part of the algorithm is to merge the forward and the backward part to give the full posterior probabilities.&lt;/p&gt;
+
+&lt;p&gt;This algorithm gives you probabilities for all hidden states, but it doesn’t give probabilities for sequences of states (see &lt;a target=&quot;_blank&quot; href=&quot;http://en.wikipedia.org/wiki/Viterbi_algorithm&quot;&gt;Viterbi Algorithm&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;forward-part&quot;&gt;Forward Part&lt;/h2&gt;
+
+&lt;p&gt;We want to use dynamic programming, so we want to express $P(Z_k | X_{1:k})$ as a function of k-1, so that we can setup a recursion. We achieve that by using &lt;a target=&quot;_blank&quot; href=&quot;http://en.wikipedia.org/wiki/Marginal_distribution&quot;&gt;marginalization&lt;/a&gt;.
+So using marginalization we can bring $ Z_{k-1} $ to the equation:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(Z_k,X_{1:k}) = \sum_{Z_{k-1}} P(Z_k, Z_{k-1}, X_{1:k-1}, X_k)&lt;/script&gt;
+
+&lt;p&gt;Where the sum is over all the values which $ Z_{k-1} $ can assume. Now we can use the &lt;a target=&quot;_blank&quot; href=&quot;http://en.wikipedia.org/wiki/Chain_rule_(probability)&quot;&gt;chain rule for probability&lt;/a&gt; and see what happens:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sum_{Z_{k-1}} P(Z_k, Z_{k-1}, X_{1:k-1}, X_k) = \sum_{Z_{k-1}} P(X_k | Z_k, Z_{k-1}, X_{1:k-1}) P(Z_k|Z_{k-1}, X_{1:k-1}) P(Z_{k-1} | X_{1:k-1}) P(X_{1:k-1})&lt;/script&gt;
+
+&lt;p&gt;the last two terms can be unified in: $P(Z_{k-1}, X_{1:k-1})$. So now we use &lt;a target=&quot;_blank&quot; href=&quot;http://www.andrew.cmu.edu/user/scheines/tutor/d-sep.html&quot;&gt;D-separation&lt;/a&gt; to simplify the above equation. In the first term we can remove $ Z_{k-1}$ and $ X_{1:k-1} $, because $ X_k $ is independent of them, given $ Z_k $. We can see it graphically using D-separation: the idea is that any path in the graph from $ X_k $ to $ Z_{k-1}$ or $ X_{1:k-1} $, must pass through $ Z_k $, so we say that they are independent given $ Z_k $ and we remove them.
+The same goes for the second term, in which we remove $ X_{1:k-1} $. Let’s now write the simplified equation:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(Z_k,X_{1:k}) = \sum_{Z_{k-1}} P(X_k | Z_k) P(Z_k|Z_{k-1}) P(Z_{k-1}, X_{1:k-1})&lt;/script&gt;
+
+&lt;p&gt;Let’s examine this equation. The first term is the emission probability, which we have assumed we know. The second term is the transition probability, which also we have assumed we know. The third term is the recursion term over k-1, so we compute this value $\forall k = 2 … n$ and we are done.
+For k = 1, the value is simple to compute:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(Z_1,X_1) = P(X_1 | Z_1) P(Z_1)&lt;/script&gt;
+
+&lt;h2 id=&quot;backward-part&quot;&gt;Backward Part&lt;/h2&gt;
+
+&lt;p&gt;For the backward part, we compute the values in a similar way, by using marginalization and the chain rule.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(X_{k+1, t}, Z_k) = \sum_{Z_{k+1}} P(X_{k+1:t}, Z_{k+1} | Z_k) = \sum_{Z_{k+1}} P(X_{k+1}, X_{k+2:t}, Z_{k+1} | Z_k)&lt;/script&gt;
+
+&lt;p&gt;Now we again use the chain rule and see what happens:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sum_{Z_{k+1}} = P(X_{k+2:t} | Z_{k+1}, X_{k+1}, Z_k) P(X_{k+1} | Z_{k+1}, Z_k) P(Z_{k+1}, Z_k)&lt;/script&gt;
+
+&lt;p&gt;Like in the forward part, we can use D-separation to simplify the equation. In the first term, we can remove $ X_{k+1}$ and $Z_k$, and in the second
+term we can remove $Z_k$. So now the equation is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sum_{Z_{k+1}} = P(X_{k+2:t} | Z_{k+1}) P(X_{k+1} | Z_{k+1}) P(Z_{k+1}, Z_k)&lt;/script&gt;
+
+&lt;p&gt;And again: we have an emission probability (second term), a transition probability (third term), and a recursion term over k+1 (first term).
+We again compute this value $\forall k = 1 … n-1$ and we are done. For k=n, the value is 1 (you can compute it yourself is pretty easy).&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 30 May 2015 17:30:20 +0200</pubDate>
+        <link>http://www.gabrieleangeletti.com/2015/05/forward-backward-algorithm-hidden-markov-models</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/forward-backward-algorithm-hidden-markov-models</guid>
+        
+        
+        <category>machine</category>
+        
+        <category>learning</category>
+        
+      </item>
+    
+      <item>
+        <title>Prolog Bfs Meta Interpreter</title>
+        <description>
+</description>
+        <pubDate>Thu, 21 May 2015 00:00:00 +0200</pubDate>
+        <link>http://www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Sudoku Csp Prolog</title>
+        <description>
+</description>
+        <pubDate>Thu, 14 May 2015 00:00:00 +0200</pubDate>
+        <link>http://www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
