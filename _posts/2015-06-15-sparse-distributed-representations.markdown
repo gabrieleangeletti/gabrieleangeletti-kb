@@ -34,7 +34,7 @@ If you want to know more on this subject, and also on related topics, I suggest 
 */
 
 var disqus_config = function () {
-this.page.url = "http://www.gabrieleangeletti.com/2015/06/sparse-distributed-representations"; // Replace PAGE_URL with your page's canonical URL variable
+this.page.url = "www.gabrieleangeletti.com/2015/06/sparse-distributed-representations"; // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = "Sparse Distributed Representations in Machine Learning"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 

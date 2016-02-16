@@ -54,7 +54,7 @@ The full code is available at [github][ghub].
 */
 
 var disqus_config = function () {
-this.page.url = "http://www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter"; // Replace PAGE_URL with your page's canonical URL variable
+this.page.url = "www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter"; // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = "A Breadth-First Search (BFS) Prolog meta-interpreter"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 

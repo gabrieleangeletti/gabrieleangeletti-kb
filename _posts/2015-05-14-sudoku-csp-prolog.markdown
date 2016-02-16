@@ -48,7 +48,7 @@ The full code is available at [github][ghub].
 */
 
 var disqus_config = function () {
-this.page.url = "http://www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog"; // Replace PAGE_URL with your page's canonical URL variable
+this.page.url = "www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog"; // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = "Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 
