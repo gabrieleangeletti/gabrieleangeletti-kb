@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Projects</title>
-  <meta name="description" content="My blog about Artificial Intelligence, Machine Learning and related topics.
-">
+  <title>A Breadth-First Search (BFS) Prolog meta-interpreter</title>
+  <meta name="description" content="Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the...">
 
-  <link rel="canonical" href="http://www.gabrieleangeletti.com/projects/">
+  <link rel="canonical" href="http://www.gabrieleangeletti.com/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html">
   <link rel="alternate" type="application/rss+xml" title="Gabriele Angeletti" href="http://www.gabrieleangeletti.com/feed.xml" />
 
   <!-- Material Design Lite css Library -->
@@ -100,45 +99,93 @@
 
     
 
-    <div class="sc-ribbon"></div>
-<main class="sc-main mdl-layout__content">
-  <div class="sc-container mdl-grid">
+    <div class="post-ribbon"></div>
+<main class="post-main mdl-layout__content">
+  <div class="post-container mdl-grid">
     <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-    <div class="sc-section mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+    <div class="post-section mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
       <div class="mdl-color-text--grey-500">
-      
+      May 21, 2015 • Gabriele Angeletti •  blog  prolog  
       </div>
-      <h3>Projects</h3>
-      <article class="sc-content">
-        <p>
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet  mdl-cell--12-col-phone">
-      <div class="mdl-card__title" >
-        <h2 class="mdl-card__title-text">University project on Deep Belief Nets</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <span>Sep 10, 2015</span>
-        <p><p>Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.</p>
-</p>
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/projects/deep-belief-nets">
-          Read More
-        </a>
-      </div>
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="project-/projects/deep-belief-nets">
-          <i class="material-icons">share</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="project-/projects/deep-belief-nets">
-          <li><a href="https://www.facebook.com/dialog/share?app_id=1213455035336203&display=page&href=http://www.gabrieleangeletti.com/projects/deep-belief-nets&redirect_uri=" class="mdl-menu__item">Facebook</a></li>
-          <li><a href="https://twitter.com/share?url=http://www.gabrieleangeletti.com/projects/deep-belief-nets&text=University project on Deep Belief Nets&via=gabrieleang" class="mdl-menu__item">Twitter</a></li>
-          <li><a href="https://plus.google.com/share?url=http://www.gabrieleangeletti.com/projects/deep-belief-nets" class="mdl-menu__item">Google+</a></li>
-        </ul>
-      </div>
-    </div>
+      <h3>A Breadth-First Search (BFS) Prolog meta-interpreter</h3>
+      <article class="post-content">
+        <p><p>Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the tree of computations.
+This is due to performance reasons,</p>
+
+<p>because other searching policies wouldn’t be feasible, except for fairly easy problems.
+But a cool fact about Prolog is that code and data are basically the same thing, and because of that its easy to implement a Prolog program that runs other Prolog programs (i.e. a meta-interpreter).
+We can build meta-interpreters to change the behavior of our interpreter: we can for example change the search policy, do the occur check, return the depth of the computations tree, and many other things.</p>
+
+<p>In this post we will change Prolog’s search strategy from DFS to BFS, as an example of how we can easily change its behavior.
+The main difference between DFS and BFS is that DFS uses a Stack to mantain the list of nodes to visit, and it means that DFS always tries to expand the last node it has visited. This policy can turn into trouble if there is a
+left recursion, which is when a variable that appears in the head of a rule also appears in the first goal of the tail. Since Prolog doesn’t do the occur check, which is needed exactly to avoid such situations, it loops forever, until it goes out of local stack.</p>
+
+<p>With Breadth-First Search such situations can be avoided, because BFS will expand all the goals in a clause, instead of keep trying to expand the first node it encounter.
+This is due do the fact that BFS uses a Queue to mantain the list of nodes to visit, so it when it expands a node, it won’t visit what it has just expanded, but it will continue to visit the other nodes it hasn’t expanded yet.</p>
+
+<p>So at each depth level, BFS will first visit all the nodes at that level, and then move to the next level. While this is bad for performance, because we don’t want any useless path to be visited, it can always find a solution if it exists, thus BFS is sound and complete. Let’s now implement the meta-interpreter.</p>
+
+<h2 id="code">Code</h2>
+<p>We will use Prolog’s built-in predicate clause/2.
+clause(Goal, Body) unifies Body with the bodies that matches with Goal, and return them in the form (FirstGoal, OtherGoals), where OtherGoals can be another list of the form (FirstGoal, OtherGoals). So clause/2 will find for us all the matches with Goal. Now we need a predicate that converts goal lists of this form into a standard prolog list with square brackets. To do this we will implement the predicate conj_goals_2_list.
+Now we are ready to implement the meta-interpreter. Basically BFS is the same as DFS except that it uses a Queue instead of a Stack. The Queue works with a FIFO (first-in first-out) policy, so we always insert element at the last position of the list, and we always retrieve elements at the first position.
+In Prolog we can do this pretty easily by using the way it handles lists and append/3.
+Using the predicate append(OldList, Element, NewList), NewList will be the result of adding Element at the end of OldList.
+So the code looks like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>solveBFS([Goal|Rest]) :- % list of goals to prove
+</code></pre>
+</div>
+
+<p>we use clause/2 on the first element of the goals list, that is the first-out part of FIFO</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>clause(Goal, Body)
+</code></pre>
+</div>
+
+<p>we convert the list format returned by clause into a standart Prolog list</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>conj_goals_2_list(Body, List)
+</code></pre>
+</div>
+
+<p>we append List to the end of Rest, that is the part first-in part of FIFO</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>append(Rest, List, New)
+</code></pre>
+</div>
+
+<p>we call recursively the solver passing it the new list. The program will keep trying to prove the goals, until all the goals are proved, or they can’t be proved</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>solveBFS(New)
+</code></pre>
+</div>
+
+<p>The full code is available at <a href="http://github.com/blackecho/prolog-programs">github</a>.</p>
 
 </p>
       </article>
+      <!-- Disqus comments -->
+      
+      <div>
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'gabrieleangeletti';
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+      </div>
+      
     </div>
   </div>
 </main>

@@ -1,0 +1,31 @@
+---
+layout: showcase
+title: Projects
+permalink: /projects/
+---
+{% for project in site.categories.projects %}
+    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet  mdl-cell--12-col-phone">
+      <div class="mdl-card__title" {% if project.image %} style="background: url('{{ project.image }}') center/cover;" {% endif %}>
+        <h2 class="mdl-card__title-text">{{project.title}}</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <span>{{ project.date | date: "%b %-d, %Y" }}</span>
+        <p>{{ project.excerpt }}</p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ project.url | prepend: site.baseurl }}">
+          Read More
+        </a>
+      </div>
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="project-{{ project.id }}">
+          <i class="material-icons">share</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="project-{{ project.id }}">
+          <li><a href="https://www.facebook.com/dialog/share?app_id={{site.facebook_app_id}}&display=page&href={{ project.url | prepend: site.url }}&redirect_uri={{ site.baseurl }}" class="mdl-menu__item">Facebook</a></li>
+          <li><a href="https://twitter.com/share?url={{ project.url | prepend: site.url }}&text={{ project.title }}&via={{ site.twitter_username }}" class="mdl-menu__item">Twitter</a></li>
+          <li><a href="https://plus.google.com/share?url={{ project.url | prepend: site.url }}" class="mdl-menu__item">Google+</a></li>
+        </ul>
+      </div>
+    </div>
+{% endfor %}

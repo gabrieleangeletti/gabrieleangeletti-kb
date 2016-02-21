@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Projects</title>
-  <meta name="description" content="My blog about Artificial Intelligence, Machine Learning and related topics.
-">
+  <title>Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog</title>
+  <meta name="description" content="Today we will model the game of Sudoku as a Constraint Satisfaction Problem (CSP) and then write a Prolog program that solves it.CSP is particularly useful w...">
 
-  <link rel="canonical" href="http://www.gabrieleangeletti.com/projects/">
+  <link rel="canonical" href="http://www.gabrieleangeletti.com/blog/prolog/2015/05/14/sudoku-csp-prolog.html">
   <link rel="alternate" type="application/rss+xml" title="Gabriele Angeletti" href="http://www.gabrieleangeletti.com/feed.xml" />
 
   <!-- Material Design Lite css Library -->
@@ -100,45 +99,75 @@
 
     
 
-    <div class="sc-ribbon"></div>
-<main class="sc-main mdl-layout__content">
-  <div class="sc-container mdl-grid">
+    <div class="post-ribbon"></div>
+<main class="post-main mdl-layout__content">
+  <div class="post-container mdl-grid">
     <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-    <div class="sc-section mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+    <div class="post-section mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
       <div class="mdl-color-text--grey-500">
-      
+      May 14, 2015 • Gabriele Angeletti •  blog  prolog  
       </div>
-      <h3>Projects</h3>
-      <article class="sc-content">
-        <p>
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet  mdl-cell--12-col-phone">
-      <div class="mdl-card__title" >
-        <h2 class="mdl-card__title-text">University project on Deep Belief Nets</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <span>Sep 10, 2015</span>
-        <p><p>Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.</p>
-</p>
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/projects/deep-belief-nets">
-          Read More
-        </a>
-      </div>
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="project-/projects/deep-belief-nets">
-          <i class="material-icons">share</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="project-/projects/deep-belief-nets">
-          <li><a href="https://www.facebook.com/dialog/share?app_id=1213455035336203&display=page&href=http://www.gabrieleangeletti.com/projects/deep-belief-nets&redirect_uri=" class="mdl-menu__item">Facebook</a></li>
-          <li><a href="https://twitter.com/share?url=http://www.gabrieleangeletti.com/projects/deep-belief-nets&text=University project on Deep Belief Nets&via=gabrieleang" class="mdl-menu__item">Twitter</a></li>
-          <li><a href="https://plus.google.com/share?url=http://www.gabrieleangeletti.com/projects/deep-belief-nets" class="mdl-menu__item">Google+</a></li>
-        </ul>
-      </div>
-    </div>
+      <h3>Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog</h3>
+      <article class="post-content">
+        <p><p>Today we will model the game of <a href="http://en.wikipedia.org/wiki/Sudoku">Sudoku</a> as a <a href="http://en.wikipedia.org/wiki/Constraint_satisfaction_problem">Constraint Satisfaction Problem (CSP)</a> and then write a Prolog program that solves it.
+CSP is particularly useful when we want to model a combinatorial problem subject to <strong>constraints</strong>.</p>
+
+<p>In standard Sudoku we have a 9x9 grid, where each cell can be filled with an integer between 1 and 9, so the possible configurations are all the ordered combinations of 81 numbers between 1 and 9.</p>
+
+<p>In the first cell, we have 9 different values that we can put in.
+If we consider both the first and the second cells, we have $ 9^{2} $ different values that we can put in, because we have to take into account all the possible combination of
+the form $ (1,1), (1,2) … (1,9), (2,1) … (9,9) $. So if we consider all the cells in the end we have $ 9^{81} $ possible combination of values, a very huge number!!</p>
+
+<p>But, two things help us here:</p>
+
+<ol>
+  <li>Sudoku is not about trying some random combination, it has some rules, and those rules greatly reduce the above number, because they tell us which combinations are right, and which are wrong.</li>
+  <li>Sudoku has some cells that are already filled, and these <strong>initial conditions</strong> also help in reducing the huge number of tries.</li>
+</ol>
+
+<p>So let’s see how we can model this game in csp.</p>
+
+<p>CSP has variables (what we are interested in), domains (which values the variables can assume) and constraints (rules about what values are right and what are wrong).
+The variables in this case are the 81 cells of the grid, each of which can assume a value between 1 and 9, so the domain here is the integer interval [1, 9].
+The constraints simply are the rules of the game, that are:</p>
+
+<ul>
+  <li>All the values in each row must be different each other</li>
+  <li>All the values in each column must be different each other</li>
+  <li>All the values in each 3x3 block must be different each other</li>
+</ul>
+
+<p>Done! We don’t need some fancy algorithm or complex trick to get the job done: we are simply describing the problem here, and we let Prolog’s backtracking solve it for us. This is the true power of Prolog and logic
+Programming: you don’t actually have to solve the problem, you only have to model it!</p>
+
+<h2 id="code">Code</h2>
+<p>Prolog has a csp library, named <strong>clpfd</strong>. It has all the things that we need: we can define variables, domains for the variables, and costraints. More over, the constraints that the values must be different, is a type of constraint that is already implemented in clpfd. All we have to do is to use all_different(List).</p>
+
+<p>The full code is available at <a href="http://github.com/blackecho/prolog-programs">github</a>.</p>
 
 </p>
       </article>
+      <!-- Disqus comments -->
+      
+      <div>
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'gabrieleangeletti';
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+      </div>
+      
     </div>
   </div>
 </main>

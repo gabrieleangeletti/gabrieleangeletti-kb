@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Projects</title>
-  <meta name="description" content="My blog about Artificial Intelligence, Machine Learning and related topics.
-">
+  <title>The Forward-Backward Algorithm for Hidden Markov Models</title>
+  <meta name="description" content="Today we will see how we can do inference in a Hidden Markov Model (HMM), using the Forward-Backward (FB) algorithm. First of all I will briefly recap what a...">
 
-  <link rel="canonical" href="http://www.gabrieleangeletti.com/projects/">
+  <link rel="canonical" href="http://www.gabrieleangeletti.com/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html">
   <link rel="alternate" type="application/rss+xml" title="Gabriele Angeletti" href="http://www.gabrieleangeletti.com/feed.xml" />
 
   <!-- Material Design Lite css Library -->
@@ -100,45 +99,117 @@
 
     
 
-    <div class="sc-ribbon"></div>
-<main class="sc-main mdl-layout__content">
-  <div class="sc-container mdl-grid">
+    <div class="post-ribbon"></div>
+<main class="post-main mdl-layout__content">
+  <div class="post-container mdl-grid">
     <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-    <div class="sc-section mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+    <div class="post-section mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
       <div class="mdl-color-text--grey-500">
-      
+      May 30, 2015 • Gabriele Angeletti •  blog  machine-learning  
       </div>
-      <h3>Projects</h3>
-      <article class="sc-content">
-        <p>
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet  mdl-cell--12-col-phone">
-      <div class="mdl-card__title" >
-        <h2 class="mdl-card__title-text">University project on Deep Belief Nets</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <span>Sep 10, 2015</span>
-        <p><p>Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.</p>
-</p>
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/projects/deep-belief-nets">
-          Read More
-        </a>
-      </div>
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="project-/projects/deep-belief-nets">
-          <i class="material-icons">share</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="project-/projects/deep-belief-nets">
-          <li><a href="https://www.facebook.com/dialog/share?app_id=1213455035336203&display=page&href=http://www.gabrieleangeletti.com/projects/deep-belief-nets&redirect_uri=" class="mdl-menu__item">Facebook</a></li>
-          <li><a href="https://twitter.com/share?url=http://www.gabrieleangeletti.com/projects/deep-belief-nets&text=University project on Deep Belief Nets&via=gabrieleang" class="mdl-menu__item">Twitter</a></li>
-          <li><a href="https://plus.google.com/share?url=http://www.gabrieleangeletti.com/projects/deep-belief-nets" class="mdl-menu__item">Google+</a></li>
-        </ul>
-      </div>
-    </div>
+      <h3>The Forward-Backward Algorithm for Hidden Markov Models</h3>
+      <article class="post-content">
+        <p><p>Today we will see how we can do inference in a <a href="https://en.wikipedia.org/wiki/Hidden_Markov_Model">Hidden Markov Model (HMM)</a>, using the <a href="https://en.wikipedia.org/wiki/Forward%E2%80%93backward_algorithm">Forward-Backward (FB) algorithm</a>. First of all I will briefly recap what a HMM is, then I’ll show you the algorithm in detail.</p>
+
+<p>A HMM is a statistical model that can be used to do a lot of interesting things, it has many applications in speech-recognition, handwriting recognition, and many others.
+The basic idea is that if we have some observations about something, they can be explained in terms of some states (which are hidden) to which these observations depend. If we take for example handwriting recognition, the hidden states would be the letters of the alphabet, and the observed variables would be the letters that one actually writes.</p>
+
+<p><img class="responsive-img" src="../../../../img/hmm.png" alt="hidden markov model graphic representation" /></p>
+
+<p>The arrows in the image indicate a conditional probability, so there are conditional probabilities between states and between
+states and observations.
+These two quantities themselves, together with the initial distributions for the states, entirely define an HMM.
+So you have two matrices, the transition probability matrix $T$ (or transition model) and the observation probability matrix $O$
+(or observation model).</p>
+
+<p>$T$ contains the probabilities of changing state: if the model has N states, then the matrix will have dimensions NxN, in which the $T_{(i,j)}$ cell contains the probability that the next state will be j, given that the current state is i.</p>
+
+<p>$O$ contains the probabilities of observing a particular value, given the current state: for example the $O_{(i,j)}$ cell
+contains the probability of observing value i given that the current state is j.</p>
+
+<p>When you have defined a HMM, you can compute the posterior probability distribution of the states given the observations, thus estimating the
+correlations between the observed variables and the hidden states. In the handwriting example this means that we would be able to recognize the character
+that one has written given the actual messy character that she/he wrote.</p>
+
+<p>The FB algorithm allows you to compute these posterior probabilities for internal hidden states.</p>
+
+<p>The basic idea is that this probability is proportional to the joint distribution $ P(Z_k,X_{1:t}) $ and, using <a href="http://en.wikipedia.org/wiki/Bayes'_theorem">Bayes theorem</a> and the independence of $ X_{1:k} $ and $ X_{k+1:t} $ given $ Z_k $, we obtain:</p>
+
+<script type="math/tex; mode=display">P(Z_k | X_{1:t}) \propto P(Z_k , X_{1:t}) = P(Z_k | X_{1:k}) P(X_{k+1:t} | Z_k)</script>
+
+<p>This algorithm rely on the idea of <a href="http://en.wikipedia.org/wiki/Dynamic_programming">Dynamic Programming</a>, that is a fancy name for saying that we reuse things we have already computed to make things faster.</p>
+
+<p>The forward part computes the posterior probability of state $Z_k$ given the first k observations $ X_{1:k}$, and does
+this $\forall k = 1 … n$.</p>
+
+<p>The backward part computes the probability of the remaining observations $X_{k+1:n}$ given state $Z_k$, again for each k.</p>
+
+<p>The last part of the algorithm is to merge the forward and the backward part to give the full posterior probabilities.</p>
+
+<p>This algorithm gives you probabilities for all hidden states, but it doesn’t give probabilities for sequences of states (see the <a href="http://en.wikipedia.org/wiki/Viterbi_algorithm">Viterbi Algorithm</a>)</p>
+
+<h2 id="forward-part">Forward Part</h2>
+
+<p>We want to use dynamic programming, so we want to express $P(Z_k | X_{1:k})$ as a function of k-1, so that we can setup a recursion. We achieve that by using <a href="http://en.wikipedia.org/wiki/Marginal_distribution">marginalization</a>.
+So using marginalization we can bring $ Z_{k-1} $ to the equation:</p>
+
+<script type="math/tex; mode=display">P(Z_k,X_{1:k}) = \sum_{Z_{k-1}} P(Z_k, Z_{k-1}, X_{1:k-1}, X_k)</script>
+
+<p>Where the sum is over all the values which $ Z_{k-1} $ can assume. Now we can use the <a href="http://en.wikipedia.org/wiki/Chain_rule_(probability)">chain rule for probability</a>&lt;/a&gt; and see what happens:</p>
+
+<script type="math/tex; mode=display">\sum_{Z_{k-1}} P(Z_k, Z_{k-1}, X_{1:k-1}, X_k) = \sum_{Z_{k-1}} P(X_k | Z_k, Z_{k-1}, X_{1:k-1}) P(Z_k|Z_{k-1}, X_{1:k-1}) P(Z_{k-1} | X_{1:k-1}) P(X_{1:k-1})</script>
+
+<p>the last two terms can be unified in: $P(Z_{k-1}, X_{1:k-1})$. So now we use <a href="http://www.andrew.cmu.edu/user/scheines/tutor/d-sep.html">D-separation</a> to simplify the above equation. In the first term we can remove $ Z_{k-1}$ and $ X_{1:k-1} $, because $ X_k $ is independent of them, given $ Z_k $. We can see it graphically using D-separation: the idea is that any path in the graph from $ X_k $ to $ Z_{k-1}$ or $ X_{1:k-1} $, must pass through $ Z_k $, so we say that they are independent given $ Z_k $ and we remove them.
+The same goes for the second term, in which we remove $ X_{1:k-1} $. Let’s now write the simplified equation:</p>
+
+<script type="math/tex; mode=display">P(Z_k,X_{1:k}) = \sum_{Z_{k-1}} P(X_k | Z_k) P(Z_k|Z_{k-1}) P(Z_{k-1}, X_{1:k-1})</script>
+
+<p>Let’s examine this equation. The first term is the emission probability, which we have assumed we know. The second term is the transition probability, which also we have assumed we know. The third term is the recursion term over k-1, so we compute this value $\forall k = 2 … n$ and we are done.
+For k = 1, the value is simple to compute:</p>
+
+<script type="math/tex; mode=display">P(Z_1,X_1) = P(X_1 | Z_1) P(Z_1)</script>
+
+<h2 id="backward-part">Backward Part</h2>
+
+<p>For the backward part, we compute the values in a similar way, by using marginalization and the chain rule.</p>
+
+<script type="math/tex; mode=display">P(X_{k+1, t}, Z_k) = \sum_{Z_{k+1}} P(X_{k+1:t}, Z_{k+1} | Z_k) = \sum_{Z_{k+1}} P(X_{k+1}, X_{k+2:t}, Z_{k+1} | Z_k)</script>
+
+<p>Now we again use the chain rule and see what happens:</p>
+
+<script type="math/tex; mode=display">\sum_{Z_{k+1}} = P(X_{k+2:t} | Z_{k+1}, X_{k+1}, Z_k) P(X_{k+1} | Z_{k+1}, Z_k) P(Z_{k+1}, Z_k)</script>
+
+<p>Like in the forward part, we can use D-separation to simplify the equation. In the first term, we can remove $ X_{k+1}$ and $Z_k$, and in the second
+term we can remove $Z_k$. So now the equation is:</p>
+
+<script type="math/tex; mode=display">\sum_{Z_{k+1}} = P(X_{k+2:t} | Z_{k+1}) P(X_{k+1} | Z_{k+1}) P(Z_{k+1}, Z_k)</script>
+
+<p>And again: we have an emission probability (second term), a transition probability (third term), and a recursion term over k+1 (first term).
+We again compute this value $\forall k = 1 … n-1$ and we are done. For k=n, the value is 1 (you can compute it yourself is pretty easy).</p>
 
 </p>
       </article>
+      <!-- Disqus comments -->
+      
+      <div>
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'gabrieleangeletti';
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+      </div>
+      
     </div>
   </div>
 </main>

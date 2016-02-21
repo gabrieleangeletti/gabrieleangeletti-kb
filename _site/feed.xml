@@ -6,9 +6,24 @@
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Feb 2016 11:04:50 +0100</pubDate>
-    <lastBuildDate>Sun, 21 Feb 2016 11:04:50 +0100</lastBuildDate>
+    <pubDate>Sun, 21 Feb 2016 12:34:45 +0100</pubDate>
+    <lastBuildDate>Sun, 21 Feb 2016 12:34:45 +0100</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>University project on Deep Belief Nets</title>
+        <description>&lt;p&gt;Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
+        <link>http://www.gabrieleangeletti.com/projects/deep-belief-nets</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/projects/deep-belief-nets</guid>
+        
+        
+        <category>projects</category>
+        
+        <category>project</category>
+        
+      </item>
     
       <item>
         <title>Sparse Distributed Representations in Machine Learning</title>
@@ -36,9 +51,11 @@ All these layers are indeed learning Sparse Distributed Representations of the t
 
 </description>
         <pubDate>Mon, 15 Jun 2015 16:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/machine-learning/2015/06/15/sparse-distributed-representations.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/machine-learning/2015/06/15/sparse-distributed-representations.html</guid>
+        <link>http://www.gabrieleangeletti.com/blog/machine-learning/2015/06/15/sparse-distributed-representations.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/machine-learning/2015/06/15/sparse-distributed-representations.html</guid>
         
+        
+        <category>blog</category>
         
         <category>machine-learning</category>
         
@@ -126,9 +143,11 @@ We again compute this value $\forall k = 1 … n-1$ and we are done. For k=n, th
 
 </description>
         <pubDate>Sat, 30 May 2015 17:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</guid>
+        <link>http://www.gabrieleangeletti.com/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</guid>
         
+        
+        <category>blog</category>
         
         <category>machine-learning</category>
         
@@ -192,9 +211,11 @@ So the code looks like this:&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 21 May 2015 16:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</guid>
+        <link>http://www.gabrieleangeletti.com/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</guid>
         
+        
+        <category>blog</category>
         
         <category>prolog</category>
         
@@ -240,9 +261,11 @@ Programming: you don’t actually have to solve the problem, you only have to mo
 
 </description>
         <pubDate>Thu, 14 May 2015 21:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/prolog/2015/05/14/sudoku-csp-prolog.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/prolog/2015/05/14/sudoku-csp-prolog.html</guid>
+        <link>http://www.gabrieleangeletti.com/blog/prolog/2015/05/14/sudoku-csp-prolog.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/prolog/2015/05/14/sudoku-csp-prolog.html</guid>
         
+        
+        <category>blog</category>
         
         <category>prolog</category>
         
