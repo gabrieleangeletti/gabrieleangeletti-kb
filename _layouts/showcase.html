@@ -1,18 +1,8 @@
 ---
 layout: default
 ---
-<div class="sc-ribbon"></div>
-<main class="sc-main mdl-layout__content">
-  <div class="sc-container mdl-grid">
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-    <div class="sc-section mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
-      <div class="mdl-color-text--grey-500">
-      {% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}
-      </div>
-      <h3>{{ page.title }}</h3>
-      <article class="sc-content">
-        <p>{{ content }}</p>
-      </article>
-    </div>
+<div class="page-content">
+  <div class="mdl-grid">
+    {{content}}
   </div>
-</main>
+</div>

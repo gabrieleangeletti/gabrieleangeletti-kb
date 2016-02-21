@@ -6,13 +6,30 @@
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Feb 2016 12:34:45 +0100</pubDate>
-    <lastBuildDate>Sun, 21 Feb 2016 12:34:45 +0100</lastBuildDate>
+    <pubDate>Sun, 21 Feb 2016 14:43:42 +0100</pubDate>
+    <lastBuildDate>Sun, 21 Feb 2016 14:43:42 +0100</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
-        <title>University project on Deep Belief Nets</title>
-        <description>&lt;p&gt;Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.&lt;/p&gt;
+        <title>University project on Hierarchical Reinforcement Learning</title>
+        <description>&lt;p&gt;Project on Hierarchical RL. Implementation of the MAX-QQ value function decomposition and algorithm.
+Link: https://github.com/blackecho/Hierarchical-Reinforcement-Learning&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
+        <link>http://www.gabrieleangeletti.com/projects/deep-belief-nets</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/projects/deep-belief-nets</guid>
+        
+        
+        <category>projects</category>
+        
+        <category>project</category>
+        
+      </item>
+    
+      <item>
+        <title>Deep Belief Networks</title>
+        <description>&lt;p&gt;Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.
+Link: http://github.com/blackecho/Deep-Belief-Network&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
         <link>http://www.gabrieleangeletti.com/projects/deep-belief-nets</link>
