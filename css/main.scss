@@ -1,39 +1,24 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
+//
+// Main sass file, to import all styles
+//
+
 @charset "utf-8";
 
-// Helpers
-@import
-  'helpers/variables',
-  'helpers/mixins';
+$spacing-unit:     30px;
+$super-search:     rgba(0, 191, 255, 0.85);
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
 
-// Base
-@import
-  'base/reset';
 
-// Utilities
+// Import partials from `sass_dir` (defaults to `_sass`)
 @import
-  'utilities/layout';
-
-// Components
-@import
-  'components/header',
-  'components/navigation',
-  'components/article',
-  'components/archives',
-  'components/social',
-  'components/buttons',
-  'components/footer';
-
-// Themes
-@import
-  'themes/blue',
-  'themes/green',
-  'themes/grey',
-  'themes/orange',
-  'themes/purple';
-
-// Vendor
-@import
-  'vendor/syntax-highlighting';
+        "base",
+        "layout",
+        "syntax-highlighting",
+        "post",
+        "search"
+;

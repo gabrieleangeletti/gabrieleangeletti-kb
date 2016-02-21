@@ -2,12 +2,14 @@
 layout: post
 title:  "Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog"
 date:   2015-05-14 14:30:20 -0500
-categories: "prolog"
+author: Gabriele Angeletti
+categories: prolog
+image: img/sudoku-teaser.png
 ---
 Today we will model the game of [Sudoku][sudoku] as a [Constraint Satisfaction Problem (CSP)][csp] and then write a Prolog program that solves it.
-CSP is particularly useful when we want to model a combinatorial problem subject to **constraints**. In standard Sudoku we have a 9x9 grid, where each cell can be filled with an integer between 1 and 9, so the possible configurations are all the ordered combinations of 81 numbers between 1 and 9.
+CSP is particularly useful when we want to model a combinatorial problem subject to **constraints**.
 
-<img src="../../img/sudoku.png" width="50%" style="display: block;margin: 0 auto;clear right;">
+In standard Sudoku we have a 9x9 grid, where each cell can be filled with an integer between 1 and 9, so the possible configurations are all the ordered combinations of 81 numbers between 1 and 9.
 
 In the first cell, we have 9 different values that we can put in.
 If we consider both the first and the second cells, we have $ 9^{2} $ different values that we can put in, because we have to take into account all the possible combination of
@@ -39,26 +41,3 @@ The full code is available at [github][ghub].
 [sudoku]: http://en.wikipedia.org/wiki/Sudoku
 [csp]: http://en.wikipedia.org/wiki/Constraint_satisfaction_problem
 [ghub]: http://github.com/blackecho/prolog-programs
-
-<div id="disqus_thread"></div>
-<script>
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-
-var disqus_config = function () {
-this.page.url = "www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog"; // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = "Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-
-s.src = '//gabrieleangeletti.disqus.com/embed.js';
-
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

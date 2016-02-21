@@ -2,9 +2,15 @@
 layout: post
 title:  "A Breadth-First Search (BFS) Prolog meta-interpreter"
 date:   2015-05-21 09:30:20 -0500
-categories: "prolog"
+author: Gabriele Angeletti
+categories: prolog
+image: img/graph.png
 ---
-Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the tree of computations. This is due to performance reasons, because other searching policies wouldn't be feasible, except for fairly easy problems. But a cool fact about Prolog is that code and data are basically the same thing, and because of that its easy to implement a Prolog program that runs other Prolog programs (i.e. a meta-interpreter).
+Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the tree of computations.
+This is due to performance reasons,
+
+because other searching policies wouldn't be feasible, except for fairly easy problems.
+But a cool fact about Prolog is that code and data are basically the same thing, and because of that its easy to implement a Prolog program that runs other Prolog programs (i.e. a meta-interpreter).
 We can build meta-interpreters to change the behavior of our interpreter: we can for example change the search policy, do the occur check, return the depth of the computations tree, and many other things.
 
 In this post we will change Prolog's search strategy from DFS to BFS, as an example of how we can easily change its behavior.
@@ -45,26 +51,3 @@ we call recursively the solver passing it the new list. The program will keep tr
 The full code is available at [github][ghub].
 
 [ghub]: http://github.com/blackecho/prolog-programs
-
-<div id="disqus_thread"></div>
-<script>
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-
-var disqus_config = function () {
-this.page.url = "www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter"; // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = "A Breadth-First Search (BFS) Prolog meta-interpreter"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-
-s.src = '//gabrieleangeletti.disqus.com/embed.js';
-
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

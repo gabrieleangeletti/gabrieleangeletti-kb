@@ -2,14 +2,16 @@
 layout: post
 title:  "The Forward-Backward Algorithm for Hidden Markov Models"
 date:   2015-05-30 10:30:20 -0500
-categories: "machine-learning"
+author: Gabriele Angeletti
+categories: machine-learning
+image: img/markov-teaser.png
 ---
 Today we will see how we can do inference in a [Hidden Markov Model (HMM)][hidden-markov-model], using the [Forward-Backward (FB) algorithm][forward-backward]. First of all I will briefly recap what a HMM is, then I'll show you the algorithm in detail.
 
 A HMM is a statistical model that can be used to do a lot of interesting things, it has many applications in speech-recognition, handwriting recognition, and many others.
 The basic idea is that if we have some observations about something, they can be explained in terms of some states (which are hidden) to which these observations depend. If we take for example handwriting recognition, the hidden states would be the letters of the alphabet, and the observed variables would be the letters that one actually writes.
 
-<img class="responsive-img" src="../../img/hmm.png" alt="hidden markov model graphic representation">
+<img class="responsive-img" src="../../../../img/hmm.png" alt="hidden markov model graphic representation">
 
 The arrows in the image indicate a conditional probability, so there are conditional probabilities between states and between
 states and observations.
@@ -26,7 +28,7 @@ When you have defined a HMM, you can compute the posterior probability distribut
 correlations between the observed variables and the hidden states. In the handwriting example this means that we would be able to recognize the character
 that one has written given the actual messy character that she/he wrote.
 
-The FB algorithm allows you to compute these posterior probabilities $P(Z_k | X_{1:t})$ for internal hidden states.
+The FB algorithm allows you to compute these posterior probabilities for internal hidden states.
 
 The basic idea is that this probability is proportional to the joint distribution $ P(Z_k,X_{1:t}) $ and, using [Bayes theorem][bayes] and the independence of $ X_{1:k} $ and $ X_{k+1:t} $ given $ Z_k $, we obtain:
 
@@ -90,26 +92,3 @@ We again compute this value $\forall k = 1 ... n-1$ and we are done. For k=n, th
 [marg]: http://en.wikipedia.org/wiki/Marginal_distribution
 [chainrule]: http://en.wikipedia.org/wiki/Chain_rule_(probability)
 [dsep]: http://www.andrew.cmu.edu/user/scheines/tutor/d-sep.html
-
-<div id="disqus_thread"></div>
-<script>
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-
-var disqus_config = function () {
-this.page.url = "www.gabrieleangeletti.com/2015/05/forward-backward-algorithm-hidden-markov-models"; // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = "The Forward-Backward Algorithm for Hidden Markov Models"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-
-s.src = '//gabrieleangeletti.disqus.com/embed.js';
-
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

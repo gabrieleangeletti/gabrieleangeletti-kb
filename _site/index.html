@@ -1,68 +1,313 @@
 <!DOCTYPE html>
-<html class="t-green">
+<html>
+
   <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Artificial Intelligence and related stuff</title>
+  <title>Gabriele Angeletti</title>
   <meta name="description" content="My blog about Artificial Intelligence, Machine Learning and related topics.
 ">
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
-
-  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700|Roboto+Mono:400,500' rel='stylesheet' type='text/css'>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://www.gabrieleangeletti.com/">
-  <link rel="alternate" type="application/rss+xml" title="Gabriele Angeletti" href="http://www.gabrieleangeletti.com/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Gabriele Angeletti" href="http://www.gabrieleangeletti.com/feed.xml" />
+
+  <!-- Material Design Lite css Library -->
+  <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/code.getmdl.io/1.1.1/material.light_green-indigo.min.css">
+
+  <!-- Material Design Fonts -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- Custom theme css -->
+  <link rel="stylesheet" href="/css/main.css">
 </head>
 
+
   <body>
-    <nav class="c-navigation is-fixed">
-  <div class="c-navigation__container u-container">
-    <a class="c-navigation__item is-active" href="/">Home</a>
-    <a class="c-navigation__item " href="/posts/">Posts</a>
-    <a class="c-navigation__item " href="/about-me/">About Me</a>
-    <a class="c-navigation__item " href="/about-blog/">About this blog</a>
-  </div>
-</nav>
+
+    <!-- Start Layout -->
+    
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <!-- search layout -->
+<div class="super-search" id="js-search">
+  <ul class="super-search__results" id="js-search__results"></ul>        
+  <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored super-search__close-btn" onclick="superSearch.toggle()">
+    <i class="material-icons">close</i>
+  </button>
+</div>
+<!-- /end search -->
+        <header class="mdl-layout__header">
+
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <a href="http://www.gabrieleangeletti.com"><span class="mdl-layout-title">Gabriele Angeletti</span></a>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
 
 
-    <article class="c-article">
-  <header class="c-header c-article__header">
-    <div class="u-container">
-      <h1 class="c-header__title">Artificial Intelligence and related stuff</h1>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable is-upgraded">
+        <label class="mdl-button mdl-js-button mdl-button--icon" for="js-search__input">
+          <i class="material-icons">search</i>
+        </label>
+
+        <div class="mdl-textfield__expandable-holder" >
+          <input class="mdl-textfield__input super-search__input" type="text" id="js-search__input" />
+        </div>
+      </div>
+
+      <button class="mdl-button mdl-js-button mdl-button--icon" id="menu-lower-left">
+        <i class="material-icons">more_vert</i>
+      </button>
+
+      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-lower-left">
+        
+        <li><a href="https://medium.com/@gabrieleang" class="mdl-menu__item">Medium</a></li>
+        
+        <li><a href="https://www.quora.com/profile/Gabriele-Angeletti" class="mdl-menu__item">Quora</a></li>
+        
+        <li><a href="https://www.linkedin.com/in/gabriele-angeletti-71959a63" class="mdl-menu__item">LinkedIn</a></li>
+        
+      </ul>
     </div>
   </header>
 
-  <div class="c-article__main">
-    <h2><a href="posts/">Blog</a></h2>
-<p><a href="posts/"><img src="img/machine-learning.png" width="60%" /></a></p>
-
-<h2><a href="projects/">Projects and code</a></h2>
-<p><a href="projects/"><img src="img/code.png" width="60%" /></a></p>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Menu</span>
+    <nav class="mdl-navigation">
+    
+      
+      <a class="mdl-navigation__link" href="/about-blog/">About this Blog</a>
+      
+    
+      
+      <a class="mdl-navigation__link" href="/about-me/">About Me</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+      <a class="mdl-navigation__link" href="/projects/">Projects</a>
+      
+    
+    </nav>
 
   </div>
-</article>
 
+    
 
-    <footer class="c-footer">
-  <div class="u-container c-footer__container">
-    <p>&copy; Gabriele Angeletti 2016</p>
-    <p>
-      <a href="https://twitter.com/gabrieleang">Twitter</a>
-      <a href="https://github.com/blackecho">Github</a>
-      <a href="https://medium.com/@gabrieleang">Medium</a>
-      <a href="https://www.quora.com/profile/Gabriele-Angeletti">Quora</a>
-      <a href="https://www.linkedin.com/in/gabriele-angeletti-71959a63">LinkedIn</a>
-    </p>
+    <div class="page-content">
+  <div class="mdl-grid">
+  
+
+    
+    
+
+    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+      <div class="mdl-card__title"  style="background: url('img/sparse-representation.png') center/cover;" >
+        <h2 class="mdl-card__title-text">Sparse Distributed Representations in Machine Learning</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <span>Jun 15, 2015</span>
+        <p><p>Today we will take a look at <a href="https://github.com/numenta/nupic/wiki/Sparse-Distributed-Representations">Sparse Distributed Representations</a>: what they are, why they differ from the standard types of representations used by computers, and why many people think they are fundamental in building true machine intelligence.</p>
+
+</p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/machine-learning/2015/06/15/sparse-distributed-representations.html">Read More</a>
+      </div>
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-/machine-learning/2015/06/15/sparse-distributed-representations">
+          <i class="material-icons">share</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-/machine-learning/2015/06/15/sparse-distributed-representations">
+          <li><a href="https://www.facebook.com/dialog/share?app_id=1213455035336203&display=page&href=http://www.gabrieleangeletti.com/machine-learning/2015/06/15/sparse-distributed-representations.html&redirect_uri=" class="mdl-menu__item">Facebook</a></li>
+          <li><a href="https://twitter.com/share?url=http://www.gabrieleangeletti.com/machine-learning/2015/06/15/sparse-distributed-representations.html&text=Sparse Distributed Representations in Machine Learning&via=gabrieleang" class="mdl-menu__item">Twitter</a></li>
+          <li><a href="https://plus.google.com/share?url=http://www.gabrieleangeletti.com/machine-learning/2015/06/15/sparse-distributed-representations.html" class="mdl-menu__item">Google+</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+
+    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+      <div class="mdl-card__title"  style="background: url('img/markov-teaser.png') center/cover;" >
+        <h2 class="mdl-card__title-text">The Forward-Backward Algorithm for Hidden Markov Models</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <span>May 30, 2015</span>
+        <p><p>Today we will see how we can do inference in a <a href="https://en.wikipedia.org/wiki/Hidden_Markov_Model">Hidden Markov Model (HMM)</a>, using the <a href="https://en.wikipedia.org/wiki/Forward%E2%80%93backward_algorithm">Forward-Backward (FB) algorithm</a>. First of all I will briefly recap what a HMM is, then I’ll show you the algorithm in detail.</p>
+
+</p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html">Read More</a>
+      </div>
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models">
+          <i class="material-icons">share</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models">
+          <li><a href="https://www.facebook.com/dialog/share?app_id=1213455035336203&display=page&href=http://www.gabrieleangeletti.com/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html&redirect_uri=" class="mdl-menu__item">Facebook</a></li>
+          <li><a href="https://twitter.com/share?url=http://www.gabrieleangeletti.com/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html&text=The Forward-Backward Algorithm for Hidden Markov Models&via=gabrieleang" class="mdl-menu__item">Twitter</a></li>
+          <li><a href="https://plus.google.com/share?url=http://www.gabrieleangeletti.com/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html" class="mdl-menu__item">Google+</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+
+    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+      <div class="mdl-card__title"  style="background: url('img/graph.png') center/cover;" >
+        <h2 class="mdl-card__title-text">A Breadth-First Search (BFS) Prolog meta-interpreter</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <span>May 21, 2015</span>
+        <p><p>Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the tree of computations.
+This is due to performance reasons,</p>
+
+</p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/prolog/2015/05/21/prolog-bfs-meta-interpreter.html">Read More</a>
+      </div>
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-/prolog/2015/05/21/prolog-bfs-meta-interpreter">
+          <i class="material-icons">share</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-/prolog/2015/05/21/prolog-bfs-meta-interpreter">
+          <li><a href="https://www.facebook.com/dialog/share?app_id=1213455035336203&display=page&href=http://www.gabrieleangeletti.com/prolog/2015/05/21/prolog-bfs-meta-interpreter.html&redirect_uri=" class="mdl-menu__item">Facebook</a></li>
+          <li><a href="https://twitter.com/share?url=http://www.gabrieleangeletti.com/prolog/2015/05/21/prolog-bfs-meta-interpreter.html&text=A Breadth-First Search (BFS) Prolog meta-interpreter&via=gabrieleang" class="mdl-menu__item">Twitter</a></li>
+          <li><a href="https://plus.google.com/share?url=http://www.gabrieleangeletti.com/prolog/2015/05/21/prolog-bfs-meta-interpreter.html" class="mdl-menu__item">Google+</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+
+    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+      <div class="mdl-card__title"  style="background: url('img/sudoku-teaser.png') center/cover;" >
+        <h2 class="mdl-card__title-text">Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <span>May 14, 2015</span>
+        <p><p>Today we will model the game of <a href="http://en.wikipedia.org/wiki/Sudoku">Sudoku</a> as a <a href="http://en.wikipedia.org/wiki/Constraint_satisfaction_problem">Constraint Satisfaction Problem (CSP)</a> and then write a Prolog program that solves it.
+CSP is particularly useful when we want to model a combinatorial problem subject to <strong>constraints</strong>.</p>
+
+</p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/prolog/2015/05/14/sudoku-csp-prolog.html">Read More</a>
+      </div>
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-/prolog/2015/05/14/sudoku-csp-prolog">
+          <i class="material-icons">share</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-/prolog/2015/05/14/sudoku-csp-prolog">
+          <li><a href="https://www.facebook.com/dialog/share?app_id=1213455035336203&display=page&href=http://www.gabrieleangeletti.com/prolog/2015/05/14/sudoku-csp-prolog.html&redirect_uri=" class="mdl-menu__item">Facebook</a></li>
+          <li><a href="https://twitter.com/share?url=http://www.gabrieleangeletti.com/prolog/2015/05/14/sudoku-csp-prolog.html&text=Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog&via=gabrieleang" class="mdl-menu__item">Twitter</a></li>
+          <li><a href="https://plus.google.com/share?url=http://www.gabrieleangeletti.com/prolog/2015/05/14/sudoku-csp-prolog.html" class="mdl-menu__item">Google+</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    
+
+  
   </div>
+</div>
+
+    <footer class="mdl-mega-footer">
+  <div class="mdl-mega-footer--middle-section">
+
+    <div class="mdl-mega-footer--drop-down-section">
+      <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+      <h1 class="mdl-mega-footer--heading">INFO</h1>
+      <ul class="mdl-mega-footer--link-list">
+        <li><a href="mailto:angeletti.gabriele@gmail.com">angeletti.gabriele@gmail.com</a></li>
+        <li><a href="/feed.xml">subscribe via RSS</a></li>
+      </ul>
+    </div>
+
+    <div class="mdl-mega-footer--drop-down-section">
+      <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+      <h1 class="mdl-mega-footer--heading">SOCIAL</h1>
+      <ul class="mdl-mega-footer--link-list">
+        
+        <li>
+          <a href="https://github.com/blackecho">
+            <span class="icon  icon--github">
+              <svg viewBox="0 0 16 16">
+                <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+
+            <span class="username">blackecho</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a href="https://twitter.com/gabrieleang">
+            <span class="icon  icon--twitter">
+              <svg viewBox="0 0 16 16">
+                <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+              </svg>
+            </span>
+
+            <span class="username">gabrieleang</span>
+          </a>
+        </li>
+      
+	  
+      
+	  
+        <li>
+          <a href="https://plus.google.com/u/0/+GabrieleAngeletti">
+            <span class="icon  icon--googleplus_per">
+              <svg style="width:16px;height:16px" viewBox="0 0 24 24">
+				<path fill="#000000" d="M20,2A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V4C2,2.89 2.9,2 4,2H20M20,12H18V10H17V12H15V13H17V15H18V13H20V12M9,11.29V13H11.86C11.71,13.71 11,15.14 9,15.14C7.29,15.14 5.93,13.71 5.93,12C5.93,10.29 7.29,8.86 9,8.86C10,8.86 10.64,9.29 11,9.64L12.36,8.36C11.5,7.5 10.36,7 9,7C6.21,7 4,9.21 4,12C4,14.79 6.21,17 9,17C11.86,17 13.79,15 13.79,12.14C13.79,11.79 13.79,11.57 13.71,11.29H9Z" />
+			  </svg>
+            </span>
+
+            <span class="username">Google Plus</span>
+          </a>
+        </li>
+      
+
+      </ul>
+    </div>
+
+    <div class="mdl-mega-footer--drop-down-section">
+      <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+      <h1 class="mdl-mega-footer--heading">ABOUT</h1>
+      <ul class="mdl-mega-footer--link-list">
+        <li>My blog about Artificial Intelligence, Machine Learning and related topics.
+</li>
+      </ul>
+    </div>
+
+
+  </div>
+
+  <div class="mdl-mega-footer--bottom-section">
+    <div class="mdl-logo">Gabriele Angeletti</div>
+    <ul class="mdl-mega-footer--link-list">
+      <li><a href="mailto:angeletti.gabriele@gmail.com">Contact</a></li>
+    </ul>
+  </div>
+
 </footer>
 
-
-    <!-- Javascript sources - placed at the end of the document so the pages load faster -->
+<!-- JavaScript imports at the end of the body -->
 
 <!-- JQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -74,26 +319,24 @@
 <!-- MathJax -->
 <script type="text/javascript" src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
-<!-- Cookie -->
-<script>
-document.cookie="analytics-filter-spam=myblog2016; expires=Sun, 18 Dec 2016 12:00:00 UTC";
-</script>
 
-<!-- Google Analytics -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </div>
+    <!-- /End Layout -->
 
-  ga('create', 'UA-41410147-2', 'auto');
-  ga('send', 'pageview');
-
-  // custom dimentsion analytics-filter-spam
-  var dimensionValue = '';
-  ga('set', 'dimension1', dimensionValue);
-
-</script>
-
+    <!-- Material Design Lite js Library -->
+    <script type="text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.1.1/material.min.js"></script>
+    
+    <script rel="javascript" type="text/javascript" src="/js/site.js"></script>
+    
+    <script rel="javascript" type="text/javascript" src="/js/search.js"></script>
+    <script rel="javascript" type="text/javascript">
+      superSearch({
+        searchFile: '/feed.xml',
+        searchSelector: '#js-search', // CSS Selector for search container element.
+        inputSelector: '#js-search__input', // CSS selector for <input>
+        resultsSelector: '#js-search__results' // CSS selector for results container
+      });
+    </script>
   </body>
+
 </html>

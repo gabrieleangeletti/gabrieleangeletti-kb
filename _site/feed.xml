@@ -6,9 +6,9 @@
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 20 Feb 2016 18:34:30 +0100</pubDate>
-    <lastBuildDate>Sat, 20 Feb 2016 18:34:30 +0100</lastBuildDate>
-    <generator>Jekyll v3.0.3</generator>
+    <pubDate>Sun, 21 Feb 2016 11:04:50 +0100</pubDate>
+    <lastBuildDate>Sun, 21 Feb 2016 11:04:50 +0100</lastBuildDate>
+    <generator>Jekyll v3.1.1</generator>
     
       <item>
         <title>Sparse Distributed Representations in Machine Learning</title>
@@ -34,33 +34,10 @@ There are many kind of Deep Learning Neural Networks, but all of them are based 
 unsupervised pretraining: you train one layer at a time in an unsupervised fashion, and the output of one layer is used as training set for the next layer in the hierarchy. All these layers learn to detect &lt;strong&gt;features&lt;/strong&gt; of the training data, the higher the layer in the hierarchy, the more abstract and meaningful the features are expected to be. For instance, if we are recognizing faces in images, in the first layer one would expect to see edges, strokes, blobs, while in the second layer one would expect to see something like an eye, a mouth, and so no.
 All these layers are indeed learning Sparse Distributed Representations of the training set, and this is way this is useful to know and study this topic in order to grasp the concepts behind Deep Learning.&lt;/p&gt;
 
-&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-&lt;script&gt;
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-
-var disqus_config = function () {
-this.page.url = &quot;www.gabrieleangeletti.com/2015/06/sparse-distributed-representations&quot;; // Replace PAGE_URL with your page&#39;s canonical URL variable
-this.page.identifier = &quot;Sparse Distributed Representations in Machine Learning&quot;; // Replace PAGE_IDENTIFIER with your page&#39;s unique identifier variable
-};
-
-(function() { // DON&#39;T EDIT BELOW THIS LINE
-var d = document, s = d.createElement(&#39;script&#39;);
-
-s.src = &#39;//gabrieleangeletti.disqus.com/embed.js&#39;;
-
-s.setAttribute(&#39;data-timestamp&#39;, +new Date());
-(d.head || d.body).appendChild(s);
-})();
-&lt;/script&gt;
-
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot; rel=&quot;nofollow&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 </description>
         <pubDate>Mon, 15 Jun 2015 16:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/2015/06/sparse-distributed-representations</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/06/sparse-distributed-representations</guid>
+        <link>http://www.gabrieleangeletti.com/machine-learning/2015/06/15/sparse-distributed-representations.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/machine-learning/2015/06/15/sparse-distributed-representations.html</guid>
         
         
         <category>machine-learning</category>
@@ -74,7 +51,7 @@ s.setAttribute(&#39;data-timestamp&#39;, +new Date());
 &lt;p&gt;A HMM is a statistical model that can be used to do a lot of interesting things, it has many applications in speech-recognition, handwriting recognition, and many others.
 The basic idea is that if we have some observations about something, they can be explained in terms of some states (which are hidden) to which these observations depend. If we take for example handwriting recognition, the hidden states would be the letters of the alphabet, and the observed variables would be the letters that one actually writes.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;responsive-img&quot; src=&quot;../../img/hmm.png&quot; alt=&quot;hidden markov model graphic representation&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;responsive-img&quot; src=&quot;../../../../img/hmm.png&quot; alt=&quot;hidden markov model graphic representation&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The arrows in the image indicate a conditional probability, so there are conditional probabilities between states and between
 states and observations.
@@ -91,14 +68,7 @@ contains the probability of observing value i given that the current state is j.
 correlations between the observed variables and the hidden states. In the handwriting example this means that we would be able to recognize the character
 that one has written given the actual messy character that she/he wrote.&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;The FB algorithm allows you to compute these posterior probabilities $P(Z_k&lt;/td&gt;
-      &lt;td&gt;X_{1:t})$ for internal hidden states.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;The FB algorithm allows you to compute these posterior probabilities for internal hidden states.&lt;/p&gt;
 
 &lt;p&gt;The basic idea is that this probability is proportional to the joint distribution $ P(Z_k,X_{1:t}) $ and, using &lt;a href=&quot;http://en.wikipedia.org/wiki/Bayes&#39;_theorem&quot;&gt;Bayes theorem&lt;/a&gt; and the independence of $ X_{1:k} $ and $ X_{k+1:t} $ given $ Z_k $, we obtain:&lt;/p&gt;
 
@@ -154,33 +124,10 @@ term we can remove $Z_k$. So now the equation is:&lt;/p&gt;
 &lt;p&gt;And again: we have an emission probability (second term), a transition probability (third term), and a recursion term over k+1 (first term).
 We again compute this value $\forall k = 1 … n-1$ and we are done. For k=n, the value is 1 (you can compute it yourself is pretty easy).&lt;/p&gt;
 
-&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-&lt;script&gt;
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-
-var disqus_config = function () {
-this.page.url = &quot;www.gabrieleangeletti.com/2015/05/forward-backward-algorithm-hidden-markov-models&quot;; // Replace PAGE_URL with your page&#39;s canonical URL variable
-this.page.identifier = &quot;The Forward-Backward Algorithm for Hidden Markov Models&quot;; // Replace PAGE_IDENTIFIER with your page&#39;s unique identifier variable
-};
-
-(function() { // DON&#39;T EDIT BELOW THIS LINE
-var d = document, s = d.createElement(&#39;script&#39;);
-
-s.src = &#39;//gabrieleangeletti.disqus.com/embed.js&#39;;
-
-s.setAttribute(&#39;data-timestamp&#39;, +new Date());
-(d.head || d.body).appendChild(s);
-})();
-&lt;/script&gt;
-
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot; rel=&quot;nofollow&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 </description>
         <pubDate>Sat, 30 May 2015 17:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/2015/05/forward-backward-algorithm-hidden-markov-models</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/forward-backward-algorithm-hidden-markov-models</guid>
+        <link>http://www.gabrieleangeletti.com/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</guid>
         
         
         <category>machine-learning</category>
@@ -189,7 +136,11 @@ s.setAttribute(&#39;data-timestamp&#39;, +new Date());
     
       <item>
         <title>A Breadth-First Search (BFS) Prolog meta-interpreter</title>
-        <description>&lt;p&gt;Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the tree of computations. This is due to performance reasons, because other searching policies wouldn’t be feasible, except for fairly easy problems. But a cool fact about Prolog is that code and data are basically the same thing, and because of that its easy to implement a Prolog program that runs other Prolog programs (i.e. a meta-interpreter).
+        <description>&lt;p&gt;Today we will build a meta-interpreter for Prolog that uses a Breadth-First search strategy. The Prolog built-in interpreter uses DFS by default to build the tree of computations.
+This is due to performance reasons,&lt;/p&gt;
+
+&lt;p&gt;because other searching policies wouldn’t be feasible, except for fairly easy problems.
+But a cool fact about Prolog is that code and data are basically the same thing, and because of that its easy to implement a Prolog program that runs other Prolog programs (i.e. a meta-interpreter).
 We can build meta-interpreters to change the behavior of our interpreter: we can for example change the search policy, do the occur check, return the depth of the computations tree, and many other things.&lt;/p&gt;
 
 &lt;p&gt;In this post we will change Prolog’s search strategy from DFS to BFS, as an example of how we can easily change its behavior.
@@ -239,33 +190,10 @@ So the code looks like this:&lt;/p&gt;
 
 &lt;p&gt;The full code is available at &lt;a href=&quot;http://github.com/blackecho/prolog-programs&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
 
-&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-&lt;script&gt;
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-
-var disqus_config = function () {
-this.page.url = &quot;www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter&quot;; // Replace PAGE_URL with your page&#39;s canonical URL variable
-this.page.identifier = &quot;A Breadth-First Search (BFS) Prolog meta-interpreter&quot;; // Replace PAGE_IDENTIFIER with your page&#39;s unique identifier variable
-};
-
-(function() { // DON&#39;T EDIT BELOW THIS LINE
-var d = document, s = d.createElement(&#39;script&#39;);
-
-s.src = &#39;//gabrieleangeletti.disqus.com/embed.js&#39;;
-
-s.setAttribute(&#39;data-timestamp&#39;, +new Date());
-(d.head || d.body).appendChild(s);
-})();
-&lt;/script&gt;
-
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot; rel=&quot;nofollow&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 </description>
         <pubDate>Thu, 21 May 2015 16:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/prolog-bfs-meta-interpreter</guid>
+        <link>http://www.gabrieleangeletti.com/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</guid>
         
         
         <category>prolog</category>
@@ -275,9 +203,9 @@ s.setAttribute(&#39;data-timestamp&#39;, +new Date());
       <item>
         <title>Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog</title>
         <description>&lt;p&gt;Today we will model the game of &lt;a href=&quot;http://en.wikipedia.org/wiki/Sudoku&quot;&gt;Sudoku&lt;/a&gt; as a &lt;a href=&quot;http://en.wikipedia.org/wiki/Constraint_satisfaction_problem&quot;&gt;Constraint Satisfaction Problem (CSP)&lt;/a&gt; and then write a Prolog program that solves it.
-CSP is particularly useful when we want to model a combinatorial problem subject to &lt;strong&gt;constraints&lt;/strong&gt;. In standard Sudoku we have a 9x9 grid, where each cell can be filled with an integer between 1 and 9, so the possible configurations are all the ordered combinations of 81 numbers between 1 and 9.&lt;/p&gt;
+CSP is particularly useful when we want to model a combinatorial problem subject to &lt;strong&gt;constraints&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../img/sudoku.png&quot; width=&quot;50%&quot; style=&quot;display: block;margin: 0 auto;clear right;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In standard Sudoku we have a 9x9 grid, where each cell can be filled with an integer between 1 and 9, so the possible configurations are all the ordered combinations of 81 numbers between 1 and 9.&lt;/p&gt;
 
 &lt;p&gt;In the first cell, we have 9 different values that we can put in.
 If we consider both the first and the second cells, we have $ 9^{2} $ different values that we can put in, because we have to take into account all the possible combination of
@@ -310,33 +238,10 @@ Programming: you don’t actually have to solve the problem, you only have to mo
 
 &lt;p&gt;The full code is available at &lt;a href=&quot;http://github.com/blackecho/prolog-programs&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
 
-&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-&lt;script&gt;
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-
-var disqus_config = function () {
-this.page.url = &quot;www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog&quot;; // Replace PAGE_URL with your page&#39;s canonical URL variable
-this.page.identifier = &quot;Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog&quot;; // Replace PAGE_IDENTIFIER with your page&#39;s unique identifier variable
-};
-
-(function() { // DON&#39;T EDIT BELOW THIS LINE
-var d = document, s = d.createElement(&#39;script&#39;);
-
-s.src = &#39;//gabrieleangeletti.disqus.com/embed.js&#39;;
-
-s.setAttribute(&#39;data-timestamp&#39;, +new Date());
-(d.head || d.body).appendChild(s);
-})();
-&lt;/script&gt;
-
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot; rel=&quot;nofollow&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 </description>
         <pubDate>Thu, 14 May 2015 21:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/2015/05/sudoku-csp-prolog</guid>
+        <link>http://www.gabrieleangeletti.com/prolog/2015/05/14/sudoku-csp-prolog.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/prolog/2015/05/14/sudoku-csp-prolog.html</guid>
         
         
         <category>prolog</category>

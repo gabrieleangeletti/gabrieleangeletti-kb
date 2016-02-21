@@ -2,7 +2,9 @@
 layout: post
 title:  "Sparse Distributed Representations in Machine Learning"
 date:   2015-06-15 09:30:20 -0500
-categories: "machine-learning"
+author: Gabriele Angeletti
+categories: machine-learning
+image: img/sparse-representation.png
 ---
 Today we will take a look at [Sparse Distributed Representations][sparsedr]: what they are, why they differ from the standard types of representations used by computers, and why many people think they are fundamental in building true machine intelligence.
 
@@ -29,26 +31,3 @@ All these layers are indeed learning Sparse Distributed Representations of the t
 [sparsedr]: https://github.com/numenta/nupic/wiki/Sparse-Distributed-Representations
 [ascii]: https://en.wikipedia.org/wiki/ASCII
 [deeplearning]: https://en.wikipedia.org/wiki/Deep_learning
-
-<div id="disqus_thread"></div>
-<script>
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-
-var disqus_config = function () {
-this.page.url = "www.gabrieleangeletti.com/2015/06/sparse-distributed-representations"; // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = "Sparse Distributed Representations in Machine Learning"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-
-s.src = '//gabrieleangeletti.disqus.com/embed.js';
-
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
