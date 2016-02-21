@@ -6,9 +6,24 @@
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Feb 2016 14:47:51 +0100</pubDate>
-    <lastBuildDate>Sun, 21 Feb 2016 14:47:51 +0100</lastBuildDate>
+    <pubDate>Sun, 21 Feb 2016 16:09:47 +0100</pubDate>
+    <lastBuildDate>Sun, 21 Feb 2016 16:09:47 +0100</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Refactoring a Restricted Boltzmann Machine implementation in TensorFlow.</title>
+        <description>
+</description>
+        <pubDate>Sun, 21 Feb 2016 15:30:20 +0100</pubDate>
+        <link>http://www.gabrieleangeletti.com/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</guid>
+        
+        
+        <category>blog</category>
+        
+        <category>programming</category>
+        
+      </item>
     
       <item>
         <title>University project on Hierarchical Reinforcement Learning</title>
