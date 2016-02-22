@@ -7,4 +7,4 @@ categories: project
 image: ../img/hrl.png
 ---
 Project on Hierarchical RL. Implementation of the MAX-QQ value function decomposition and algorithm.
-Link: https://github.com/blackecho/Hierarchical-Reinforcement-Learning
+Link to [github](https://github.com/blackecho/Hierarchical-Reinforcement-Learning)

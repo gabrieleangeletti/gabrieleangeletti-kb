@@ -6,8 +6,8 @@
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Feb 2016 11:10:38 +0100</pubDate>
-    <lastBuildDate>Mon, 22 Feb 2016 11:10:38 +0100</lastBuildDate>
+    <pubDate>Mon, 22 Feb 2016 11:12:50 +0100</pubDate>
+    <lastBuildDate>Mon, 22 Feb 2016 11:12:50 +0100</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -85,7 +85,7 @@ np.random.shuffle(trX)
       <item>
         <title>Hierarchical Reinforcement Learning</title>
         <description>&lt;p&gt;Project on Hierarchical RL. Implementation of the MAX-QQ value function decomposition and algorithm.
-Link: https://github.com/blackecho/Hierarchical-Reinforcement-Learning&lt;/p&gt;
+Link to &lt;a href=&quot;https://github.com/blackecho/Hierarchical-Reinforcement-Learning&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
         <link>http://www.gabrieleangeletti.com/projects/deep-belief-nets</link>
@@ -101,7 +101,7 @@ Link: https://github.com/blackecho/Hierarchical-Reinforcement-Learning&lt;/p&gt;
       <item>
         <title>Deep Belief Networks</title>
         <description>&lt;p&gt;Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.
-Link: http://github.com/blackecho/Deep-Belief-Network&lt;/p&gt;
+Link to &lt;a href=&quot;http://github.com/blackecho/Deep-Belief-Network&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
         <link>http://www.gabrieleangeletti.com/projects/deep-belief-nets</link>

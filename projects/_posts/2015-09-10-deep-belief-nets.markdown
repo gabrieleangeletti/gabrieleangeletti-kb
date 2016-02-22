@@ -7,4 +7,4 @@ categories: project
 image: ../img/deep-belief-net.png
 ---
 Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.
-Link: http://github.com/blackecho/Deep-Belief-Network
+Link to [github](http://github.com/blackecho/Deep-Belief-Network)
