@@ -1,6 +1,6 @@
 ---
 layout: post
-title: University project on Hierarchical Reinforcement Learning
+title: Hierarchical Reinforcement Learning
 date: 2015-09-10 9:30:20 -0500
 permalink: /projects/deep-belief-nets
 categories: project

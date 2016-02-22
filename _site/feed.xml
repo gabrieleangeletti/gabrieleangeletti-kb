@@ -6,13 +6,70 @@
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Feb 2016 16:09:47 +0100</pubDate>
-    <lastBuildDate>Sun, 21 Feb 2016 16:09:47 +0100</lastBuildDate>
+    <pubDate>Mon, 22 Feb 2016 11:10:38 +0100</pubDate>
+    <lastBuildDate>Mon, 22 Feb 2016 11:10:38 +0100</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
         <title>Refactoring a Restricted Boltzmann Machine implementation in TensorFlow.</title>
-        <description>
+        <description>&lt;p&gt;I’m currently reading the excellent book &lt;a href=&quot;http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882&quot;&gt;Clean Code&lt;/a&gt;, a book about writing code in a professional way, and I applied the lessons learned in this book to my implementation of a &lt;a href=&quot;https://en.wikipedia.org/wiki/Restricted_Boltzmann_machine&quot;&gt;Restricted Boltzmann Machine&lt;/a&gt; using &lt;a href=&quot;https://www.tensorflow.org/&quot;&gt;TensorFlow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;TensorFlow is an open source library developed at Google for distributed computation of machine learning algorithms. I’ll write another post about it, for now let’s focus only on refactoring the code. You don’t have to be a TensorFlow expert in order to understand the refactoring, it’s just about modifying names, removing comments and rearranging functions.&lt;/p&gt;
+
+&lt;p&gt;The old code (before the refactoring) and the new code (after the refactoring) can be found at this &lt;a href=&quot;https://gist.github.com/blackecho/db85fab069bd2d6fb3e7&quot;&gt;github gist&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Clean code is an amazing book full of lessons about writing &lt;strong&gt;good&lt;/strong&gt; code. Indeed I learned a lot of lessons since I realized my coding style was “not so good” after I saw how clean code can be &lt;strong&gt;elegant&lt;/strong&gt; and pleasant to the eyes. Since I haven’t finished the book yet, I want about the three things I learned the most about: naming things, functions and comments.&lt;/p&gt;
+
+&lt;h3 id=&quot;naming&quot;&gt;Naming&lt;/h3&gt;
+
+&lt;p&gt;This quote from the book can’t explain better the concept:&lt;/p&gt;
+&lt;blockquote&gt;
+Names should reveal intent. A name should tell you why the variable, class, etc.. exits, what it does, and how it is used. If a name requires a comment, then the name does not reveal its intent.
+&lt;/blockquote&gt;
+&lt;p&gt;For example, you can see in the old code that the instance variables corresponding to the number of visible/hidden units in the rbm are called respectively &lt;code class=&quot;highlighter-rouge&quot;&gt;nvis/nhid&lt;/code&gt;.
+While the meaning of these variables can be deducted from the context of the class and their usage, the name isn’t much self-explaining, probably a comment would be needed to make the reader instantly understand the meaning of them. Instead, &lt;code class=&quot;highlighter-rouge&quot;&gt;num_visible/num_hidden&lt;/code&gt; are names that can’t be misunderstood. As you read them, you immediately understand what they are, why they are there, and how they are used.&lt;/p&gt;
+
+&lt;h3 id=&quot;functions&quot;&gt;Functions&lt;/h3&gt;
+
+&lt;p&gt;Functions should do one thing. A quote from the book:&lt;/p&gt;
+&lt;blockquote&gt;
+The first rule of functions is that they should be small. The second rule of functions is that they should be smaller than that.
+&lt;/blockquote&gt;
+&lt;p&gt;This is the single most valuable thing I learned from this book. Clean code is mainly about &lt;strong&gt;readability&lt;/strong&gt;, &lt;strong&gt;maintainability&lt;/strong&gt; and &lt;strong&gt;elegance&lt;/strong&gt;. And I think that writing functions that do one thing is one of the most effective ways to achieve cleanness.&lt;/p&gt;
+
+&lt;p&gt;For example, look at the &lt;code class=&quot;highlighter-rouge&quot;&gt;_create_graph&lt;/code&gt; method (&lt;code class=&quot;highlighter-rouge&quot;&gt;_build_model&lt;/code&gt; in the new code). This function is way too long and it does a lot of different things like creating placeholders, variables, performing gibbs sampling, computing positive and negative associations, compute the update rules and the loss function. This is really a good example of a function that does way more than one thing!
+In the new code, this single function is replaced by seven new functions, one for each thing the old function did. The resulting code is much cleaner.&lt;/p&gt;
+
+&lt;p&gt;Another thing about functions is the order in which they should be placed in the source file.
+In particural, the caller should be above the callee. The author of the book explains this rule in terms of the &lt;em&gt;newspaper&lt;/em&gt; metaphor: the source file should look like a newspaper article. At the top there is the title, and a short outline of what its told in the article. Then it begins explaining the broad concepts of the story, and then below are all the details of who says what, when things happened etc..&lt;/p&gt;
+&lt;blockquote&gt;
+Master Programmers think of systems as stories to be told rather than programs to be written. With this goal in mind, functions need to fit cleanly together into a clear and precise language to help you with that telling.
+&lt;/blockquote&gt;
+&lt;p&gt;In the new code, the &lt;code class=&quot;highlighter-rouge&quot;&gt;_build_model&lt;/code&gt; function is splitted in seven new functions in a top-down fashion. To build a model, the first thing you have to do is to create placeholders (TensorFlow structure for the data to be passed to the algorithm). And indeed, &lt;code class=&quot;highlighter-rouge&quot;&gt;_create_placeholders&lt;/code&gt; is the first function below &lt;code class=&quot;highlighter-rouge&quot;&gt;_build_model&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then, the second thing you have to do is to create variables (TensorFlow structure to store the parameters of the model), in this case the weights and biases of the Restricted Boltzmann Machine. Again, you can see that &lt;code class=&quot;highlighter-rouge&quot;&gt;_create_variables&lt;/code&gt; is below &lt;code class=&quot;highlighter-rouge&quot;&gt;_create_placeholders&lt;/code&gt;, and so on.&lt;/p&gt;
+
+&lt;p&gt;The code is much cleaner. At first you are presented with the &lt;code class=&quot;highlighter-rouge&quot;&gt;_build_model&lt;/code&gt; function, which tells you the broad concept of constructing a RBM model using TensorFlow. As you scroll down more details are revealed to you: how do I create a placeholder? A variable? How is gibbs sampling implemented? As you dive deeper in the story, the details are revealed to you.&lt;/p&gt;
+
+&lt;h3 id=&quot;comments&quot;&gt;Comments&lt;/h3&gt;
+
+&lt;p&gt;By reading this book I realized that my idea about comments was completely wrong. I’ve always thought that comments are always a good thing, and its always better to put a comment than to put nothing. Why should comments be a bad thing? They help us expressing ourselves better!&lt;/p&gt;
+
+&lt;p&gt;And this is the point made by the author: &lt;strong&gt;we use comments because we fail to express ourselves in code&lt;/strong&gt;.
+Bad comments are far worse than no comments at all! Bad comments can even lie about the code. Often also good comments can lie about the code. This is because is very difficult for programmers to maintain them in a consistent state as the code evolves. Code changes very often, and if comments do not change consistently with the code, we can find a comment in another place than it was supposed to be, or a good comment that now is wrong because of a change in the code, and so on.&lt;/p&gt;
+
+&lt;p&gt;Comments should be kept at a minimum, and should be used only when we can’t find a way to express the concept in code. When you are in a position in which you have to write a comment, think about it first and see if you can came up with a way to express yourself in code rather than with that comment.
+In the old code you can find a lot of useless comments, like:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Randomly shuffle the input
+np.random.shuffle(trX)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You already know (or at least imagine) what the &lt;a href=&quot;http://www.numpy.org/&quot;&gt;numpy&lt;/a&gt; shuffle function does. This comment is completely redundant. As you can tell, there are a lot of examples like this in the old code.&lt;/p&gt;
+
+&lt;p&gt;This was just a small example of refactoring and writing clean code. I’ll write more about the topic and my experiments/lessons learned. I encourage you to take a look at the &lt;a href=&quot;https://gist.github.com/blackecho/db85fab069bd2d6fb3e7&quot;&gt;code&lt;/a&gt;, and please comment below if you have any suggestion/ideas on how to improve it.&lt;/p&gt;
+
 </description>
         <pubDate>Sun, 21 Feb 2016 15:30:20 +0100</pubDate>
         <link>http://www.gabrieleangeletti.com/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</link>
@@ -26,7 +83,7 @@
       </item>
     
       <item>
-        <title>University project on Hierarchical Reinforcement Learning</title>
+        <title>Hierarchical Reinforcement Learning</title>
         <description>&lt;p&gt;Project on Hierarchical RL. Implementation of the MAX-QQ value function decomposition and algorithm.
 Link: https://github.com/blackecho/Hierarchical-Reinforcement-Learning&lt;/p&gt;
 </description>
