@@ -11,7 +11,7 @@ Today we will see how we can do inference in a [Hidden Markov Model (HMM)][hidde
 A HMM is a statistical model that can be used to do a lot of interesting things, it has many applications in speech-recognition, handwriting recognition, and many others.
 The basic idea is that if we have some observations about something, they can be explained in terms of some states (which are hidden) to which these observations depend. If we take for example handwriting recognition, the hidden states would be the letters of the alphabet, and the observed variables would be the letters that one actually writes.
 
-<img class="responsive-img" src="../../../../img/hmm.png" alt="hidden markov model graphic representation">
+<img src="../../../../../img/hmm.png" alt="hidden markov model graphic representation">
 
 The arrows in the image indicate a conditional probability, so there are conditional probabilities between states and between
 states and observations.

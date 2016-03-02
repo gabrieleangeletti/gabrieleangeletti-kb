@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Denoising Autoencoders: Tutorial + TensorFlow implementation</title>
+  <meta name="description" content="Denoising Autoencoders are a special kind of Neural Network trained to extract meaningful and robust features from the input data. They can be stacked to for...">
+
+  <link rel="canonical" href="http://www.gabrieleangeletti.com/blog/machine-learning/2016/02/28/denoising-autoencoder-tensorflow.html">
+  <link rel="alternate" type="application/rss+xml" title="Gabriele Angeletti" href="http://www.gabrieleangeletti.com/feed.xml" />
+
+  <!-- Material Design Lite css Library -->
+  <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/code.getmdl.io/1.1.1/material.light_green-indigo.min.css">
+
+  <!-- Material Design Fonts -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- Custom theme css -->
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+
+  <body>
+
+    <!-- Start Layout -->
+    
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <!-- search layout -->
+<div class="super-search" id="js-search">
+  <ul class="super-search__results" id="js-search__results"></ul>        
+  <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored super-search__close-btn" onclick="superSearch.toggle()">
+    <i class="material-icons">close</i>
+  </button>
+</div>
+<!-- /end search -->
+        <header class="mdl-layout__header">
+
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <a href="http://www.gabrieleangeletti.com"><span class="mdl-layout-title">Gabriele Angeletti</span></a>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable is-upgraded">
+        <label class="mdl-button mdl-js-button mdl-button--icon" for="js-search__input">
+          <i class="material-icons">search</i>
+        </label>
+
+        <div class="mdl-textfield__expandable-holder" >
+          <input class="mdl-textfield__input super-search__input" type="text" id="js-search__input" />
+        </div>
+      </div>
+
+      <button class="mdl-button mdl-js-button mdl-button--icon" id="menu-lower-left">
+        <i class="material-icons">more_vert</i>
+      </button>
+
+      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-lower-left">
+        
+        <li><a href="https://medium.com/@gabrieleang" class="mdl-menu__item">Medium</a></li>
+        
+        <li><a href="https://www.quora.com/profile/Gabriele-Angeletti" class="mdl-menu__item">Quora</a></li>
+        
+        <li><a href="https://www.linkedin.com/in/gabriele-angeletti-71959a63" class="mdl-menu__item">LinkedIn</a></li>
+        
+      </ul>
+    </div>
+  </header>
+
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Menu</span>
+    <nav class="mdl-navigation">
+    
+      
+      <a class="mdl-navigation__link" href="/about-blog/">About this Blog</a>
+      
+    
+      
+      <a class="mdl-navigation__link" href="/about-me/">About Me</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+      <a class="mdl-navigation__link" href="/projects/">Projects</a>
+      
+    
+    </nav>
+
+  </div>
+
+    
+
+    <div class="post-ribbon"></div>
+<main class="post-main mdl-layout__content">
+  <div class="post-container mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+    <div class="post-section mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+      <div class="mdl-color-text--grey-500">
+      Feb 28, 2016 • Gabriele Angeletti •  blog  machine-learning  
+      </div>
+      <h3>Denoising Autoencoders: Tutorial + TensorFlow implementation</h3>
+      <article class="post-content">
+        <p class="post-paragraph"><p>Denoising Autoencoders are a special kind of Neural Network trained to extract meaningful and <strong>robust</strong> features from the input data. They can be stacked to form Deep Neural Networks, and their performance is state-of-the-art in many popular benchmarks.</p>
+
+<p>This tutorial is an overview of autoencoders. First, the general model is described, then we’ll see what is a <em>denoising</em> autoencoder (and why it works better) and how we can stack them to obtain Deep Networks.
+The implementation of the algorithm is written in Python using <a href="https://www.tensorflow.org/">TensorFlow</a>, and you can find it at this <a href="https://gist.github.com/blackecho/3a6e4d512d3aa8aa6cf9">github gist</a>.</p>
+
+<p><strong>Note</strong>: this tutorial is for people with at least some working knowledge of Neural Networks, and it is only intended as a brief overview of the topic. I recommend you to read the <a href="http://www.jmlr.org/papers/volume11/vincent10a/vincent10a.pdf">original paper</a> for further reference.</p>
+
+<h4 id="what-is-an-autoencoder">What is an Autoencoder?</h4>
+
+<p>Put simply, an autoencoder is a <a href="https://en.wikipedia.org/wiki/Feedforward_neural_network">Feed Forward Neural Network</a> trained to reconstruct its input. As usual, you have an input layer, a hidden layer, and an output layer. If you have used NNs for classification tasks, you may be used to the idea that the output layer has as many nodes as there are classes in the dataset. For example, if you have worked with <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> dataset (the hello world of machine learning), you saw that the output of the network was a 10 nodes (because MNIST has 10 classes) <em>softmax layer</em> where the i-th node represents the probability that the input pattern belong to the i-th class.</p>
+
+<p><img src="../../../../../img/autoencoder.png" alt="neural networks architecture" /></p>
+
+<p>Autoencoders are an unsupervised learning algorithm though, so labels are either not available or we don’t care about them. Autoencoders are trained to reconstruct their input, and in order to do this, it is clear that the input and the output layers must have the same dimensionality.</p>
+
+<p>Thus, an autoencoder learns two mappings: the first from the input to the hidden layer (we call this mapping the <strong>encoder</strong>), and the second from the hidden to the output layer (this one is called the <strong>decoder</strong>).</p>
+
+<p>It’s easy to see why they are called encoder/decoder: the encoder maps data from the input space to the hidden space, and the decoder maps encoded data back to the original space. You can think of the hidden representation as a <em>code</em>, from which the original data can be decoded back. Of course, the code must capture the main features in the data, otherwise it would be impossible to extract something meaningful from it.</p>
+
+<h4 id="autoencoder-algorithm">Autoencoder Algorithm</h4>
+
+<p><strong>Note</strong>: In the following notation $x$ is the input, $y$ is the encoded data, $z$ is the decoded data, $\sigma$ is a non-linear activation function (sigmoid or hyperbolic tangent usually), and $f(x ; \theta)$ means that $f$ is a function of $x$ parameterized by $\theta$.</p>
+
+<p>The model can be summarized in the following way:</p>
+
+<ul>
+  <li>
+    <h6 id="the-input-data-is-mapped-onto-the-hidden-layer-encoding-the-mapping-is-usually-an-affine-transformation--followed-by-a-non-linearity-something-like">The input data is mapped onto the hidden layer (<em>encoding</em>). The mapping is usually an affine transformation  followed by a non-linearity. Something like:</h6>
+    <p><script type="math/tex">y = f(x ; \theta) = \sigma(Wx + b)</script></p>
+  </li>
+  <li>
+    <h6 id="the-hidden-layer-is-mapped-onto-the-output-layer-decoding-the-mapping-is-an-affine-transformation-optionally-followed-by-a-non-linearity-something-like">The hidden layer is mapped onto the output layer (<em>decoding</em>). The mapping is an affine transformation optionally followed by a non-linearity. Something like:</h6>
+    <p><script type="math/tex">z = g(y ; \theta^{'}) = g(f(x ; \theta) ; \theta^{'}) = \sigma(W^{'}y + b^{'})</script></p>
+  </li>
+  <li>
+    <h6 id="optionally-in-order-to-reduce-the-size-of-the-model-one-can-use-tied-weights-that-is-the-decoder-weights-matrix-is-constrained-to-be-the-transpose-of-the-encoder-weights-matrix-theta--thetat">Optionally, in order to reduce the size of the model, one can use <em>tied weights</em>, that is the decoder weights matrix is constrained to be the transpose of the encoder weights matrix: $\theta^{‘} = \theta^{T}$.</h6>
+  </li>
+  <li>
+    <h6 id="the-output-of-the-autoencoder-is-matched-against-the-original-input-using-a-specific-criterion-cross-entropy-loss-or-mean-squared-error-usually-something-like">The output of the autoencoder is matched against the original input using a specific criterion (cross entropy loss or mean squared error usually). Something like:</h6>
+    <p><script type="math/tex">e = \frac{1}{2m} \sum_{i = 1}^{m}|| x_{i} - z_{i} ||^{2}</script> for mse or
+<script type="math/tex">e = - \frac{1}{m} \sum_{i = 1}^{m} x_{i} log(z_{i}) + (1 - x_{i})log(1 - z_{i})</script> for ce.</p>
+  </li>
+  <li>
+    <h6 id="using-backpropagationbp-small-changes-are-made-to-the-parameters-of-the-model-to-make-the-reconstructions-more-similar-to-the-original-input-note-that-with-tensorflow-you-dont-have-to-explicitly-compute-the-gradients-the-backpropagation-algorithm-is-automatically-applied-to-your-model-using-one-of-the-available-optimizerstfopt">Using <a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/">Backpropagation</a>, small changes are made to the parameters of the model to make the reconstructions more similar to the original input. Note that with TensorFlow you don’t have to explicitly compute the gradients. The Backpropagation algorithm is automatically applied to your model using one of the available <a href="https://www.tensorflow.org/versions/r0.7/api_docs/python/train.html#optimizers">optimizers</a>.</h6>
+  </li>
+</ul>
+
+<h4 id="notes-on-different-architectures">Notes on different Architectures</h4>
+
+<p>The hidden layer can have either a lower or a higher dimensionality than that of the input/output layers.</p>
+
+<p>In the former case, the decoder reconstructs the original input from a lower-dimensional representation of it (we call it an <strong>under-complete</strong> representation). For the overall thing to work, the encoder should learn to provide a low-dimensional representation that captures the essence of the data (i.e. the main factors of variations in the distribution). Intuitively, if the data was a five minute speach, the encoder would have to describe it in one minute, in other words it is forced to find a good way to summarize the data.</p>
+
+<p>In the latter case, the decoder reconstruction is build from a higher-dimensional representation (we call this one an <strong>over-complete</strong> representation). You might think that these kind of representations are kind of useless. If the input dimension is 500, and the hidden layer dimension is 700, there is a great chance that the autoencoder will use 500 of its 700 hidden units to learn the identity mapping, and “throw away” the others.
+Although this can happen, it turns out that if we constrain the hidden units so that only a fraction of them are active at any given time, it can act as a strong regularizer making the autoencoder work surprisingly well. These are the so called <a href="https://web.stanford.edu/class/cs294a/sparseAutoencoder.pdf">Sparse Autoencoders</a>.</p>
+
+<h4 id="denoising-autoencoders">Denoising Autoencoders</h4>
+
+<p>So what are Denoising autoencoders? They are very similar to the model we saw previously, the difference is that in this case the input is <strong>corrupted</strong> before being passed to the network. The trick is that by matching the original version (not the corrupted one) with the reconstruction at error computing time, the autoencoder is trained to reconstruct the <em>original input</em> from the corrupted version. An approximate schema is the following:</p>
+
+<ul>
+  <li>
+    <h6 id="the-input-x-gets-corrupted-by-a-function-qx--xcorr">the input $x$ gets corrupted by a function $q(x) = x_{corr}$.</h6>
+  </li>
+  <li>
+    <h6 id="xcorr-is-used-as-in-the-previous-model">$x_{corr}$ is used as in the previous model:</h6>
+    <ul>
+      <li>
+        <h6 id="y--fxcorr--theta--sigmawxcorr--b-"><script type="math/tex">y = f(x_{corr} ; \theta) = \sigma(Wx_{corr} + b)</script></h6>
+      </li>
+      <li>
+        <h6 id="z--gy--theta--gfxcorr--theta--theta--sigmawy--b-"><script type="math/tex">z = g(y ; \theta^{'}) = g(f(x_{corr} ; \theta) ; \theta^{'}) = \sigma(W^{'}y + b^{'})</script></h6>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <h6 id="the-error-computation-is-exactly-the-same-as-the-previous-model-use-the-original-x">The error computation is exactly the same as the previous model (use the original x)</h6>
+  </li>
+</ul>
+
+<p>Intuitively, if we observe an autoencoder capable of taking in input a distorted version of something and returning a good reconstruction of it, it means that it was very clever about the representation it has learned, otherwise it wouldn’t be able to reconstruct the data.
+To get a sense of what corrupt the input means, below is an image taken from the MNIST dataset, you can clearly see which is the original and which is the corrupted version.</p>
+
+<p><img src="../../../../../img/8.png" width="100px !important" alt="image of an eight" />
+<img src="../../../../../img/8c.png" alt="image of a distorted eight" /></p>
+
+<p>The corruption technique used in this image is the <strong>masking noise</strong> technique, that is a fraction of the input elements taken at random is set to zero. In the image above, the fraction was 50% of the pixels.
+The other techniques discussed in the paper are the <strong>salt and pepper noise</strong>, where a fraction of the input elements taken at random is set either to the maximum value or to the minimum, and the <strong>white gaussian noise</strong>. The authors emphasize the fact that they used these methods because they are very general and can be applied to a wide variety of data. Of course, if you know well the domain at hand (e.g. images) and use a technique to better expose the main structure in your data, the algorithm is expected to work better.</p>
+
+<p><strong>Note</strong>: The corruption process has to be repeated each time the same input is presented to the autoencoder. If the training set is corrupted only once at the beginning of training, the model would recognize the distortions as valid data patterns, leading to <strong>overfitting</strong>. By corrupting the data every time in a different way instead, the model will learn to extract the underlying structure, avoiding overfitting.</p>
+
+<h4 id="stacked-denoising-autoencoders">Stacked Denoising Autoencoders</h4>
+
+<p>We can stack autoencoders in order to obtain Deep Neural Networks. The stacking process is done in the following way for a classification task:</p>
+
+<ul>
+  <li>
+    <h6 id="an-autoencoder-denoising-or-not-is-unsupervisely-trained-on-the-input-data-after-training-we-drop-the-decoder-and-we-encode-the-training-set-encoded-training-set--sigmaw1x--b1">An Autoencoder (denoising or not) is “unsupervisely” trained on the input data. After training, we drop the decoder, and we encode the training set: encoded training set = $\sigma(W_{1}x + b_{1})$.</h6>
+  </li>
+  <li>
+    <h6 id="the-encoded-data-is-used-as-training-set-for-a-second-autoencoder-after-training-we-drop-the-decoder-and-we-encode-the-encoded-training-set-sigmaw2sigmaw1x--b1--b2">The encoded data is used as training set for a second Autoencoder. After training, we drop the decoder, and we encode the encoded training set: $\sigma(W_{2}\sigma(W_{1}x + b_{1}) + b_{2})$</h6>
+  </li>
+  <li>
+    <h6 id="we-do-this-for-as-many-layers-we-want-at-the-end-we-attach-a-softmax-layer-on-top-of-the-last-autoencoders-encoder-and-we-train-the-whole-thing-as-if-it-was-a-simple-feed-forward-neural-network-using-backpropagation-of-course-the-initial-weights-of-the-neural-net-must-be-initialized-at-the-value-that-the-autoencoders-had-after-training-otherwise-the-pretraining-procedure-would-be-useless">We do this for as many layers we want. At the end, we attach a softmax layer on top of the last autoencoder’s encoder, and we train the whole thing as if it was a simple Feed Forward Neural Network using Backpropagation (of course the initial weights of the Neural Net must be initialized at the value that the autoencoders had after training, otherwise the pretraining procedure would be useless).</h6>
+  </li>
+</ul>
+
+<p>The <a href="https://gist.github.com/blackecho/3a6e4d512d3aa8aa6cf9">github gist</a> contains only an implementation of a Denoising Autoencoder. If you want to see a working implementation of a Stacked Autoencoder, as well as many other Deep Learning algorithms, I encourage you to take a look at <a href="https://github.com/blackecho/Deep-Learning-TensorFlow">my repository</a> of Deep Learning algorithms implemented in TensorFlow.</p>
+
+</p>
+      </article>
+      <!-- Disqus comments -->
+      
+      <div>
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'gabrieleangeletti';
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+      </div>
+      
+    </div>
+  </div>
+</main>
+
+    <footer class="mdl-mega-footer">
+  <div class="mdl-mega-footer--middle-section">
+
+    <div class="mdl-mega-footer--drop-down-section">
+      <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+      <h1 class="mdl-mega-footer--heading">INFO</h1>
+      <ul class="mdl-mega-footer--link-list">
+        <li><a href="mailto:angeletti.gabriele@gmail.com">angeletti.gabriele@gmail.com</a></li>
+        <li><a href="/feed.xml">subscribe via RSS</a></li>
+      </ul>
+    </div>
+
+    <div class="mdl-mega-footer--drop-down-section">
+      <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+      <h1 class="mdl-mega-footer--heading">SOCIAL</h1>
+      <ul class="mdl-mega-footer--link-list">
+        
+        <li>
+          <a href="https://github.com/blackecho">
+            <span class="icon  icon--github">
+              <svg viewBox="0 0 16 16">
+                <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+
+            <span class="username">blackecho</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a href="https://twitter.com/gabrieleang">
+            <span class="icon  icon--twitter">
+              <svg viewBox="0 0 16 16">
+                <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+              </svg>
+            </span>
+
+            <span class="username">gabrieleang</span>
+          </a>
+        </li>
+      
+	  
+      
+	  
+        <li>
+          <a href="https://plus.google.com/u/0/+GabrieleAngeletti">
+            <span class="icon  icon--googleplus_per">
+              <svg style="width:16px;height:16px" viewBox="0 0 24 24">
+				<path fill="#000000" d="M20,2A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V4C2,2.89 2.9,2 4,2H20M20,12H18V10H17V12H15V13H17V15H18V13H20V12M9,11.29V13H11.86C11.71,13.71 11,15.14 9,15.14C7.29,15.14 5.93,13.71 5.93,12C5.93,10.29 7.29,8.86 9,8.86C10,8.86 10.64,9.29 11,9.64L12.36,8.36C11.5,7.5 10.36,7 9,7C6.21,7 4,9.21 4,12C4,14.79 6.21,17 9,17C11.86,17 13.79,15 13.79,12.14C13.79,11.79 13.79,11.57 13.71,11.29H9Z" />
+			  </svg>
+            </span>
+
+            <span class="username">Google Plus</span>
+          </a>
+        </li>
+      
+
+      </ul>
+    </div>
+
+    <div class="mdl-mega-footer--drop-down-section">
+      <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+      <h1 class="mdl-mega-footer--heading">ABOUT</h1>
+      <ul class="mdl-mega-footer--link-list">
+        <li>My blog about Artificial Intelligence, Machine Learning and related topics.
+</li>
+      </ul>
+    </div>
+
+    <div class="mdl-mega-footer--drop-down-section">
+        <!-- Begin MailChimp Signup Form -->
+        <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+        <div id="mc_embed_signup">
+        <form action="//gabrieleangeletti.us1.list-manage.com/subscribe/post?u=88f22fb848840168e138c61f7&amp;id=0dc9d0878a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll">
+        	<label for="mce-EMAIL" class="mdl-mega-footer--heading">Subscribe to my mailing list</label>
+        	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_88f22fb848840168e138c61f7_0dc9d0878a" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+            </div>
+        </form>
+        </div>
+        <!--End mc_embed_signup-->
+    </div>
+
+  </div>
+
+  <div class="mdl-mega-footer--bottom-section">
+    <div class="mdl-logo">Gabriele Angeletti</div>
+    <ul class="mdl-mega-footer--link-list">
+      <li><a href="mailto:angeletti.gabriele@gmail.com">Contact</a></li>
+    </ul>
+  </div>
+
+</footer>
+
+<!-- JavaScript imports at the end of the body -->
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+<!-- Mathjax configuration with single dollar sign delimiters -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<!-- MathJax -->
+<script type="text/javascript" src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+<!-- Cookie -->
+<script>
+document.cookie="analytics-filter-spam=myblog2016; expires=Sun, 18 Dec 2016 12:00:00 UTC";
+</script>
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41410147-2', 'auto');
+  ga('send', 'pageview');
+
+  // custom dimentsion analytics-filter-spam
+  var dimensionValue = '';
+  ga('set', 'dimension1', dimensionValue);
+
+</script>
+
+
+    </div>
+    <!-- /End Layout -->
+
+    <!-- Material Design Lite js Library -->
+    <script type="text/javascript" src="https://storage.googleapis.com/code.getmdl.io/1.1.1/material.min.js"></script>
+    
+    <script rel="javascript" type="text/javascript" src="/js/site.js"></script>
+    
+    <script rel="javascript" type="text/javascript" src="/js/search.js"></script>
+    <script rel="javascript" type="text/javascript">
+      superSearch({
+        searchFile: '/feed.xml',
+        searchSelector: '#js-search', // CSS Selector for search container element.
+        inputSelector: '#js-search__input', // CSS selector for <input>
+        resultsSelector: '#js-search__results' // CSS selector for results container
+      });
+    </script>
+  </body>
+
+</html>

@@ -6,9 +6,132 @@
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Feb 2016 11:12:50 +0100</pubDate>
-    <lastBuildDate>Mon, 22 Feb 2016 11:12:50 +0100</lastBuildDate>
+    <pubDate>Wed, 02 Mar 2016 13:03:50 +0100</pubDate>
+    <lastBuildDate>Wed, 02 Mar 2016 13:03:50 +0100</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Denoising Autoencoders: Tutorial + TensorFlow implementation</title>
+        <description>&lt;p&gt;Denoising Autoencoders are a special kind of Neural Network trained to extract meaningful and &lt;strong&gt;robust&lt;/strong&gt; features from the input data. They can be stacked to form Deep Neural Networks, and their performance is state-of-the-art in many popular benchmarks.&lt;/p&gt;
+
+&lt;p&gt;This tutorial is an overview of autoencoders. First, the general model is described, then we’ll see what is a &lt;em&gt;denoising&lt;/em&gt; autoencoder (and why it works better) and how we can stack them to obtain Deep Networks.
+The implementation of the algorithm is written in Python using &lt;a href=&quot;https://www.tensorflow.org/&quot;&gt;TensorFlow&lt;/a&gt;, and you can find it at this &lt;a href=&quot;https://gist.github.com/blackecho/3a6e4d512d3aa8aa6cf9&quot;&gt;github gist&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: this tutorial is for people with at least some working knowledge of Neural Networks, and it is only intended as a brief overview of the topic. I recommend you to read the &lt;a href=&quot;http://www.jmlr.org/papers/volume11/vincent10a/vincent10a.pdf&quot;&gt;original paper&lt;/a&gt; for further reference.&lt;/p&gt;
+
+&lt;h4 id=&quot;what-is-an-autoencoder&quot;&gt;What is an Autoencoder?&lt;/h4&gt;
+
+&lt;p&gt;Put simply, an autoencoder is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Feedforward_neural_network&quot;&gt;Feed Forward Neural Network&lt;/a&gt; trained to reconstruct its input. As usual, you have an input layer, a hidden layer, and an output layer. If you have used NNs for classification tasks, you may be used to the idea that the output layer has as many nodes as there are classes in the dataset. For example, if you have worked with &lt;a href=&quot;http://yann.lecun.com/exdb/mnist/&quot;&gt;MNIST&lt;/a&gt; dataset (the hello world of machine learning), you saw that the output of the network was a 10 nodes (because MNIST has 10 classes) &lt;em&gt;softmax layer&lt;/em&gt; where the i-th node represents the probability that the input pattern belong to the i-th class.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../../img/autoencoder.png&quot; alt=&quot;neural networks architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Autoencoders are an unsupervised learning algorithm though, so labels are either not available or we don’t care about them. Autoencoders are trained to reconstruct their input, and in order to do this, it is clear that the input and the output layers must have the same dimensionality.&lt;/p&gt;
+
+&lt;p&gt;Thus, an autoencoder learns two mappings: the first from the input to the hidden layer (we call this mapping the &lt;strong&gt;encoder&lt;/strong&gt;), and the second from the hidden to the output layer (this one is called the &lt;strong&gt;decoder&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;p&gt;It’s easy to see why they are called encoder/decoder: the encoder maps data from the input space to the hidden space, and the decoder maps encoded data back to the original space. You can think of the hidden representation as a &lt;em&gt;code&lt;/em&gt;, from which the original data can be decoded back. Of course, the code must capture the main features in the data, otherwise it would be impossible to extract something meaningful from it.&lt;/p&gt;
+
+&lt;h4 id=&quot;autoencoder-algorithm&quot;&gt;Autoencoder Algorithm&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In the following notation $x$ is the input, $y$ is the encoded data, $z$ is the decoded data, $\sigma$ is a non-linear activation function (sigmoid or hyperbolic tangent usually), and $f(x ; \theta)$ means that $f$ is a function of $x$ parameterized by $\theta$.&lt;/p&gt;
+
+&lt;p&gt;The model can be summarized in the following way:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;the-input-data-is-mapped-onto-the-hidden-layer-encoding-the-mapping-is-usually-an-affine-transformation--followed-by-a-non-linearity-something-like&quot;&gt;The input data is mapped onto the hidden layer (&lt;em&gt;encoding&lt;/em&gt;). The mapping is usually an affine transformation  followed by a non-linearity. Something like:&lt;/h6&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;y = f(x ; \theta) = \sigma(Wx + b)&lt;/script&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;the-hidden-layer-is-mapped-onto-the-output-layer-decoding-the-mapping-is-an-affine-transformation-optionally-followed-by-a-non-linearity-something-like&quot;&gt;The hidden layer is mapped onto the output layer (&lt;em&gt;decoding&lt;/em&gt;). The mapping is an affine transformation optionally followed by a non-linearity. Something like:&lt;/h6&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;z = g(y ; \theta^{&#39;}) = g(f(x ; \theta) ; \theta^{&#39;}) = \sigma(W^{&#39;}y + b^{&#39;})&lt;/script&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;optionally-in-order-to-reduce-the-size-of-the-model-one-can-use-tied-weights-that-is-the-decoder-weights-matrix-is-constrained-to-be-the-transpose-of-the-encoder-weights-matrix-theta--thetat&quot;&gt;Optionally, in order to reduce the size of the model, one can use &lt;em&gt;tied weights&lt;/em&gt;, that is the decoder weights matrix is constrained to be the transpose of the encoder weights matrix: $\theta^{‘} = \theta^{T}$.&lt;/h6&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;the-output-of-the-autoencoder-is-matched-against-the-original-input-using-a-specific-criterion-cross-entropy-loss-or-mean-squared-error-usually-something-like&quot;&gt;The output of the autoencoder is matched against the original input using a specific criterion (cross entropy loss or mean squared error usually). Something like:&lt;/h6&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;e = \frac{1}{2m} \sum_{i = 1}^{m}|| x_{i} - z_{i} ||^{2}&lt;/script&gt; for mse or
+&lt;script type=&quot;math/tex&quot;&gt;e = - \frac{1}{m} \sum_{i = 1}^{m} x_{i} log(z_{i}) + (1 - x_{i})log(1 - z_{i})&lt;/script&gt; for ce.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;using-backpropagationbp-small-changes-are-made-to-the-parameters-of-the-model-to-make-the-reconstructions-more-similar-to-the-original-input-note-that-with-tensorflow-you-dont-have-to-explicitly-compute-the-gradients-the-backpropagation-algorithm-is-automatically-applied-to-your-model-using-one-of-the-available-optimizerstfopt&quot;&gt;Using &lt;a href=&quot;http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/&quot;&gt;Backpropagation&lt;/a&gt;, small changes are made to the parameters of the model to make the reconstructions more similar to the original input. Note that with TensorFlow you don’t have to explicitly compute the gradients. The Backpropagation algorithm is automatically applied to your model using one of the available &lt;a href=&quot;https://www.tensorflow.org/versions/r0.7/api_docs/python/train.html#optimizers&quot;&gt;optimizers&lt;/a&gt;.&lt;/h6&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;notes-on-different-architectures&quot;&gt;Notes on different Architectures&lt;/h4&gt;
+
+&lt;p&gt;The hidden layer can have either a lower or a higher dimensionality than that of the input/output layers.&lt;/p&gt;
+
+&lt;p&gt;In the former case, the decoder reconstructs the original input from a lower-dimensional representation of it (we call it an &lt;strong&gt;under-complete&lt;/strong&gt; representation). For the overall thing to work, the encoder should learn to provide a low-dimensional representation that captures the essence of the data (i.e. the main factors of variations in the distribution). Intuitively, if the data was a five minute speach, the encoder would have to describe it in one minute, in other words it is forced to find a good way to summarize the data.&lt;/p&gt;
+
+&lt;p&gt;In the latter case, the decoder reconstruction is build from a higher-dimensional representation (we call this one an &lt;strong&gt;over-complete&lt;/strong&gt; representation). You might think that these kind of representations are kind of useless. If the input dimension is 500, and the hidden layer dimension is 700, there is a great chance that the autoencoder will use 500 of its 700 hidden units to learn the identity mapping, and “throw away” the others.
+Although this can happen, it turns out that if we constrain the hidden units so that only a fraction of them are active at any given time, it can act as a strong regularizer making the autoencoder work surprisingly well. These are the so called &lt;a href=&quot;https://web.stanford.edu/class/cs294a/sparseAutoencoder.pdf&quot;&gt;Sparse Autoencoders&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;denoising-autoencoders&quot;&gt;Denoising Autoencoders&lt;/h4&gt;
+
+&lt;p&gt;So what are Denoising autoencoders? They are very similar to the model we saw previously, the difference is that in this case the input is &lt;strong&gt;corrupted&lt;/strong&gt; before being passed to the network. The trick is that by matching the original version (not the corrupted one) with the reconstruction at error computing time, the autoencoder is trained to reconstruct the &lt;em&gt;original input&lt;/em&gt; from the corrupted version. An approximate schema is the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;the-input-x-gets-corrupted-by-a-function-qx--xcorr&quot;&gt;the input $x$ gets corrupted by a function $q(x) = x_{corr}$.&lt;/h6&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;xcorr-is-used-as-in-the-previous-model&quot;&gt;$x_{corr}$ is used as in the previous model:&lt;/h6&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;h6 id=&quot;y--fxcorr--theta--sigmawxcorr--b-&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;y = f(x_{corr} ; \theta) = \sigma(Wx_{corr} + b)&lt;/script&gt;&lt;/h6&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;h6 id=&quot;z--gy--theta--gfxcorr--theta--theta--sigmawy--b-&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;z = g(y ; \theta^{&#39;}) = g(f(x_{corr} ; \theta) ; \theta^{&#39;}) = \sigma(W^{&#39;}y + b^{&#39;})&lt;/script&gt;&lt;/h6&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;the-error-computation-is-exactly-the-same-as-the-previous-model-use-the-original-x&quot;&gt;The error computation is exactly the same as the previous model (use the original x)&lt;/h6&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Intuitively, if we observe an autoencoder capable of taking in input a distorted version of something and returning a good reconstruction of it, it means that it was very clever about the representation it has learned, otherwise it wouldn’t be able to reconstruct the data.
+To get a sense of what corrupt the input means, below is an image taken from the MNIST dataset, you can clearly see which is the original and which is the corrupted version.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../../img/8.png&quot; width=&quot;100px !important&quot; alt=&quot;image of an eight&quot; /&gt;
+&lt;img src=&quot;../../../../../img/8c.png&quot; alt=&quot;image of a distorted eight&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The corruption technique used in this image is the &lt;strong&gt;masking noise&lt;/strong&gt; technique, that is a fraction of the input elements taken at random is set to zero. In the image above, the fraction was 50% of the pixels.
+The other techniques discussed in the paper are the &lt;strong&gt;salt and pepper noise&lt;/strong&gt;, where a fraction of the input elements taken at random is set either to the maximum value or to the minimum, and the &lt;strong&gt;white gaussian noise&lt;/strong&gt;. The authors emphasize the fact that they used these methods because they are very general and can be applied to a wide variety of data. Of course, if you know well the domain at hand (e.g. images) and use a technique to better expose the main structure in your data, the algorithm is expected to work better.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The corruption process has to be repeated each time the same input is presented to the autoencoder. If the training set is corrupted only once at the beginning of training, the model would recognize the distortions as valid data patterns, leading to &lt;strong&gt;overfitting&lt;/strong&gt;. By corrupting the data every time in a different way instead, the model will learn to extract the underlying structure, avoiding overfitting.&lt;/p&gt;
+
+&lt;h4 id=&quot;stacked-denoising-autoencoders&quot;&gt;Stacked Denoising Autoencoders&lt;/h4&gt;
+
+&lt;p&gt;We can stack autoencoders in order to obtain Deep Neural Networks. The stacking process is done in the following way for a classification task:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;an-autoencoder-denoising-or-not-is-unsupervisely-trained-on-the-input-data-after-training-we-drop-the-decoder-and-we-encode-the-training-set-encoded-training-set--sigmaw1x--b1&quot;&gt;An Autoencoder (denoising or not) is “unsupervisely” trained on the input data. After training, we drop the decoder, and we encode the training set: encoded training set = $\sigma(W_{1}x + b_{1})$.&lt;/h6&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;the-encoded-data-is-used-as-training-set-for-a-second-autoencoder-after-training-we-drop-the-decoder-and-we-encode-the-encoded-training-set-sigmaw2sigmaw1x--b1--b2&quot;&gt;The encoded data is used as training set for a second Autoencoder. After training, we drop the decoder, and we encode the encoded training set: $\sigma(W_{2}\sigma(W_{1}x + b_{1}) + b_{2})$&lt;/h6&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h6 id=&quot;we-do-this-for-as-many-layers-we-want-at-the-end-we-attach-a-softmax-layer-on-top-of-the-last-autoencoders-encoder-and-we-train-the-whole-thing-as-if-it-was-a-simple-feed-forward-neural-network-using-backpropagation-of-course-the-initial-weights-of-the-neural-net-must-be-initialized-at-the-value-that-the-autoencoders-had-after-training-otherwise-the-pretraining-procedure-would-be-useless&quot;&gt;We do this for as many layers we want. At the end, we attach a softmax layer on top of the last autoencoder’s encoder, and we train the whole thing as if it was a simple Feed Forward Neural Network using Backpropagation (of course the initial weights of the Neural Net must be initialized at the value that the autoencoders had after training, otherwise the pretraining procedure would be useless).&lt;/h6&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://gist.github.com/blackecho/3a6e4d512d3aa8aa6cf9&quot;&gt;github gist&lt;/a&gt; contains only an implementation of a Denoising Autoencoder. If you want to see a working implementation of a Stacked Autoencoder, as well as many other Deep Learning algorithms, I encourage you to take a look at &lt;a href=&quot;https://github.com/blackecho/Deep-Learning-TensorFlow&quot;&gt;my repository&lt;/a&gt; of Deep Learning algorithms implemented in TensorFlow.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 28 Feb 2016 19:30:20 +0100</pubDate>
+        <link>http://www.gabrieleangeletti.com/blog/machine-learning/2016/02/28/denoising-autoencoder-tensorflow.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/machine-learning/2016/02/28/denoising-autoencoder-tensorflow.html</guid>
+        
+        
+        <category>blog</category>
+        
+        <category>machine-learning</category>
+        
+      </item>
     
       <item>
         <title>Refactoring a Restricted Boltzmann Machine implementation in TensorFlow.</title>
@@ -157,7 +280,7 @@ All these layers are indeed learning Sparse Distributed Representations of the t
 &lt;p&gt;A HMM is a statistical model that can be used to do a lot of interesting things, it has many applications in speech-recognition, handwriting recognition, and many others.
 The basic idea is that if we have some observations about something, they can be explained in terms of some states (which are hidden) to which these observations depend. If we take for example handwriting recognition, the hidden states would be the letters of the alphabet, and the observed variables would be the letters that one actually writes.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;responsive-img&quot; src=&quot;../../../../img/hmm.png&quot; alt=&quot;hidden markov model graphic representation&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../../../../../img/hmm.png&quot; alt=&quot;hidden markov model graphic representation&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The arrows in the image indicate a conditional probability, so there are conditional probabilities between states and between
 states and observations.
