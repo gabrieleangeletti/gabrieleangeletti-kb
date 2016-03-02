@@ -2,7 +2,7 @@
 layout: post
 title:  "Denoising Autoencoders: Tutorial + TensorFlow implementation"
 titlecol: "#000000"
-date:   2016-02-28 13:30:20 -0500
+date:   2016-02-29 13:30:20 -0500
 author: Gabriele Angeletti
 categories: machine-learning
 image: img/autoencoder.png
