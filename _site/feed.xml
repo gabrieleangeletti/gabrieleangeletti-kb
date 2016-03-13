@@ -6,9 +6,42 @@
 </description>
     <link>http://www.gabrieleangeletti.com/</link>
     <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Mar 2016 18:52:22 +0100</pubDate>
-    <lastBuildDate>Wed, 09 Mar 2016 18:52:22 +0100</lastBuildDate>
+    <pubDate>Sun, 13 Mar 2016 18:39:35 +0100</pubDate>
+    <lastBuildDate>Sun, 13 Mar 2016 18:39:35 +0100</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Visualizing Twitter data: a Python example</title>
+        <description>&lt;p&gt;Data visualization is used to synthesize data, explain concepts and communicate results and insights in a clear and efficient way. And most important, it’s fun!
+In this post we’ll see an example of data visualization using Twitter API.&lt;/p&gt;
+
+&lt;p&gt;This post is realized in collaboration with a friend of mine, and university collegue
+&lt;a href=&quot;https://it-it.facebook.com/people/Alessandro-Stagni/100007421145017&quot;&gt;Alessandro Stagni&lt;/a&gt;.
+We used &lt;a href=&quot;http://ipython.org/notebook.html&quot;&gt;IPython Notebooks&lt;/a&gt; to present the work. Notebooks are a great way to show
+Python work: text, code, output and even images can be mixed in one interactive document
+and then converted to html. Some people are even &lt;a href=&quot;https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python&quot;&gt;writing books&lt;/a&gt; using ipython notebooks!&lt;/p&gt;
+
+&lt;p&gt;Data is collected from Twitter using the &lt;a href=&quot;https://dev.twitter.com/streaming/overview&quot;&gt;streaming API&lt;/a&gt;.
+We collected 250 thousand tweets for each of the following languages: english, french, german, spanish, portuguese.&lt;/p&gt;
+
+&lt;p&gt;We show visualizations of length distribution for each language, and WordClouds for
+the most frequent words.&lt;/p&gt;
+
+&lt;p&gt;WordClouds are generated using &lt;a href=&quot;https://github.com/amueller/word_cloud&quot;&gt;this&lt;/a&gt; great package.&lt;/p&gt;
+
+&lt;p&gt;This is the &lt;a href=&quot;http://www.gabrieleangeletti.com/tweet_data_viz.html&quot;&gt;link to the notebook&lt;/a&gt;, hope you enjoy it!&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 12 Mar 2016 21:30:20 +0100</pubDate>
+        <link>http://www.gabrieleangeletti.com/blog/data-science/2016/03/12/twitter-data-visualization-python.html</link>
+        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/data-science/2016/03/12/twitter-data-visualization-python.html</guid>
+        
+        
+        <category>blog</category>
+        
+        <category>data-science</category>
+        
+      </item>
     
       <item>
         <title>Denoising Autoencoders: Tutorial + TensorFlow implementation</title>
