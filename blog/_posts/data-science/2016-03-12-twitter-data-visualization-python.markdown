@@ -31,4 +31,4 @@ This is the [link to the notebook][work], hope you enjoy it!
 [ales]: https://it-it.facebook.com/people/Alessandro-Stagni/100007421145017
 [ipynb]: http://ipython.org/notebook.html
 [ipynbkalman]: https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
-[work]: http://www.gabrieleangeletti.com/tweet_data_viz.html
+[work]: http://blackecho.github.io/tweet_data_viz.html

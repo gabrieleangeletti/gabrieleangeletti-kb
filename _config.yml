@@ -4,7 +4,7 @@ email: angeletti.gabriele@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   My blog about Artificial Intelligence, Machine Learning and related topics.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://www.gabrieleangeletti.com" # the base hostname & protocol for your site
+url: "http://blackecho.github.io" # the base hostname & protocol for your site
 twitter_username: gabrieleang
 github_username:  blackecho
 google_play:
