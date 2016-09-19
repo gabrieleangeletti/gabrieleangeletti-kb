@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Deep Locality Sensitive Hashing
-titlecolor: mdl-color-text--grey-500
+title: Deep Autoencoder Locality Sensitive Hashing
+card-title-color: card-title-orange-700
 date: 2015-09-10 9:30:20 -0500
 permalink: /projects/deep-locality-sensitive-hashing
 categories: project

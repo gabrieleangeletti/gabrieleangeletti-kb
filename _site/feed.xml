@@ -4,14 +4,14 @@
     <title>Gabriele Angeletti</title>
     <description>My blog about Artificial Intelligence, Machine Learning and related topics.
 </description>
-    <link>http://www.gabrieleangeletti.com/</link>
-    <atom:link href="http://www.gabrieleangeletti.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 25 Mar 2016 19:38:18 +0100</pubDate>
-    <lastBuildDate>Fri, 25 Mar 2016 19:38:18 +0100</lastBuildDate>
-    <generator>Jekyll v3.1.1</generator>
+    <link>http://blackecho.github.io/</link>
+    <atom:link href="http://blackecho.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 19 Sep 2016 12:44:19 +0200</pubDate>
+    <lastBuildDate>Mon, 19 Sep 2016 12:44:19 +0200</lastBuildDate>
+    <generator>Jekyll v3.2.1</generator>
     
       <item>
-        <title>Understanding Python&#39;s underlying data structures</title>
+        <title>Understanding Python's underlying data structures</title>
         <description>&lt;p&gt;Let’s take a look at how Python’s typical data structures (lists, tuples, dicts, sets) are implemented, and how we can take advantage of this knowledge to optimize our code. The implementation we are focusing on is CPython.&lt;/p&gt;
 
 &lt;p&gt;CPython is the &lt;a href=&quot;http://stackoverflow.com/questions/17130975/python-vs-cpython&quot;&gt;original implementation&lt;/a&gt; of Python, written in C. Since Python is a high-level language, the code you execute has to be evaluated and interpreted somehow. CPython is the program that translates Python instructions, written following the language specification, to something the machine can actually execute. Specifically, it compiles the code into bytecode, which then get interpreted and executed.
@@ -148,8 +148,8 @@ def g(e):
 
 </description>
         <pubDate>Wed, 23 Mar 2016 19:30:20 +0100</pubDate>
-        <link>http://www.gabrieleangeletti.com/blog/programming/2016/03/23/python-underlying-data-structures.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/programming/2016/03/23/python-underlying-data-structures.html</guid>
+        <link>http://blackecho.github.io/blog/programming/2016/03/23/python-underlying-data-structures.html</link>
+        <guid isPermaLink="true">http://blackecho.github.io/blog/programming/2016/03/23/python-underlying-data-structures.html</guid>
         
         
         <category>blog</category>
@@ -177,12 +177,12 @@ the most frequent words.&lt;/p&gt;
 
 &lt;p&gt;WordClouds are generated using &lt;a href=&quot;https://github.com/amueller/word_cloud&quot;&gt;this&lt;/a&gt; great package.&lt;/p&gt;
 
-&lt;p&gt;This is the &lt;a href=&quot;http://www.gabrieleangeletti.com/tweet_data_viz.html&quot;&gt;link to the notebook&lt;/a&gt;, hope you enjoy it!&lt;/p&gt;
+&lt;p&gt;This is the &lt;a href=&quot;http://blackecho.github.io/tweet_data_viz.html&quot;&gt;link to the notebook&lt;/a&gt;, hope you enjoy it!&lt;/p&gt;
 
 </description>
         <pubDate>Sat, 12 Mar 2016 21:30:20 +0100</pubDate>
-        <link>http://www.gabrieleangeletti.com/blog/data-science/2016/03/12/twitter-data-visualization-python.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/data-science/2016/03/12/twitter-data-visualization-python.html</guid>
+        <link>http://blackecho.github.io/blog/data-science/2016/03/12/twitter-data-visualization-python.html</link>
+        <guid isPermaLink="true">http://blackecho.github.io/blog/data-science/2016/03/12/twitter-data-visualization-python.html</guid>
         
         
         <category>blog</category>
@@ -225,7 +225,7 @@ The implementation of the algorithm is written in Python using &lt;a href=&quot;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;h6 id=&quot;the-hidden-layer-is-mapped-onto-the-output-layer-decoding-the-mapping-is-an-affine-transformation-optionally-followed-by-a-non-linearity-something-like&quot;&gt;The hidden layer is mapped onto the output layer (&lt;em&gt;decoding&lt;/em&gt;). The mapping is an affine transformation optionally followed by a non-linearity. Something like:&lt;/h6&gt;
-    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;z = g(y ; \theta^{&#39;}) = g(f(x ; \theta) ; \theta^{&#39;}) = \sigma(W^{&#39;}y + b^{&#39;})&lt;/script&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;z = g(y ; \theta^{'}) = g(f(x ; \theta) ; \theta^{'}) = \sigma(W^{'}y + b^{'})&lt;/script&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;h6 id=&quot;optionally-in-order-to-reduce-the-size-of-the-model-one-can-use-tied-weights-that-is-the-decoder-weights-matrix-is-constrained-to-be-the-transpose-of-the-encoder-weights-matrix-theta--thetat&quot;&gt;Optionally, in order to reduce the size of the model, one can use &lt;em&gt;tied weights&lt;/em&gt;, that is the decoder weights matrix is constrained to be the transpose of the encoder weights matrix: $\theta^{‘} = \theta^{T}$.&lt;/h6&gt;
@@ -264,7 +264,7 @@ Although this can happen, it turns out that if we constrain the hidden units so 
         &lt;h6 id=&quot;y--fxcorr--theta--sigmawxcorr--b-&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;y = f(x_{corr} ; \theta) = \sigma(Wx_{corr} + b)&lt;/script&gt;&lt;/h6&gt;
       &lt;/li&gt;
       &lt;li&gt;
-        &lt;h6 id=&quot;z--gy--theta--gfxcorr--theta--theta--sigmawy--b-&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;z = g(y ; \theta^{&#39;}) = g(f(x_{corr} ; \theta) ; \theta^{&#39;}) = \sigma(W^{&#39;}y + b^{&#39;})&lt;/script&gt;&lt;/h6&gt;
+        &lt;h6 id=&quot;z--gy--theta--gfxcorr--theta--theta--sigmawy--b-&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;z = g(y ; \theta^{'}) = g(f(x_{corr} ; \theta) ; \theta^{'}) = \sigma(W^{'}y + b^{'})&lt;/script&gt;&lt;/h6&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
@@ -304,8 +304,8 @@ The other techniques discussed in the paper are the &lt;strong&gt;salt and peppe
 
 </description>
         <pubDate>Mon, 29 Feb 2016 19:30:20 +0100</pubDate>
-        <link>http://www.gabrieleangeletti.com/blog/machine-learning/2016/02/29/denoising-autoencoder-tensorflow.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/machine-learning/2016/02/29/denoising-autoencoder-tensorflow.html</guid>
+        <link>http://blackecho.github.io/blog/machine-learning/2016/02/29/denoising-autoencoder-tensorflow.html</link>
+        <guid isPermaLink="true">http://blackecho.github.io/blog/machine-learning/2016/02/29/denoising-autoencoder-tensorflow.html</guid>
         
         
         <category>blog</category>
@@ -376,8 +376,8 @@ np.random.shuffle(trX)
 
 </description>
         <pubDate>Sun, 21 Feb 2016 15:30:20 +0100</pubDate>
-        <link>http://www.gabrieleangeletti.com/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</guid>
+        <link>http://blackecho.github.io/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</link>
+        <guid isPermaLink="true">http://blackecho.github.io/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</guid>
         
         
         <category>blog</category>
@@ -387,13 +387,34 @@ np.random.shuffle(trX)
       </item>
     
       <item>
+        <title>Deep Autoencoder Locality Sensitive Hashing</title>
+        <description>&lt;p&gt;In this project I use a stack of denoising autoencoders to learn low-dimensional
+representations of images.&lt;/p&gt;
+
+&lt;p&gt;These encodings are used as input to a locality sensitive
+hashing algorithm to find images similar to a given query image. The results clearly
+shows that this approach outperforms basic LSH by far.
+&lt;a href=&quot;http://www.slideshare.net/GabrieleAngeletti/project-deep-locality-sensitive-hashing&quot;&gt;Here you can find the presentation of this project&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
+        <link>http://blackecho.github.io/projects/deep-locality-sensitive-hashing</link>
+        <guid isPermaLink="true">http://blackecho.github.io/projects/deep-locality-sensitive-hashing</guid>
+        
+        
+        <category>projects</category>
+        
+        <category>project</category>
+        
+      </item>
+    
+      <item>
         <title>Hierarchical Reinforcement Learning</title>
         <description>&lt;p&gt;Project on Hierarchical RL. Implementation of the MAX-QQ value function decomposition and algorithm.
 Link to &lt;a href=&quot;https://github.com/blackecho/Hierarchical-Reinforcement-Learning&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/projects/deep-belief-nets</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/projects/deep-belief-nets</guid>
+        <link>http://blackecho.github.io/projects/hierarchical-reinf-learning</link>
+        <guid isPermaLink="true">http://blackecho.github.io/projects/hierarchical-reinf-learning</guid>
         
         
         <category>projects</category>
@@ -408,8 +429,8 @@ Link to &lt;a href=&quot;https://github.com/blackecho/Hierarchical-Reinforcement
 Link to &lt;a href=&quot;http://github.com/blackecho/Deep-Belief-Network&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/projects/deep-belief-nets</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/projects/deep-belief-nets</guid>
+        <link>http://blackecho.github.io/projects/deep-belief-nets</link>
+        <guid isPermaLink="true">http://blackecho.github.io/projects/deep-belief-nets</guid>
         
         
         <category>projects</category>
@@ -444,8 +465,8 @@ All these layers are indeed learning Sparse Distributed Representations of the t
 
 </description>
         <pubDate>Mon, 15 Jun 2015 16:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/blog/machine-learning/2015/06/15/sparse-distributed-representations.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/machine-learning/2015/06/15/sparse-distributed-representations.html</guid>
+        <link>http://blackecho.github.io/blog/machine-learning/2015/06/15/sparse-distributed-representations.html</link>
+        <guid isPermaLink="true">http://blackecho.github.io/blog/machine-learning/2015/06/15/sparse-distributed-representations.html</guid>
         
         
         <category>blog</category>
@@ -480,7 +501,7 @@ that one has written given the actual messy character that she/he wrote.&lt;/p&g
 
 &lt;p&gt;The FB algorithm allows you to compute these posterior probabilities for internal hidden states.&lt;/p&gt;
 
-&lt;p&gt;The basic idea is that this probability is proportional to the joint distribution $ P(Z_k,X_{1:t}) $ and, using &lt;a href=&quot;http://en.wikipedia.org/wiki/Bayes&#39;_theorem&quot;&gt;Bayes theorem&lt;/a&gt; and the independence of $ X_{1:k} $ and $ X_{k+1:t} $ given $ Z_k $, we obtain:&lt;/p&gt;
+&lt;p&gt;The basic idea is that this probability is proportional to the joint distribution $ P(Z_k,X_{1:t}) $ and, using &lt;a href=&quot;http://en.wikipedia.org/wiki/Bayes'_theorem&quot;&gt;Bayes theorem&lt;/a&gt; and the independence of $ X_{1:k} $ and $ X_{k+1:t} $ given $ Z_k $, we obtain:&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;P(Z_k | X_{1:t}) \propto P(Z_k , X_{1:t}) = P(Z_k | X_{1:k}) P(X_{k+1:t} | Z_k)&lt;/script&gt;
 
@@ -536,8 +557,8 @@ We again compute this value $\forall k = 1 … n-1$ and we are done. For k=n, th
 
 </description>
         <pubDate>Sat, 30 May 2015 17:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</guid>
+        <link>http://blackecho.github.io/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</link>
+        <guid isPermaLink="true">http://blackecho.github.io/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</guid>
         
         
         <category>blog</category>
@@ -604,58 +625,8 @@ So the code looks like this:&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 21 May 2015 16:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</guid>
-        
-        
-        <category>blog</category>
-        
-        <category>prolog</category>
-        
-      </item>
-    
-      <item>
-        <title>Solving Sudoku as a Constraint Satisfaction Problem (CSP) using Prolog</title>
-        <description>&lt;p&gt;Today we will model the game of &lt;a href=&quot;http://en.wikipedia.org/wiki/Sudoku&quot;&gt;Sudoku&lt;/a&gt; as a &lt;a href=&quot;http://en.wikipedia.org/wiki/Constraint_satisfaction_problem&quot;&gt;Constraint Satisfaction Problem (CSP)&lt;/a&gt; and then write a Prolog program that solves it.
-CSP is particularly useful when we want to model a combinatorial problem subject to &lt;strong&gt;constraints&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;In standard Sudoku we have a 9x9 grid, where each cell can be filled with an integer between 1 and 9, so the possible configurations are all the ordered combinations of 81 numbers between 1 and 9.&lt;/p&gt;
-
-&lt;p&gt;In the first cell, we have 9 different values that we can put in.
-If we consider both the first and the second cells, we have $ 9^{2} $ different values that we can put in, because we have to take into account all the possible combination of
-the form $ (1,1), (1,2) … (1,9), (2,1) … (9,9) $. So if we consider all the cells in the end we have $ 9^{81} $ possible combination of values, a very huge number!!&lt;/p&gt;
-
-&lt;p&gt;But, two things help us here:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Sudoku is not about trying some random combination, it has some rules, and those rules greatly reduce the above number, because they tell us which combinations are right, and which are wrong.&lt;/li&gt;
-  &lt;li&gt;Sudoku has some cells that are already filled, and these &lt;strong&gt;initial conditions&lt;/strong&gt; also help in reducing the huge number of tries.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;So let’s see how we can model this game in csp.&lt;/p&gt;
-
-&lt;p&gt;CSP has variables (what we are interested in), domains (which values the variables can assume) and constraints (rules about what values are right and what are wrong).
-The variables in this case are the 81 cells of the grid, each of which can assume a value between 1 and 9, so the domain here is the integer interval [1, 9].
-The constraints simply are the rules of the game, that are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;All the values in each row must be different each other&lt;/li&gt;
-  &lt;li&gt;All the values in each column must be different each other&lt;/li&gt;
-  &lt;li&gt;All the values in each 3x3 block must be different each other&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Done! We don’t need some fancy algorithm or complex trick to get the job done: we are simply describing the problem here, and we let Prolog’s backtracking solve it for us. This is the true power of Prolog and logic
-Programming: you don’t actually have to solve the problem, you only have to model it!&lt;/p&gt;
-
-&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
-&lt;p&gt;Prolog has a csp library, named &lt;strong&gt;clpfd&lt;/strong&gt;. It has all the things that we need: we can define variables, domains for the variables, and costraints. More over, the constraints that the values must be different, is a type of constraint that is already implemented in clpfd. All we have to do is to use all_different(List).&lt;/p&gt;
-
-&lt;p&gt;The full code is available at &lt;a href=&quot;http://github.com/blackecho/prolog-programs&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 14 May 2015 21:30:20 +0200</pubDate>
-        <link>http://www.gabrieleangeletti.com/blog/prolog/2015/05/14/sudoku-csp-prolog.html</link>
-        <guid isPermaLink="true">http://www.gabrieleangeletti.com/blog/prolog/2015/05/14/sudoku-csp-prolog.html</guid>
+        <link>http://blackecho.github.io/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</link>
+        <guid isPermaLink="true">http://blackecho.github.io/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</guid>
         
         
         <category>blog</category>
