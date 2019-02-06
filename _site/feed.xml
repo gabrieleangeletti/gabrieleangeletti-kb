@@ -6,9 +6,9 @@
 </description>
     <link>http://blackecho.github.io/</link>
     <atom:link href="http://blackecho.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 19 Sep 2016 12:44:19 +0200</pubDate>
-    <lastBuildDate>Mon, 19 Sep 2016 12:44:19 +0200</lastBuildDate>
-    <generator>Jekyll v3.2.1</generator>
+    <pubDate>Wed, 06 Feb 2019 23:27:30 +0000</pubDate>
+    <lastBuildDate>Wed, 06 Feb 2019 23:27:30 +0000</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
     
       <item>
         <title>Understanding Python's underlying data structures</title>
@@ -34,7 +34,7 @@ Thus, if you perform a million consecutive appends, the resizing mechanism accou
 
 &lt;p&gt;The following two little experiments show some optimizations we can do:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f(n):
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f(n):
     l = []
     for i in range(n):
         l.append(i)
@@ -45,8 +45,7 @@ def g(n):
     for i in range(n):
         l.insert(i, i)
     return l
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The two functions has the same effect, they return a list of natural numbers from 0 to n. The function f is slightly faster, as you can see from this plot (the execution time was measured using the handy ipython module &lt;code class=&quot;highlighter-rouge&quot;&gt;%timeit&lt;/code&gt;):&lt;/p&gt;
 
@@ -54,7 +53,7 @@ def g(n):
 
 &lt;p&gt;The following experiment shows the (huge) O(n) cost for resizing of the &lt;code class=&quot;highlighter-rouge&quot;&gt;insert(0, v)&lt;/code&gt; operation. If we modify the functions above to return the list of natural numbers in inverted order, we can see that it is much (very much) faster to append the elements and then &lt;code class=&quot;highlighter-rouge&quot;&gt;reverse()&lt;/code&gt; the resulting list rather than doing &lt;code class=&quot;highlighter-rouge&quot;&gt;insert(0, v)&lt;/code&gt; operations.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f(n):
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f(n):
     l = []
     for i in range(n):
         l.append(i)
@@ -66,16 +65,14 @@ def g(n):
     for i in range(n):
         l.insert(0, i)
     return l
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The difference between the two is so big that instead of plotting the results I’ll show you the numbers (unit is the microsecond):&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input:      [100,  1000, 1000, 50000, 100000, 200000]
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input:      [100,  1000, 1000, 50000, 100000, 200000]
 function f: [9.43, 89.1, 849, 4430, 9300, 18900]
 function g: [24.3, 463, 29300, 785000, 3240000, 13000000]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;tuples&quot;&gt;Tuples&lt;/h3&gt;
 &lt;p&gt;The main difference between lists and tuples is that tuples are immutable objects: that is once they are created, they cannot be modified anymore (of course the tuple cannot be modified, but the variable pointing to it can).
@@ -97,27 +94,25 @@ The goal of a hash function is to distribute the keys evenly in the array. A goo
 
 &lt;p&gt;For example, a common use case of dictionaries is counting object, like word frequencies. In these cases, items are initialized once and modified many times. To implement this function we could write something like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f(words):
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f(words):
     wdict = {}
     for word in words:
         if word not in wdict:
             wdict[word] = 0
         wdict[word] += 1
     return wdict
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The problem with the above code is that except for the first time a new word is seen, the if test will fail every time, wasting a lot of hash function computations. We can avoid this with the following code:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def g(words):
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def g(words):
     wdict = {}
     for word in words:
         try:
             wdict[word] += 1
         except KeyError:
             wdict[word] = 1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Note: it is important to use KeyError in the except clause. You want the dictionary to be modified only when this exception occurs.&lt;/p&gt;
 
@@ -130,15 +125,14 @@ The goal of a hash function is to distribute the keys evenly in the array. A goo
 
 &lt;p&gt;Because of this amazingly fast membership checking, sets are the obvious choice when you have a list of values and you don’t care about the order of the items, but just whether an item belongs to the list or not. Of course this is true only if the set is already there. If you include the set creation time, then a list is usually faster, as the following experiment shows:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f(e):
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f(e):
     l = range(1000000)
     return e in l
 
 def g(e):
     s = set(range(1000000))
     return e in l
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;f(645000)&lt;/code&gt; took &lt;code class=&quot;highlighter-rouge&quot;&gt;30.7ms&lt;/code&gt; while &lt;code class=&quot;highlighter-rouge&quot;&gt;g(645000)&lt;/code&gt; took &lt;code class=&quot;highlighter-rouge&quot;&gt;142ms&lt;/code&gt;. But if we measure only the membership-checking time, then things are different: the list took &lt;code class=&quot;highlighter-rouge&quot;&gt;13.9ms&lt;/code&gt; while the set only &lt;code class=&quot;highlighter-rouge&quot;&gt;65.4ns&lt;/code&gt;! So keep in mind that in order to take advantage of the set data structure you have to be in a situation when you create the set once and read it many times.&lt;/p&gt;
 
@@ -147,7 +141,7 @@ def g(e):
 &lt;p&gt;PS: for further reference, there’s no better place than the CPython source code: &lt;a href=&quot;https://hg.python.org/cpython/file/tip/Objects/listobject.c&quot;&gt;listobject source code&lt;/a&gt;, &lt;a href=&quot;https://hg.python.org/cpython/file/tip/Objects/dictobject.c&quot;&gt;dictobject&lt;/a&gt;, &lt;a href=&quot;https://hg.python.org/cpython/file/tip/Objects/tupleobject.c&quot;&gt;tupleobject&lt;/a&gt;, &lt;a href=&quot;https://hg.python.org/cpython/file/tip/Objects/setobject.c&quot;&gt;setobject&lt;/a&gt;.&lt;/p&gt;
 
 </description>
-        <pubDate>Wed, 23 Mar 2016 19:30:20 +0100</pubDate>
+        <pubDate>Wed, 23 Mar 2016 18:30:20 +0000</pubDate>
         <link>http://blackecho.github.io/blog/programming/2016/03/23/python-underlying-data-structures.html</link>
         <guid isPermaLink="true">http://blackecho.github.io/blog/programming/2016/03/23/python-underlying-data-structures.html</guid>
         
@@ -180,7 +174,7 @@ the most frequent words.&lt;/p&gt;
 &lt;p&gt;This is the &lt;a href=&quot;http://blackecho.github.io/tweet_data_viz.html&quot;&gt;link to the notebook&lt;/a&gt;, hope you enjoy it!&lt;/p&gt;
 
 </description>
-        <pubDate>Sat, 12 Mar 2016 21:30:20 +0100</pubDate>
+        <pubDate>Sat, 12 Mar 2016 20:30:20 +0000</pubDate>
         <link>http://blackecho.github.io/blog/data-science/2016/03/12/twitter-data-visualization-python.html</link>
         <guid isPermaLink="true">http://blackecho.github.io/blog/data-science/2016/03/12/twitter-data-visualization-python.html</guid>
         
@@ -236,7 +230,7 @@ The implementation of the algorithm is written in Python using &lt;a href=&quot;
 &lt;script type=&quot;math/tex&quot;&gt;e = - \frac{1}{m} \sum_{i = 1}^{m} x_{i} log(z_{i}) + (1 - x_{i})log(1 - z_{i})&lt;/script&gt; for ce.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;h6 id=&quot;using-backpropagationbp-small-changes-are-made-to-the-parameters-of-the-model-to-make-the-reconstructions-more-similar-to-the-original-input-note-that-with-tensorflow-you-dont-have-to-explicitly-compute-the-gradients-the-backpropagation-algorithm-is-automatically-applied-to-your-model-using-one-of-the-available-optimizerstfopt&quot;&gt;Using &lt;a href=&quot;http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/&quot;&gt;Backpropagation&lt;/a&gt;, small changes are made to the parameters of the model to make the reconstructions more similar to the original input. Note that with TensorFlow you don’t have to explicitly compute the gradients. The Backpropagation algorithm is automatically applied to your model using one of the available &lt;a href=&quot;https://www.tensorflow.org/versions/r0.7/api_docs/python/train.html#optimizers&quot;&gt;optimizers&lt;/a&gt;.&lt;/h6&gt;
+    &lt;h6 id=&quot;using-backpropagation-small-changes-are-made-to-the-parameters-of-the-model-to-make-the-reconstructions-more-similar-to-the-original-input-note-that-with-tensorflow-you-dont-have-to-explicitly-compute-the-gradients-the-backpropagation-algorithm-is-automatically-applied-to-your-model-using-one-of-the-available-optimizers&quot;&gt;Using &lt;a href=&quot;http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/&quot;&gt;Backpropagation&lt;/a&gt;, small changes are made to the parameters of the model to make the reconstructions more similar to the original input. Note that with TensorFlow you don’t have to explicitly compute the gradients. The Backpropagation algorithm is automatically applied to your model using one of the available &lt;a href=&quot;https://www.tensorflow.org/versions/r0.7/api_docs/python/train.html#optimizers&quot;&gt;optimizers&lt;/a&gt;.&lt;/h6&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -255,16 +249,16 @@ Although this can happen, it turns out that if we constrain the hidden units so 
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;h6 id=&quot;the-input-x-gets-corrupted-by-a-function-qx--xcorr&quot;&gt;the input $x$ gets corrupted by a function $q(x) = x_{corr}$.&lt;/h6&gt;
+    &lt;h6 id=&quot;the-input-x-gets-corrupted-by-a-function-qx--x_corr&quot;&gt;the input $x$ gets corrupted by a function $q(x) = x_{corr}$.&lt;/h6&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;h6 id=&quot;xcorr-is-used-as-in-the-previous-model&quot;&gt;$x_{corr}$ is used as in the previous model:&lt;/h6&gt;
+    &lt;h6 id=&quot;x_corr-is-used-as-in-the-previous-model&quot;&gt;$x_{corr}$ is used as in the previous model:&lt;/h6&gt;
     &lt;ul&gt;
       &lt;li&gt;
-        &lt;h6 id=&quot;y--fxcorr--theta--sigmawxcorr--b-&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;y = f(x_{corr} ; \theta) = \sigma(Wx_{corr} + b)&lt;/script&gt;&lt;/h6&gt;
+        &lt;h6 id=&quot;y--fx_corr--theta--sigmawx_corr--b&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;y = f(x_{corr} ; \theta) = \sigma(Wx_{corr} + b)&lt;/script&gt;&lt;/h6&gt;
       &lt;/li&gt;
       &lt;li&gt;
-        &lt;h6 id=&quot;z--gy--theta--gfxcorr--theta--theta--sigmawy--b-&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;z = g(y ; \theta^{'}) = g(f(x_{corr} ; \theta) ; \theta^{'}) = \sigma(W^{'}y + b^{'})&lt;/script&gt;&lt;/h6&gt;
+        &lt;h6 id=&quot;z--gy--theta--gfx_corr--theta--theta--sigmawy--b&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;z = g(y ; \theta^{'}) = g(f(x_{corr} ; \theta) ; \theta^{'}) = \sigma(W^{'}y + b^{'})&lt;/script&gt;&lt;/h6&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
@@ -290,10 +284,10 @@ The other techniques discussed in the paper are the &lt;strong&gt;salt and peppe
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;h6 id=&quot;an-autoencoder-denoising-or-not-is-unsupervisely-trained-on-the-input-data-after-training-we-drop-the-decoder-and-we-encode-the-training-set-encoded-training-set--sigmaw1x--b1&quot;&gt;An Autoencoder (denoising or not) is “unsupervisely” trained on the input data. After training, we drop the decoder, and we encode the training set: encoded training set = $\sigma(W_{1}x + b_{1})$.&lt;/h6&gt;
+    &lt;h6 id=&quot;an-autoencoder-denoising-or-not-is-unsupervisely-trained-on-the-input-data-after-training-we-drop-the-decoder-and-we-encode-the-training-set-encoded-training-set--sigmaw_1x--b_1&quot;&gt;An Autoencoder (denoising or not) is “unsupervisely” trained on the input data. After training, we drop the decoder, and we encode the training set: encoded training set = $\sigma(W_{1}x + b_{1})$.&lt;/h6&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;h6 id=&quot;the-encoded-data-is-used-as-training-set-for-a-second-autoencoder-after-training-we-drop-the-decoder-and-we-encode-the-encoded-training-set-sigmaw2sigmaw1x--b1--b2&quot;&gt;The encoded data is used as training set for a second Autoencoder. After training, we drop the decoder, and we encode the encoded training set: $\sigma(W_{2}\sigma(W_{1}x + b_{1}) + b_{2})$&lt;/h6&gt;
+    &lt;h6 id=&quot;the-encoded-data-is-used-as-training-set-for-a-second-autoencoder-after-training-we-drop-the-decoder-and-we-encode-the-encoded-training-set-sigmaw_2sigmaw_1x--b_1--b_2&quot;&gt;The encoded data is used as training set for a second Autoencoder. After training, we drop the decoder, and we encode the encoded training set: $\sigma(W_{2}\sigma(W_{1}x + b_{1}) + b_{2})$&lt;/h6&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;h6 id=&quot;we-do-this-for-as-many-layers-we-want-at-the-end-we-attach-a-softmax-layer-on-top-of-the-last-autoencoders-encoder-and-we-train-the-whole-thing-as-if-it-was-a-simple-feed-forward-neural-network-using-backpropagation-of-course-the-initial-weights-of-the-neural-net-must-be-initialized-at-the-value-that-the-autoencoders-had-after-training-otherwise-the-pretraining-procedure-would-be-useless&quot;&gt;We do this for as many layers we want. At the end, we attach a softmax layer on top of the last autoencoder’s encoder, and we train the whole thing as if it was a simple Feed Forward Neural Network using Backpropagation (of course the initial weights of the Neural Net must be initialized at the value that the autoencoders had after training, otherwise the pretraining procedure would be useless).&lt;/h6&gt;
@@ -303,7 +297,7 @@ The other techniques discussed in the paper are the &lt;strong&gt;salt and peppe
 &lt;p&gt;The &lt;a href=&quot;https://gist.github.com/blackecho/3a6e4d512d3aa8aa6cf9&quot;&gt;github gist&lt;/a&gt; contains only an implementation of a Denoising Autoencoder. If you want to see a working implementation of a Stacked Autoencoder, as well as many other Deep Learning algorithms, I encourage you to take a look at &lt;a href=&quot;https://github.com/blackecho/Deep-Learning-TensorFlow&quot;&gt;my repository&lt;/a&gt; of Deep Learning algorithms implemented in TensorFlow.&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 29 Feb 2016 19:30:20 +0100</pubDate>
+        <pubDate>Mon, 29 Feb 2016 18:30:20 +0000</pubDate>
         <link>http://blackecho.github.io/blog/machine-learning/2016/02/29/denoising-autoencoder-tensorflow.html</link>
         <guid isPermaLink="true">http://blackecho.github.io/blog/machine-learning/2016/02/29/denoising-autoencoder-tensorflow.html</guid>
         
@@ -365,17 +359,16 @@ Bad comments are far worse than no comments at all! Bad comments can even lie ab
 &lt;p&gt;Comments should be kept at a minimum, and should be used only when we can’t find a way to express the concept in code. When you are in a position in which you have to write a comment, think about it first and see if you can came up with a way to express yourself in code rather than with that comment.
 In the old code you can find a lot of useless comments, like:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Randomly shuffle the input
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Randomly shuffle the input
 np.random.shuffle(trX)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;You already know (or at least imagine) what the &lt;a href=&quot;http://www.numpy.org/&quot;&gt;numpy&lt;/a&gt; shuffle function does. This comment is completely redundant. As you can tell, there are a lot of examples like this in the old code.&lt;/p&gt;
 
 &lt;p&gt;This was just a small example of refactoring and writing clean code. I’ll write more about the topic and my experiments/lessons learned. I encourage you to take a look at the &lt;a href=&quot;https://gist.github.com/blackecho/db85fab069bd2d6fb3e7&quot;&gt;code&lt;/a&gt;, and please comment below if you have any suggestion/ideas on how to improve it.&lt;/p&gt;
 
 </description>
-        <pubDate>Sun, 21 Feb 2016 15:30:20 +0100</pubDate>
+        <pubDate>Sun, 21 Feb 2016 14:30:20 +0000</pubDate>
         <link>http://blackecho.github.io/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</link>
         <guid isPermaLink="true">http://blackecho.github.io/blog/programming/2016/02/21/refactoring-rbm-tensor-flow-implementation.html</guid>
         
@@ -396,7 +389,7 @@ hashing algorithm to find images similar to a given query image. The results cle
 shows that this approach outperforms basic LSH by far.
 &lt;a href=&quot;http://www.slideshare.net/GabrieleAngeletti/project-deep-locality-sensitive-hashing&quot;&gt;Here you can find the presentation of this project&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
+        <pubDate>Thu, 10 Sep 2015 15:30:20 +0100</pubDate>
         <link>http://blackecho.github.io/projects/deep-locality-sensitive-hashing</link>
         <guid isPermaLink="true">http://blackecho.github.io/projects/deep-locality-sensitive-hashing</guid>
         
@@ -412,7 +405,7 @@ shows that this approach outperforms basic LSH by far.
         <description>&lt;p&gt;Project on Hierarchical RL. Implementation of the MAX-QQ value function decomposition and algorithm.
 Link to &lt;a href=&quot;https://github.com/blackecho/Hierarchical-Reinforcement-Learning&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
+        <pubDate>Thu, 10 Sep 2015 15:30:20 +0100</pubDate>
         <link>http://blackecho.github.io/projects/hierarchical-reinf-learning</link>
         <guid isPermaLink="true">http://blackecho.github.io/projects/hierarchical-reinf-learning</guid>
         
@@ -428,7 +421,7 @@ Link to &lt;a href=&quot;https://github.com/blackecho/Hierarchical-Reinforcement
         <description>&lt;p&gt;Theoretical study and implementation of Restricted Boltzmann Machine and Deep Belief Networks.
 Link to &lt;a href=&quot;http://github.com/blackecho/Deep-Belief-Network&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 10 Sep 2015 16:30:20 +0200</pubDate>
+        <pubDate>Thu, 10 Sep 2015 15:30:20 +0100</pubDate>
         <link>http://blackecho.github.io/projects/deep-belief-nets</link>
         <guid isPermaLink="true">http://blackecho.github.io/projects/deep-belief-nets</guid>
         
@@ -464,7 +457,7 @@ unsupervised pretraining: you train one layer at a time in an unsupervised fashi
 All these layers are indeed learning Sparse Distributed Representations of the training set, and this is way this is useful to know and study this topic in order to grasp the concepts behind Deep Learning.&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 15 Jun 2015 16:30:20 +0200</pubDate>
+        <pubDate>Mon, 15 Jun 2015 15:30:20 +0100</pubDate>
         <link>http://blackecho.github.io/blog/machine-learning/2015/06/15/sparse-distributed-representations.html</link>
         <guid isPermaLink="true">http://blackecho.github.io/blog/machine-learning/2015/06/15/sparse-distributed-representations.html</guid>
         
@@ -556,7 +549,7 @@ term we can remove $Z_k$. So now the equation is:&lt;/p&gt;
 We again compute this value $\forall k = 1 … n-1$ and we are done. For k=n, the value is 1 (you can compute it yourself is pretty easy).&lt;/p&gt;
 
 </description>
-        <pubDate>Sat, 30 May 2015 17:30:20 +0200</pubDate>
+        <pubDate>Sat, 30 May 2015 16:30:20 +0100</pubDate>
         <link>http://blackecho.github.io/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</link>
         <guid isPermaLink="true">http://blackecho.github.io/blog/machine-learning/2015/05/30/forward-backward-algorithm-hidden-markov-models.html</guid>
         
@@ -593,38 +586,33 @@ In Prolog we can do this pretty easily by using the way it handles lists and app
 Using the predicate append(OldList, Element, NewList), NewList will be the result of adding Element at the end of OldList.
 So the code looks like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;solveBFS([Goal|Rest]) :- % list of goals to prove
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;solveBFS([Goal|Rest]) :- % list of goals to prove
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;we use clause/2 on the first element of the goals list, that is the first-out part of FIFO&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;clause(Goal, Body)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;clause(Goal, Body)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;we convert the list format returned by clause into a standart Prolog list&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;conj_goals_2_list(Body, List)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;conj_goals_2_list(Body, List)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;we append List to the end of Rest, that is the part first-in part of FIFO&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;append(Rest, List, New)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;append(Rest, List, New)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;we call recursively the solver passing it the new list. The program will keep trying to prove the goals, until all the goals are proved, or they can’t be proved&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;solveBFS(New)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;solveBFS(New)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The full code is available at &lt;a href=&quot;http://github.com/blackecho/prolog-programs&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 21 May 2015 16:30:20 +0200</pubDate>
+        <pubDate>Thu, 21 May 2015 15:30:20 +0100</pubDate>
         <link>http://blackecho.github.io/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</link>
         <guid isPermaLink="true">http://blackecho.github.io/blog/prolog/2015/05/21/prolog-bfs-meta-interpreter.html</guid>
         
