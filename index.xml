@@ -6,7 +6,7 @@
     <description>Recent content on Gabriele Angeletti</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Oct 2019 13:49:23 +0600</lastBuildDate>
+    <lastBuildDate>Sun, 22 Dec 2019 18:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://gabrieleangeletti.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,10 +14,10 @@
     <item>
       <title>About Me</title>
       <link>https://gabrieleangeletti.github.io/about/about/</link>
-      <pubDate>Tue, 29 Oct 2019 13:49:23 +0600</pubDate>
+      <pubDate>Sun, 22 Dec 2019 18:00:00 +0100</pubDate>
       
       <guid>https://gabrieleangeletti.github.io/about/about/</guid>
-      <description>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</description>
+      <description>Hi, I&#39;m Gabriele! A software engineer and rock climbing addict on a journey to location independence.</description>
     </item>
     
   </channel>
