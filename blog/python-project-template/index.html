@@ -211,7 +211,7 @@ ninja = {version = &quot;==1.2.3&quot;}
 }
 </code></pre><p>As you can see, <code>requests</code> is there, even if we didn't mention it anywhere in our <code>Pipfile</code>. That's because <code>Pipfile</code> handles recursive dependencies through the <code>Pipfile.lock</code> file. During deploy, when we run <code>pipenv install --deploy</code> to install dependencies, the correct version of <code>requests</code> will be installed, regardless of the latest version available in the public registry.</p>
 <ul>
-<li>Note 1: in the above I used a couple of <code>pipenv</code> commmands, which is the <a href="https://pipenv.readthedocs.io">reference implementation</a> for the <code>Pipfile</code> <a href="https://github.com/pypa/pipfile">specification</a></li>
+<li>Note 1: in the above I used a couple of <code>pipenv</code> commands, which is the <a href="https://pipenv.readthedocs.io">reference implementation</a> for the <code>Pipfile</code> <a href="https://github.com/pypa/pipfile">specification</a></li>
 <li>Note 2: you need to add both <code>Pipfile</code> and <code>Pipfile.lock</code> to your repository, otherwise you will not be able to restore the same environment</li>
 <li>Note 3: if you are currently using <code>requirements.txt</code> and want to migrate to <code>Pipfile</code>, here's an <a href="https://pipenv.readthedocs.io/en/latest/basics/#importing-from-requirements-txt">handy guide</a> on how to do it</li>
 </ul>
