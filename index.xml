@@ -6,10 +6,19 @@
     <description>Recent content on Gabriele Angeletti</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Dec 2019 12:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jan 2020 17:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://gabrieleangeletti.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Things I have learned at Lyft: Continuous Integration</title>
+      <link>https://gabrieleangeletti.github.io/blog/things-i-have-learned-at-lyft-continuous-integration/</link>
+      <pubDate>Tue, 07 Jan 2020 17:00:00 +0100</pubDate>
+      
+      <guid>https://gabrieleangeletti.github.io/blog/things-i-have-learned-at-lyft-continuous-integration/</guid>
+      <description>A while ago I was working as a contractor for an e-commerce company.</description>
+    </item>
     
     <item>
       <title>A template for Python projects</title>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8">
+  <title>Gabriele Angeletti</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="a tutorial on continuous integration and travis ci">
+  <meta name="author" content="Gabriele Angeletti">
+  <meta name="generator" content="Hugo 0.61.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://gabrieleangeletti.github.io/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://gabrieleangeletti.github.io/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://gabrieleangeletti.github.io/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://gabrieleangeletti.github.io/plugins/venobox/venobox.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://gabrieleangeletti.github.io/scss/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://gabrieleangeletti.github.io/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://gabrieleangeletti.github.io/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  
+</div>
+<!-- preloader end -->
+<!-- navigation -->
+<header class="navigation">
+  <div class="container">
+    
+    <nav class="navbar navbar-expand-lg navbar-white bg-transparent border-bottom">
+      <a class="navbar-brand mobile-view" href="https://gabrieleangeletti.github.io"><img class="img-fluid"
+          src="https://gabrieleangeletti.github.io/images/logo.png" alt="Gabriele Angeletti"></a>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
+        <i class="ti-menu h3"></i>
+      </button>
+
+      <div class="collapse navbar-collapse text-center" id="navigation">
+        <div class="desktop-view">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.facebook.com/gabriele.angeletti.7"><i class="ti-facebook"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://twitter.com/gabrieleang"><i class="ti-twitter-alt"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.instagram.com/gabriele_ang/"><i class="ti-instagram"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/gabrieleangeletti"><i class="ti-github"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.linkedin.com/in/gabriele-angeletti/"><i class="ti-linkedin"></i></a>
+            </li>
+            
+          </ul>
+        </div>
+
+        <a class="navbar-brand mx-auto desktop-view" href="https://gabrieleangeletti.github.io"><img class="img-fluid"
+            src="https://gabrieleangeletti.github.io/images/logo.png" alt="Gabriele Angeletti"></a>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://gabrieleangeletti.github.io"> Home </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="https://gabrieleangeletti.github.io/about/about">About</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="https://gabrieleangeletti.github.io/blog">Post</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="https://gabrieleangeletti.github.io/contact">Contact</a>
+          </li>
+          
+          
+        </ul>
+
+        
+        <!-- search -->
+        <div class="search px-4">
+          <button id="searchOpen" class="search-btn"><i class="ti-search"></i></button>
+          <div class="search-wrapper">
+            <form action="https://gabrieleangeletti.github.io/search" class="h-100">
+              <input class="search-box px-4" id="search-query" name="s" type="search" placeholder="Type & Hit Enter...">
+            </form>
+            <button id="searchClose" class="search-close"><i class="ti-close text-dark"></i></button>
+          </div>
+        </div>
+        
+
+        
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /navigation -->
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        
+        <a href="/categories/software-engineering"
+          class="text-primary">Software engineering</a>
+        
+        <h2>Things I have learned at Lyft: Continuous Integration</h2>
+        <div class="mb-3 post-meta">
+          <span>By Gabriele Angeletti</span>
+          
+          <span class="border-bottom border-primary px-2 mx-1"></span>
+          <span>07 January 2020</span>
+          
+        </div>
+        
+        <img src="https://gabrieleangeletti.github.io/images/software-engineering-posts/things-i-have-learned-at-lyft-continuous-integration.jpg" class="img-fluid w-100 mb-4" alt="Things I have learned at Lyft: Continuous Integration">
+        
+        <div class="content mb-5">
+          <p>A while ago I was working as a contractor for an e-commerce company. There were only a couple of developers, and a lot of work to be done. In normal conditions there would have been enough people to do the job. Unfortunately, there was one issue: making changes was incredibly painful. The existing codebase was quite large and had no tests. Not even a single one. The team was basically living through the day, spending the majority of time fixing bugs rather than adding new features. Bugs were not fixed through extensive refactoring, solving the root cause of the problem, but by adding patches that introduced more issues than they were solving. APIs were not clearly defined, which led to changes in one component to break a totally unrelated part of the project. Deployments were a completely manual and error-prone process, and the only way to deploy the app on a new machine was to install everything yourself, from scratch.</p>
+<p>I was still a university student at that point. In fact, this was my very first job as a developer. Making seemingly trivial changes was so hard that I began to seriously question my skills as a software engineer. It was my first time looking at a &ldquo;real-world&rdquo; codebase, so I just assumed I was the problem. Years after that, I now know I wasn't the problem. Working on such a codebase using almost all the bad practices of modern software development would be frustrating for anyone. I'm sure many of you have had such an experience.</p>
+<p>Working at a top-tier tech company such as Lyft, I got the chance to learn and employ best practices on really high-quality codebases. The development experience has been completely different for me ever since. There is a lot to be said about the things I have learned at Lyft, and I could only scratch the surface here. This article focuses on one of those things: Continuous Integration (CI). I'll tell you the main advantages of having a CI system, and show you a basic <a href="https://travis-ci.org/">Travis CI</a> setup with one of my <a href="https://github.com/gabrieleangeletti/python-package-template">public github repos</a>.</p>
+<h3 id="continuous-integration">Continuous Integration</h3>
+<p>For those of you who never heard about it, Continuous Integration is a software development practice where each person's changes are integrated very quickly, often within hours, into a shared development state, often the master branch of a VCS repository. Crucial to the practice is that each integration has automated tests that check for correctness, and scripts that builds the artifacts that are needed for deployment. There are many advantages of adopting CI. On the top of my head, I can think of at least these ones:</p>
+<ul>
+<li>Much faster development iterations</li>
+<li>Tighter feedback loop on all changes, making it easier to debug issues and pinpoint what caused what</li>
+<li>Less conflicts between people's changes</li>
+</ul>
+<h3 id="continuous-">Continuous &ldquo;*&rdquo;</h3>
+<p>You might have heard different terms matching the <code>Continuous *</code> regular expression. The most common ones are Integration, Delivery, and Deployment. The differences are:</p>
+<ul>
+<li>Continuous <code>Integration</code> runs an automated suite that builds the software and tests your change. If everything goes well, you are allowed to integrate the change to the master branch. No production deploys are involved in CI</li>
+<li>Continuous <code>Delivery</code> is Continuous Integration plus the things required for a production deployment. The actual deployment is not triggered, but only prepared. Someone from the business usually decides when and how often to deploy, which is usually triggered manually</li>
+<li>Continuous <code>Deployment</code> is Continuous Delivery plus the actual production deployment is also automated</li>
+</ul>
+<p>There's a lot to be said about the differences between them, and how they fit to different use-cases, but in this post we are only talking about the first one.</p>
+<h3 id="why-you-cant-simply-add-ci-to-my-project">Why you can't simply &ldquo;add CI to my project&rdquo;</h3>
+<p>The truth about CI is, you can't simply &ldquo;add it&rdquo;. There are certain requirements your project needs to meet. In particular, you can't be talking about CI if you have not automated building and testing your software. If a build requires manual steps, or if tests are not comprehensive enough to give you confidence in your changes, then you can't effectively implement CI. Two things at least need to happen:</p>
+<ul>
+<li>An automated build process, ideally in a single command</li>
+<li>A set of tests that give you enough confidence in the quality of your change</li>
+</ul>
+<p>The build script should include everything your system needs to run. If the server needs a database, it should be created from scratch, including the schema. It should not rely on some existing infrastructure. In addition to that, and I cannot stress enough how important this is, builds should be <em>fast</em>. If it takes hours to build then you can't reap all the benefits CI has to offer. This is usually achieved by only building the components that actually changed, or by not building things that are completely unrelated to your change.</p>
+<h3 id="travis-ci">Travis CI</h3>
+<p>There exist many CI solutions out there, each one with its pros and cons. The reasons I use <a href="https://travis-ci.org/">Travis CI</a> for my personal projects are:</p>
+<ul>
+<li>It's a hosted SaaS, meaning I don't have the hassle of hosting it myself</li>
+<li>It's free for open source projects</li>
+<li>It's widely used, meaning that the problems I will inevitably encounter are already solved by someone else</li>
+</ul>
+<p>I'm not going to go into the details of how to setup Travis CI, because their <a href="https://travis-ci.org/getting_started">getting started guide</a> is very well written and easy to follow.</p>
+<p>Once you're all set up, the next step is to create a <code>.travis.yml</code> file in the root of your repository. This is the main configuration file: it tells Travis what to do, how to do it and where to do it. I have configured my <a href="https://github.com/gabrieleangeletti/python-package-template">python package template repo</a> to use Travis CI, and here is how the <a href="https://github.com/gabrieleangeletti/python-package-template/blob/master/.travis.yml">configuration</a> looks like:</p>
+<pre><code>language: python
+python:
+  - &quot;3.7&quot;
+install:
+  - ./setup.sh
+  - pipenv install --deploy --dev
+script:
+  - ./test.sh
+</code></pre><p>In a nutshell: <code>language</code> says that the project uses Python, which will make Travis run inside a virtual envionment created on purpose for the build. <code>(python)</code> specifies which Python version(s) we want to test with. You can also put multiple versions in there, and the tests will be run against all of them. <code>(install)</code> tells Travis how to build the software. The default for Python if you omit this line is <code>pip install -r requirements.txt</code>, but since I have a custom setup script and I use <code>Pipfile</code> instead of <code>requirements.txt</code>, I had to override that config. <code>(script)</code> tells Travis what to run - in this case a custom script I made which runs linting, type-checking and unit-testing. If all of this runs correctly, it means that:</p>
+<ul>
+<li>The software still builds, as in I haven't introduced conflicts between dependencies or anything like that</li>
+<li>My change doesn't break any existing code (this of course depends on the quality of the tests I write)</li>
+</ul>
+<p>One small tip: when I first added the <code>.travis.yml</code> file, builds were not being triggered for my pull requests and I couldn't understand why. It turned out there was a syntax error in the file, which I discovered by looking at the <code>Requests</code> section of the Travis CI dashboard. You can access it through the dropdown menu on the right:</p>
+<p><img src="../../images/software-engineering-posts/travis-ci-wrong-yaml.png" alt="travis ci dashboard example"></p>
+<h3 id="final-thoughts">Final thoughts</h3>
+<p>This article only scratches the surface of the things you can do with CI. The benefits of the approach can hardly be overstated, and it will make your team save an incredible amount of time, and at the same time increasing the quality of the software you deliver. I encourage you to read more about the topic. One pointer I can give you is <a href="https://martinfowler.com/articles/continuousIntegration.html">this great paper by Martin Fowler</a>, which is the best explaination of the technique I have ever come across. And if you are not using CI, I strongly recommend that you give it a try.</p>
+<p><em>Disclaimer</em>: <em>this article is not about any specific technology or approach that is actually in use at Lyft. It's just a small summary of what I have learned about CI while working there</em>.</p>
+
+        </div>
+
+        
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <a href="https://gabrieleangeletti.github.io"><img src="https://gabrieleangeletti.github.io/images/logo.png" alt="Gabriele Angeletti"></a>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Contact Me</h6>
+        <ul class="list-unstyled">
+          <li class="mb-3"><a class="text-dark" href="tel:&#43;44%207803056685"><i
+                class="ti-mobile mr-3 text-primary"></i>&#43;44 7803056685</a></li>
+          <li class="mb-3"><i class="ti-location-pin mr-3 text-primary"></i>London, United Kingdom</li>
+          <li class="mb-3"><a class="text-dark" href="mailto:angeletti.gabriele@gmail.com"><i
+                class="ti-email mr-3 text-primary"></i>angeletti.gabriele@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Social Contacts</h6>
+        <ul class="list-unstyled">
+          
+          <li class="mb-3"><a class="text-dark" href="https://www.facebook.com/gabriele.angeletti.7">facebook</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://twitter.com/gabrieleang">twitter</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://www.instagram.com/gabriele_ang/">instagram</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://github.com/gabrieleangeletti">github</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://www.linkedin.com/in/gabriele-angeletti/">linkedin</a></li>
+          
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Categories</h6>
+        <ul class="list-unstyled">
+          <li class="mb-3"><a class="text-dark"
+              href="/categories/software-engineering">Software engineering</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Quick Links</h6>
+        <ul class="list-unstyled">
+          
+          <li class="mb-3"><a class="text-dark" href="https://gabrieleangeletti.github.io/about/about">About</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://gabrieleangeletti.github.io/blog">Post</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://gabrieleangeletti.github.io/contact">Contact</a></li>
+          
+        </ul>
+      </div>
+      <div class="col-12 border-top py-4 text-center">
+        | @2019 Gabriele Angeletti, all rights reserved |
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var indexURL = "https://gabrieleangeletti.github.io/index.json"
+</script>
+
+<!-- JS Plugins -->
+
+<script src="https://gabrieleangeletti.github.io/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://gabrieleangeletti.github.io/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://gabrieleangeletti.github.io/plugins/slick/slick.min.js"></script>
+
+<script src="https://gabrieleangeletti.github.io/plugins/venobox/venobox.min.js"></script>
+
+<script src="https://gabrieleangeletti.github.io/plugins/search/fuse.min.js"></script>
+
+<script src="https://gabrieleangeletti.github.io/plugins/search/mark.js"></script>
+
+<script src="https://gabrieleangeletti.github.io/plugins/search/search.js"></script>
+
+<!-- Main Script -->
+
+<script src="https://gabrieleangeletti.github.io/js/script.min.js"></script>
+<!-- google analitycs -->
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-154852357-1', 'auto');
+  ga('send', 'pageview');
+</script></body>
+</html>
