@@ -1,4 +1,4 @@
-baseURL = 'https://gabrieleangeletti.github.io/'
+baseURL = '/'
 languageCode = 'en-us'
 title = 'Gabriele Angeletti'
 theme = 'book'
