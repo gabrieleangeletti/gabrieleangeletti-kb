@@ -3,20 +3,20 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=description content="Writing code #  NENO (non-exhaustive, non-ordered) list of things to think about when writing code:
-Abstract common tasks to reduce bugs #  When you write code that does the same thing over and over it&rsquo;s time to abstract it. It&rsquo;s good to re-use code and it decreases the chances for bugs. When you write the same thing over and over, at some point you will forget something. For example, consider this code:">
+Naming #  Naming stuff is one of the most important aspects in software engineering. Everything must have a name - variables, functions, classes, modules, packages. Names should be as simple as possible, but not simpler than that. They say what the thing is, or does, they are consistent across the code base and they make reading code easier.">
 <meta name=theme-color content="#FFFFFF">
 <meta name=color-scheme content="light dark"><meta property="og:title" content>
 <meta property="og:description" content="Writing code #  NENO (non-exhaustive, non-ordered) list of things to think about when writing code:
-Abstract common tasks to reduce bugs #  When you write code that does the same thing over and over it&rsquo;s time to abstract it. It&rsquo;s good to re-use code and it decreases the chances for bugs. When you write the same thing over and over, at some point you will forget something. For example, consider this code:">
+Naming #  Naming stuff is one of the most important aspects in software engineering. Everything must have a name - variables, functions, classes, modules, packages. Names should be as simple as possible, but not simpler than that. They say what the thing is, or does, they are consistent across the code base and they make reading code easier.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://gabrieleangeletti.github.io/docs/topics/software-engineering/design/code/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-10T12:40:30+00:00">
+<meta property="article:modified_time" content="2021-11-10T16:28:43+00:00">
 <title>Code | Gabriele Angeletti</title>
 <link rel=manifest href=/manifest.json>
 <link rel=icon href=/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/book.min.95d69eb6bad8b9707ff2b5d8d9e31ce70a1b84f2ed7ffaf665ffcf00aa7993bd.css integrity="sha256-ldaetrrYuXB/8rXY2eMc5wobhPLtf/r2Zf/PAKp5k70=" crossorigin=anonymous>
 <script defer src=/flexsearch.min.js></script>
-<script defer src=/en.search.min.acf8266ce7204ac56db2f9005f6077c2e1bb9daa4acd78bf5cedf0fc66ec04ec.js integrity="sha256-rPgmbOcgSsVtsvkAX2B3wuG7napKzXi/XO3w/GbsBOw=" crossorigin=anonymous></script>
+<script defer src=/en.search.min.61ef6c53d55cfd89a89a9df5489ce6e41b3c7e36305dadeb3ce511127008ef61.js integrity="sha256-Ye9sU9Vc/Ymomp31SJzm5Bs8fjYwXa3rPOUREnAI72E=" crossorigin=anonymous></script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-XXXXXXXXX-X','auto'),ga('send','pageview'))</script>
 </head>
 <body dir=ltr>
@@ -110,11 +110,17 @@ Abstract common tasks to reduce bugs #  When you write code that does the same t
 <aside class="hidden clearfix">
 <nav id=TableOfContents>
 <ul>
+<li><a href=#naming>Naming</a>
+<ul>
+<li><a href=#variables>Variables</a></li>
+<li><a href=#functions>Functions</a></li>
+<li><a href=#comments>Comments</a></li>
+</ul>
+</li>
 <li><a href=#abstract-common-tasks-to-reduce-bugs>Abstract common tasks to reduce bugs</a></li>
 <li><a href=#boring-is-good>Boring is good</a></li>
 <li><a href=#testing-as-documentation>Testing as documentation</a></li>
 <li><a href=#test-as-protection-against-future-changes>Test as protection against future changes</a></li>
-<li><a href=#naming>Naming</a></li>
 <li><a href=#how-can-this-go-wrong>How can this go wrong?</a></li>
 </ul>
 </nav>
@@ -125,7 +131,45 @@ Writing code
 <a class=anchor href=#writing-code>#</a>
 </h1>
 <p>NENO (non-exhaustive, non-ordered) list of things to think about when writing code:</p>
-<h2 id=abstract-common-tasks-to-reduce-bugs>
+<h2 id=naming>
+Naming
+<a class=anchor href=#naming>#</a>
+</h2>
+<p>Naming stuff is one of the most important aspects in software engineering. Everything must have a name - variables, functions, classes, modules, packages. Names should be as simple as possible, but not simpler than that. They say what the thing is, or does, they are consistent across the code base and they make reading code easier.</p>
+<h3 id=variables>
+Variables
+<a class=anchor href=#variables>#</a>
+</h3>
+<p>Variable names should be explicit, and give enough information so that the reader knows what&rsquo;s going on. A good name is a name that doesn&rsquo;t make us ask questions. When you read this - <code>int duration = 1800;</code> - you ask questions. Duration of what? What&rsquo;s the unit? When you read this - <code>int half_hour_in_seconds = 1800;</code> - you know that this variable represents half an hour, and the unit is seconds. No need to ask questions. Also, if part of the name doesn&rsquo;t add additional information, remove it. In <code>int half_hour_in_seconds_integer = 1800;</code>, the <code>_integer</code> suffix is not needed, because the type of the variable already says it&rsquo;s an integer.</p>
+<h3 id=functions>
+Functions
+<a class=anchor href=#functions>#</a>
+</h3>
+<p>Ideally, you should be able to understand what a function does by reading its signature. The signature is the name, the parameters, and the return type. A good side-effect of this principle is that it forces you (or motivates you at least), to write good code.</p>
+<p>First of all, it will be easier to respect the <a href=https://en.wikipedia.org/wiki/Single-responsibility_principle>Single Responsibility Principle</a>. According to this principle, each function must do one thing and one thing only. And it&rsquo;s very hard to find a good name for a function that does many things. Imagine a function that downloads a web page from the internet, counts the occurrences of each word and uploads the results to a database. How would you call this function? <code>FetchDataComputeOccurrencesUploadToDb</code>? That&rsquo;s a ridiculous name. This is also a good test for the quality of the code you write. If it&rsquo;s hard to come up with a name for a function, that&rsquo;s a <a href=https://martinfowler.com/bliki/CodeSmell.html>code smell</a>. In the example we just made, it&rsquo;s clear that the function does too many things and need to be split in three. Of course, at some higher level in the hierarchy you will have wrapper functions that do more than one thing. But in those cases, the function should only call the lower-level functions and do nothing else. And those lower-level functions must be logically related. If they are, then it will be easy to name the high-level one.</p>
+<p>Also, functions with good names improve re-usability of your code. When a function does one thing there&rsquo;s a higher chance that the same use case will appear somewhere else and you will be able to re-use the code. In general, when a function is named well it will be easier to re-use it. A good name has to say what the function does. When I say what the function does I mean its input-output behaviour. The name should not mention what the function does internally, because that can change at any time. But the name should say anything that a user of the function should be aware of. Consider the following function:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>write</span>(data: Union[Dict, List], options: Dict[str, Any]) <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>None</span>:
+    <span style=color:#66d9ef>if</span> <span style=color:#e6db74>&#34;mode&#34;</span> <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> options:
+        options[<span style=color:#e6db74>&#34;mode&#34;</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;w&#34;</span>
+    options[<span style=color:#e6db74>&#34;path&#34;</span>]<span style=color:#f92672>.</span>open(mode<span style=color:#f92672>=</span>options[<span style=color:#e6db74>&#34;mode&#34;</span>])<span style=color:#f92672>.</span>write_text(json<span style=color:#f92672>.</span>dumps(data))
+</code></pre></div><p>This function writes a json file, but it also modifies the options dictionary. In Python, objects are passed by reference, which means:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>options <span style=color:#f92672>=</span> {}
+write([<span style=color:#ae81ff>1.0</span>, <span style=color:#ae81ff>2.0</span>], options<span style=color:#f92672>=</span>options)
+print(options)
+<span style=color:#75715e># {&#34;mode&#34;: &#34;w&#34;}</span>
+</code></pre></div><p>This function has a side-effect on one of its parameters which can&rsquo;t be guessed by looking at its signature. We could either change the name to something that explains why the side-effect, or we can get rid of it altogether:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>write</span>(data: Union[Dict, List], path: pathlib<span style=color:#f92672>.</span>Path) <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>None</span>:
+    path<span style=color:#f92672>.</span>open(mode<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w&#34;</span>)<span style=color:#f92672>.</span>write_text(json<span style=color:#f92672>.</span>dumps(data))
+</code></pre></div><p>This is another example of how following good naming principles has the great side-effect of making us write better code.</p>
+<h3 id=comments>
+Comments
+<a class=anchor href=#comments>#</a>
+</h3>
+<p>Good code with good names doesn&rsquo;t need comments. When you have to add a comment to your code is because you failed to express that idea in the code itself. Of course, there are exceptions to this. For example, if you&rsquo;re forced to do something weird or not natural because of an external issue, that&rsquo;s a good place for a comment. Or to explain why you can&rsquo;t do something. In general, a good use of comments is when, if you had to express that idea in the code itself, the result would be messier. This is a good example of a comment:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>tree <span style=color:#f92672>=</span> KDTree(leaf_size<span style=color:#f92672>=</span><span style=color:#ae81ff>40</span>)
+<span style=color:#66d9ef>for</span> point <span style=color:#f92672>in</span> points:
+    nearest_neighbor <span style=color:#f92672>=</span> tree<span style=color:#f92672>.</span>query(point, k<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</code></pre></div><h2 id=abstract-common-tasks-to-reduce-bugs>
 Abstract common tasks to reduce bugs
 <a class=anchor href=#abstract-common-tasks-to-reduce-bugs>#</a>
 </h2>
@@ -180,11 +224,6 @@ Test as protection against future changes
 <a class=anchor href=#test-as-protection-against-future-changes>#</a>
 </h2>
 <p>TODO.</p>
-<h2 id=naming>
-Naming
-<a class=anchor href=#naming>#</a>
-</h2>
-<p>TODO.</p>
 <h2 id=how-can-this-go-wrong>
 How can this go wrong?
 <a class=anchor href=#how-can-this-go-wrong>#</a>
@@ -193,7 +232,7 @@ How can this go wrong?
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/gabrieleangeletti/gabrieleangeletti.github.io/commit/da4cd1ce2f37fbb7f0008763b9a5209cd8288837 title="Last modified by Gabriele Angeletti | Nov 10, 2021" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/gabrieleangeletti/gabrieleangeletti.github.io/commit/9ea18dcfd73d70fbeb0756076c375b978ca62b7b title="Last modified by Gabriele Angeletti | Nov 10, 2021" target=_blank rel=noopener>
 <img src=/svg/calendar.svg class=book-icon alt=Calendar>
 <span>Nov 10, 2021</span>
 </a>
@@ -209,11 +248,17 @@ How can this go wrong?
 <div class=book-toc-content>
 <nav id=TableOfContents>
 <ul>
+<li><a href=#naming>Naming</a>
+<ul>
+<li><a href=#variables>Variables</a></li>
+<li><a href=#functions>Functions</a></li>
+<li><a href=#comments>Comments</a></li>
+</ul>
+</li>
 <li><a href=#abstract-common-tasks-to-reduce-bugs>Abstract common tasks to reduce bugs</a></li>
 <li><a href=#boring-is-good>Boring is good</a></li>
 <li><a href=#testing-as-documentation>Testing as documentation</a></li>
 <li><a href=#test-as-protection-against-future-changes>Test as protection against future changes</a></li>
-<li><a href=#naming>Naming</a></li>
 <li><a href=#how-can-this-go-wrong>How can this go wrong?</a></li>
 </ul>
 </nav>
